@@ -8,7 +8,8 @@ export interface IAinboxDataType {
         title:string;
         subtitle:string;
         topic:string;
-        subTopic:string;
+        detail:string;
         images:string[];
+        details:string[];
     }
 }

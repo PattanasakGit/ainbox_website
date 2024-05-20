@@ -5,7 +5,7 @@ import { Link } from "react-scroll";
 
 const CustomNavbar: React.FC = () => {
   return (
-    <nav className="h-[100px] flex justify-between items-center w-full px-8 fixed top-0 z-[1000] bg-[#fff7ec]">
+    <nav className="h-[100px] flex justify-between items-center w-full px-8 fixed top-0 z-[1000] bg-[#fffbf5]">
       <Image src={ainboxData.img.logo} alt="logo" width={200} height={200} />
 
       <div className="topic text-[25px] flex justify-evenly w-1/2">
