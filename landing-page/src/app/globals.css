@@ -19,12 +19,14 @@
     color: #555555;
     text-align: center;
 }
-.textDetail{
+.textDetail {
     font-family: "ainbox_Sarabun";
     font-weight: 500;
-    font-size: 18px;
+    font-size: clamp(15px, 1vw, 18px); /* ขนาดตัวอักษรจะเป็น 1vw แต่จะไม่เล็กกว่า 12px และไม่ใหญ่กว่า 20px */
     color: #555555;
     text-align: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 .text-gradient {
     font-family: "ainbox_Sarabun";
