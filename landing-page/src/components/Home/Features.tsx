@@ -1,16 +1,16 @@
 import Title from "@/components/Title/Title";
-import { ainboxData } from "@/store/baseData";
+import { ainboxData } from "@/store/BaseData";
 import Image from "next/image";
 import React from "react";
 
-const Service: React.FC = () => {
+const Features: React.FC = () => {
   return (     
       <div>
         <Title text={ainboxData.home.title} />
         <p className="textDetail mb-16">{ainboxData.home.subtitle}</p>
         <div className="w-full flex justify-center">
           <div className="w-full lg:w-[80%] p-8">
-            <div className=" flex flex-wrap items-center justify-center p-10">
+            <div className=" flex flex-wrap items-center justify-center px-16">
               <div className="h-full w-full lg:w-[30%] flex items-start justify-center">
                 <Image
                   src={ainboxData.home.images[1]}
@@ -27,7 +27,7 @@ const Service: React.FC = () => {
                 <p className="textDetail ">{ainboxData.home.details[1]}</p>
               </div>
             </div>
-            <div className=" flex flex-wrap items-center justify-center p-10">
+            <div className=" flex flex-wrap items-center justify-center px-16">
               <div className="w-full lg:w-[70%] bg-[#fffff1] rounded-3xl p-8">
                 <h1 className="topic text-[30px] my-6">
                   {ainboxData.home.details[2]}
@@ -50,4 +50,4 @@ const Service: React.FC = () => {
   );
 };
 
-export default Service;
+export default Features;
