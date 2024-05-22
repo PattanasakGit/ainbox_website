@@ -2,8 +2,8 @@ version: '3.9'
 
 services:
   nextapp:
-    container_name: ainbox-landing-page
-    image: ainbox-landing-page
+    container_name: ainbox_website
+    image: ainbox_website
     build: .
     ports:
       - "3000:3000"
