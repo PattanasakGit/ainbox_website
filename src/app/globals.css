@@ -34,9 +34,15 @@
     font-size: clamp(15px, 0.8vw, 18px); /* ขนาดตัวอักษรจะเป็น 1vw แต่จะไม่เล็กกว่า 12px และไม่ใหญ่กว่า 20px */
 
 }
-.text-gradient {
+/* .text-gradient {
     font-family: "ainbox_Sarabun";
     background: linear-gradient(to bottom, #FB8854, #F9373C);
+    -webkit-background-clip: text;
+    color: transparent;
+} */
+.text-gradient {
+    font-family: "ainbox_Sarabun";
+    background: linear-gradient(to right, #FB8854, #F9373C);
     -webkit-background-clip: text;
     color: transparent;
 }
