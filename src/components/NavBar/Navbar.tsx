@@ -1,4 +1,4 @@
-import { ainboxData } from "@/store/BaseData";
+import { ainboxData } from "@/store/HomeData";
 import Image from "next/image";
 import React from "react";
 

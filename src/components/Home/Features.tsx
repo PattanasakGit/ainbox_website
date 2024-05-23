@@ -1,5 +1,5 @@
 import Title from "@/components/Title/Title";
-import { ainboxData } from "@/store/BaseData";
+import { ainboxData } from "@/store/HomeData";
 import Image from "next/image";
 import React from "react";
 
