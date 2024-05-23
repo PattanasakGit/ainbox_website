@@ -1,6 +1,7 @@
 import Example from "@/components/Example/Example";
 import FAQComponent from "@/components/FAQ/FAQComponent";
 import Home from "@/components/Home/Home";
+import Price from "@/components/Price/Price";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <Home/>
       <Example/>
       <FAQComponent/>
+      <Price/>
 
       
     </main>
