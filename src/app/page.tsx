@@ -5,13 +5,11 @@ import Price from "@/components/Price/Price";
 
 export default function App() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between         pb-[500px]">
+    <main className="flex min-h-screen flex-col items-center justify-between">
       <Home/>
       <Example/>
       <FAQComponent/>
       <Price/>
-
-      
     </main>
   );
 }
