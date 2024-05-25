@@ -43,7 +43,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ data }) => {
       id="pricingCard"
       initial={{ opacity: 0, y: 100 }}
       animate={controls}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.9 }}
       className="w-full sm:w-64  p-4  bg-[#fffbf5]  shadow-xl rounded-2xl flex flex-col border-2 border-[#fa7d5071]"
     >
       <div className="flex-grow">

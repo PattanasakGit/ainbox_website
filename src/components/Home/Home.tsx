@@ -11,7 +11,7 @@ const Home: React.FC = () => {
           <img
             src={ainboxData.home.images[0]}
             alt="main image"
-            className="w-[500px]"
+            className="w-[500px] my-8 sm:my-0"
           />
           <div>
             <Image
