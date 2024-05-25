@@ -66,7 +66,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
       initial="offscreen"
       animate={isVisible ? 'onscreen' : 'offscreen'}
       variants={cardVariants}
-      className="bg-[#ffffff] p-6 rounded-3xl shadow-2xl shadow-[#bd876555] border-[#df89427b]"
+      className="bg-[#ffffff] p-6 rounded-3xl shadow-2xl shadow-[#bd876555] cursor-default hover:border-[#f7c89c43]"
     >
       <div className='flex items-center'>
         <BsStars className='text-[#eed442]' />

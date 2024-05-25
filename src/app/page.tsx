@@ -9,7 +9,7 @@ export default function App() {
   return (
     <>
       <CustomNavbar />
-      <main className="flex min-h-screen flex-col items-center justify-between">
+      <main className="flex min-h-screen flex-col items-center justify-between w-full">
         <section id="home">
           <Home />
         </section>

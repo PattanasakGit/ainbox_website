@@ -7,12 +7,12 @@ const FAQItem: React.FC<IFAQData> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <motion.div
-      className="rounded-lg overflow-hidden"
+      className="overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <hr className="flex-grow h-[1px] bg-[#ebebeb80] border-none rounded-xl" />
+      <hr className="flex-grow h-[2px] bg-[#5555551b] border-none rounded-xl" />
       <motion.div
         className="flex justify-between items-center p-4 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
@@ -24,7 +24,7 @@ const FAQItem: React.FC<IFAQData> = ({ question, answer }) => {
             isOpen ? "rotate-0" : "rotate-90"
           }`}
         >
-          {isOpen ? <IoRemove /> : <IoAdd />}
+          {isOpen ? <IoRemove className="text-[#555]"/> : <IoAdd className="text-[#555]"/>}
         </div>
       </motion.div>
       <AnimatePresence initial={false}>
@@ -36,7 +36,7 @@ const FAQItem: React.FC<IFAQData> = ({ question, answer }) => {
             exit={{ opacity: 1, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-[#555] p-4 mr-4">{answer}</p>
+            <p className="text-[#555] p-4 mr-4 pb-8">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>

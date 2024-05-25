@@ -44,7 +44,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ data }) => {
       initial={{ opacity: 0, y: 100 }}
       animate={controls}
       transition={{ duration: 0.5 }}
-      className="w-64 p-4 mt-[-20px] bg-[#fffbf5]  shadow-xl rounded-2xl flex flex-col border-2 border-[#fa7d5071]"
+      className="w-full sm:w-64  p-4  bg-[#fffbf5]  shadow-xl rounded-2xl flex flex-col border-2 border-[#fa7d5071]"
     >
       <div className="flex-grow">
         <p className="mb-4 text-xl font-medium text-gray-800">{data.name}</p>
