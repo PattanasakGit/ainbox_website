@@ -3,6 +3,7 @@ import { IAinboxDataType } from "@/models/IBaseData";
 export const ainboxData: IAinboxDataType = {
     img: {
         logo: "/logo.png",
+        logo_white: "/logo-white.png",
         icon: "/icon.png",
         motto: "/motto.png"
     },

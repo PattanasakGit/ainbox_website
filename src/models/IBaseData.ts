@@ -1,6 +1,7 @@
 export interface IAinboxDataType {
     img: {
         logo: string;
+        logo_white: string;
         icon: string;
         motto: string;
     },

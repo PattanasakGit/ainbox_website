@@ -11,15 +11,15 @@ const Home: React.FC = () => {
           <img
             src={ainboxData.home.images[0]}
             alt="main image"
-            className="w-[500px] my-8 sm:my-0"
+            className="w-[500px] my-8 sm:my-0 "
           />
           <div>
             <Image
               src={ainboxData.img.logo}
-              alt="24/7"
-              width={300}
+              alt="logo"
+              width={200}
               height={100}
-              className="mx-auto my-[-90px]"
+              className="mx-auto my-[-50px] lg:my-[-80px]"
             />
 
             <h1 className="topic text-[30px] lg:text-[45px] my-6 ">{ainboxData.home.topic}</h1>

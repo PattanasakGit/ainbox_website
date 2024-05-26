@@ -25,18 +25,18 @@ const FooterData: FooterDataInterface = {
 const Footer: React.FC = () => {
   return (
     <footer className="bg-[#333] mt-20">
-      <div className="w-full max-w-screen-xl mx-auto p-4 md:py-0">
+      <div className="w-full max-w-screen-xl mx-auto py-16 px-4">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="flex justify-center mb-6">
+          <div className="hidden sm:flex justify-center mb-6 ">
             <Image
-              src={ainboxData.img.logo}
+              src={ainboxData.img.logo_white}
               alt="logo"
-              width={300}
+              width={250}
               height={100}
             />
           </div>
           <div className="">
-            <h2 className="font-bold text-white text-center mb-6">ติดต่อ</h2>
+            <h2 className="font-bold text-white text-center mb-6">ติดต่อเรา</h2>
             <ul className="flex flex-col sm:flex-row flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0">
               <li className="flex items-center mb-4 sm:mb-0 sm:me-4 md:me-6">
                 <FaPhone className="mr-2" />

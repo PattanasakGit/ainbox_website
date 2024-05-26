@@ -18,7 +18,7 @@ const FAQItem: React.FC<IFAQData> = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         initial={false}
       >
-        <h3 className="text-lg font-black text-[#555]">{question}</h3>
+        <h3 className="text-lg font-black text-[#555] mr-5">{question}</h3>
         <div
           className={`transform transition-transform duration-300 ${
             isOpen ? "rotate-0" : "rotate-90"
