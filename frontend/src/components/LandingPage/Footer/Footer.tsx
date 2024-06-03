@@ -1,8 +1,8 @@
-import { ainboxData } from "@/store/HomeData";
 import Image from "next/image";
-import React from "react";
 import Link from "next/link";
-import { FaPhone, FaEnvelope, FaFacebook, FaLine } from "react-icons/fa";
+import React from "react";
+import { FaEnvelope, FaFacebook, FaLine, FaPhone } from "react-icons/fa";
+import { ainboxData } from "../../../store/HomeData";
 
 interface FooterDataInterface {
   contact: {

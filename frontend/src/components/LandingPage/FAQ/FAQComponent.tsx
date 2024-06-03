@@ -1,6 +1,6 @@
-import FAQData from "@/store/FAQData";
-import FAQItem from "./FAQItem";
+import FAQData from "../../../store/FAQData";
 import Title from "../Title/Title";
+import FAQItem from "./FAQItem";
 
 const FAQS: IFAQData[] = FAQData;
 const FAQComponent: React.FC = () => {

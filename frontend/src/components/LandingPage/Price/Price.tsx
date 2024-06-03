@@ -1,7 +1,7 @@
 import React from "react";
+import { PricingData } from "../../../store/PricingData";
 import Title from "../Title/Title";
 import PricingCard from "./PricingCard";
-import { PricingData } from "@/store/PricingData";
 
 const Price: React.FC = () => {
   return (

@@ -1,10 +1,9 @@
 "use client";
-import { ainboxData } from "@/store/HomeData";
 import Image from "next/image";
-import { Link } from 'react-scroll';
 import React, { useState } from "react";
-import { IoMenuOutline } from "react-icons/io5";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoMenuOutline } from "react-icons/io5";
+import { Link } from 'react-scroll';
+import { ainboxData } from "../../../store/HomeData";
 
 const CustomNavbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

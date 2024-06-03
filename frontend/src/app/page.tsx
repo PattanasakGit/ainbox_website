@@ -1,9 +1,9 @@
-import React from "react";
-import Example from "@/components/Example/Example";
-import FAQComponent from "@/components/FAQ/FAQComponent";
-import Home from "@/components/Home/Home";
-import Price from "@/components/Price/Price";
-import CustomNavbar from "@/components/NavBar/Navbar";
+import Example from "../components/LandingPage/Example/Example";
+import FAQComponent from "../components/LandingPage/FAQ/FAQComponent";
+import Footer from "../components/LandingPage/Footer/Footer";
+import Home from "../components/LandingPage/Home/Home";
+import CustomNavbar from "../components/LandingPage/NavBar/Navbar";
+import Price from "../components/LandingPage/Price/Price";
 
 export default function App() {
   return (
@@ -23,6 +23,7 @@ export default function App() {
           <Price />
         </section>
       </main>
+      <Footer/>
     </>
   );
 }
