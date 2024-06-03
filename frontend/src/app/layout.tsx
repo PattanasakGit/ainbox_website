@@ -19,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body className={inter.className}>
+      <div className="bg-[url('/bg.webp')] bg-cover bg-no-repeat bg-fixed w-[99vw] h-screen">
         {children}
+        </div>
       </body>
     </html>
   );

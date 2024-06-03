@@ -5,8 +5,8 @@ import Features from "./Features";
 
 const Home: React.FC = () => {
   return (
-    <section className="pt-[75px] w-full p-4 text-center">
-      <div className="h-[90vh] w-full flex flex-wrap items-center justify-center bg-white rounded-3xl">
+    <section className="pt-[75px] w-full p-4 text-center bg-white">
+      <div className="h-[90vh] w-full flex flex-wrap items-center justify-center rounded-3xl">
         <div className="flex flex-wrap items-center justify-center  bg-[#fff0] rounded-3xl text-[30px] text-white relative">
           <img
             src={ainboxData.home.images[0]}
