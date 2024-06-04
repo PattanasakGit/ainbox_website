@@ -9,7 +9,11 @@ export default function PortalLayout({
   return (
     <>
       <NavbarPortal />
-      {children}
+      <div className="flex pt-[70px] pl-[150px]">
+        <div className="w-full">
+            {children}
+        </div>
+      </div>
     </>
   );
 }
