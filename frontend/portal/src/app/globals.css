@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'ainbox_Sarabun';
+    src: url('/fonts/Sarabun/Sarabun-Regular.ttf') format('truetype');
+  }
+
+@layer base {
+    body {
+      font-family: "ainbox_Sarabun" !important;
+    }
+  }
+
+.topic{
+    font-family: "ainbox_Sarabun";
+    font-weight: 600;
+    color: #555555;
+    text-align: center;
+}
+.textDetail {
+    font-family: "ainbox_Sarabun";
+    font-weight: 500;
+    font-size: clamp(15px, 1vw, 18px); /* ขนาดตัวอักษรจะเป็น 1vw แต่จะไม่เล็กกว่า 12px และไม่ใหญ่กว่า 20px */
+    color: #555555;
+    text-align: center;
+    /* white-space: pre-wrap;
+    word-wrap: break-word; */
+}
+.font-family-only {
+    font-family: "ainbox_Sarabun";
+    font-weight: 500;
+    font-size: clamp(15px, 0.8vw, 18px); /* ขนาดตัวอักษรจะเป็น 1vw แต่จะไม่เล็กกว่า 12px และไม่ใหญ่กว่า 20px */
+
+}
+/* .text-gradient {
+    font-family: "ainbox_Sarabun";
+    background: linear-gradient(to bottom, #FB8854, #F9373C);
+    -webkit-background-clip: text;
+    color: transparent;
+} */
+.text-gradient {
+    font-family: "ainbox_Sarabun";
+    background: linear-gradient(to right, #FB8854, #F9373C);
+    -webkit-background-clip: text;
+    color: transparent;
+}

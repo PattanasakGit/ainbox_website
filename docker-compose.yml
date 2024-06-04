@@ -1,9 +1,1 @@
-version: '3.9'
-
-services:
-  nextapp:
-    container_name: ainbox_website
-    image: ainbox_website
-    build: .
-    ports:
-      - "3000:3000"
+#test
