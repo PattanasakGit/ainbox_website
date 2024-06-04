@@ -105,7 +105,7 @@ const SignUp: React.FC = () => {
         <div>
           คุณมีบัญชีผู้ใช้งานแล้วใช่ไหม
           <Link
-            href="/portal/login"
+            href="/login"
             className="text-orange-500 hover:underline"
           >
             เข้าสู่ระบบ

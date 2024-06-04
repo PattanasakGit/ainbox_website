@@ -35,15 +35,22 @@ const Login: React.FC = () => {
           >
             เข้าสู่ระบบ
           </button>
+          <Link href="/channel_manager" >
+            <button
+              className="w-full bg-green-500 text-white py-2 my-4 rounded-md hover:bg-green-600 transition-colors duration-200"
+            >
+              ปุ่มนี้สมมติว่า Login ได้ DEV MODE
+            </button>
+          </Link>
         </form>
         <div className="my-4">
-          <Link href="/portal/forgetpassworld" className="text-orange-500 hover:underline">
+          <Link href="/forget_password" className="text-orange-500 hover:underline">
             ลืมรหัสผ่าน
           </Link>
         </div>
         <div>
             คุณยังไม่มีบัญชีผู้ใช้งานใช่ไหม
-            <Link href="/portal/signup" className="text-orange-500 hover:underline">
+            <Link href="/signup" className="text-orange-500 hover:underline">
                 สมัครสมาชิกใหม่
             </Link>
         </div>

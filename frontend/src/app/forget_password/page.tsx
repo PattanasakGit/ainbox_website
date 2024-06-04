@@ -54,7 +54,7 @@ const ForgotPassword: React.FC = () => {
           </div>
         )}
         <div className="mt-4">
-          <a href="/portal/login" className="text-orange-500 hover:underline">
+          <a href="/login" className="text-orange-500 hover:underline">
             กลับไปยังหน้าล็อกอิน
           </a>
         </div>
