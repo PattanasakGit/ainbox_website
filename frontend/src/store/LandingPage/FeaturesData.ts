@@ -1,4 +1,4 @@
-import { IFeaturesData } from "../models/IFeaturesData";
+import { IFeaturesData } from "../../models/IFeaturesData";
 
 export const FeaturesData: IFeaturesData[] = [
   {

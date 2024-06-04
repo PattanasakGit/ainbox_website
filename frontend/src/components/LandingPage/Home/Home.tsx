@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { ainboxData } from "../../../store/HomeData";
+import { ainboxData } from "../../../store/LandingPage/HomeData";
 import Features from "./Features";
 
 const Home: React.FC = () => {

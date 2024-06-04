@@ -1,5 +1,5 @@
 import React from "react";
-import { PricingData } from "../../../store/PricingData";
+import { PricingData } from "../../../store/LandingPage/PricingData";
 import Title from "../Title/Title";
 import PricingCard from "./PricingCard";
 

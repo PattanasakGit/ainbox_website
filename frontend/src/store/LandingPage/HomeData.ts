@@ -1,4 +1,4 @@
-import { IAinboxDataType } from "../models/IBaseData";
+import { IAinboxDataType } from "../../models/IBaseData";
 
 export const ainboxData: IAinboxDataType = {
     img: {

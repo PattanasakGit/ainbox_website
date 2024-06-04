@@ -1,6 +1,6 @@
 import React from 'react';
 import { IFeaturesData } from '../../../models/IFeaturesData';
-import { FeaturesData } from '../../../store/FeaturesData';
+import { FeaturesData } from '../../../store/LandingPage/FeaturesData';
 import Title from '../Title/Title';
 import Card from './Card';
 

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
 import { useInView } from 'react-intersection-observer';
-import { ainboxData } from "../../../store/HomeData";
+import { ainboxData } from "../../../store/LandingPage/HomeData";
 import Title from "../Title/Title";
 
 const fadeInUp = {

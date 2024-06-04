@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaEnvelope, FaFacebook, FaLine, FaPhone } from "react-icons/fa";
-import { ainboxData } from "../../../store/HomeData";
+import { ainboxData } from "../../../store/LandingPage/HomeData";
 
 interface FooterDataInterface {
   contact: {
