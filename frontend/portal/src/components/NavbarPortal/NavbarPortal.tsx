@@ -8,7 +8,7 @@ const NavbarPortal: React.FC = () => {
     <nav className="h-[70px] flex justify-between items-center w-full fixed top-0 z-[1000] bg-[#ffffff] shadow-sm px-2 lg:px-16">
       <div className="flex">
         <Link href={'//'}>
-          <Image src='/images/logo.png' alt="logo" width={100} height={100}/>
+          <Image src='/images/logo.png' alt="logo" width={100} height={100} loading="eager" />
         </Link>
         <button className="mx-16">
           Document
