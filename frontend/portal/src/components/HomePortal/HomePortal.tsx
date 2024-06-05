@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 const HomePortal: React.FC = () => {
   return (
-    <section className="bg-red-500 w-full h-screen">
+    <section className="w-full h-screen">
       <MianSidebar/>
      <div className="w-full">
       <Link href={'/channel_manager'}>
