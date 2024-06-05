@@ -39,11 +39,11 @@ const SignUp: React.FC = () => {
       />
       <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center">
         <Image
-          src="/logo.png"
+          src="/images/logo.png"
           alt="Ainbox Logo"
           width={200}
           height={20}
-          className="mx-auto mt-[-30px]"
+          className="mx-auto mb-14"
         />
         <form onSubmit={handleSubmit}>
           <div className="mb-4 text-left">

@@ -7,7 +7,7 @@ const Login: React.FC = () => {
   return (
     <section className="flex justify-center items-center h-screen">
       <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center">
-        <Image src="/logo.png" alt="Ainbox Logo" width={200} height={20} className="mx-auto mt-[-30px]" />
+        <Image src="/images/logo.png" alt="Ainbox Logo" width={200} height={20} className="mx-auto mb-14" />
         <form>
           <div className="mb-4 text-left">
             <label htmlFor="email" className="block text-gray-700 mb-2">ชื่อผู้ใช้(Email)</label>
@@ -35,7 +35,7 @@ const Login: React.FC = () => {
           >
             เข้าสู่ระบบ
           </button>
-          <Link href="/channel_manager" >
+          <Link href="//" >
             <button
               className="w-full bg-green-500 text-white py-2 my-4 rounded-md hover:bg-green-600 transition-colors duration-200"
             >

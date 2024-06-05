@@ -26,7 +26,7 @@ const ForgotPassword: React.FC = () => {
         autoClose={3000}
       />
       <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center">
-        <Image src="/logo.png" alt="Ainbox Logo" width={200} height={20} className="mx-auto mt-[-30px]" />
+        <Image src="/images/logo.png" alt="Ainbox Logo" width={200} height={20} className="mx-auto mb-14" />
         <h2 className="text-[#555] text-2xl font-bold mb-4">ลืมรหัสผ่าน</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-6 text-left">
