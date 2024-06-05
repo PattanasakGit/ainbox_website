@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="th">
       <body className={inter.className}>
         <NavbarPortal />
-        <div className="flex pt-[70px] pl-[150px]">
+        <div className="flex pt-[70px] pl-[200px]">
           <div className="w-full">{children}</div>
         </div>
       </body>
