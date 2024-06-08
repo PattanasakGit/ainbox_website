@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
-import { useMainSidebar } from "../../store/SidebaeStore";
-import { MainSidebarSelection } from "../../models/ISidebar";
+import { useMainSidebar } from "@/store/SidebaeStore";
+import { MainSidebarSelection } from "@/models/ISidebar";
 
 const MianSidebar: React.FC = () => {
   const btnStyle = 'h-12 hover:bg-orange-500 hover:text-white';

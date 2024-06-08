@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
-import NavbarPortal from "../NavbarPortal/NavbarPortal";
-import MianSidebar from "../SidebarPortal/MianSidebar";
-import CustomBreadcrumb from "../Breadcrumb/Breadcrumb";
-import MainChannel from "../ChannelComponent/MainChannel/MainChannel";
-import { useMainSidebar } from "../../store/SidebaeStore";
-import { MainSidebarSelection } from "../../models/ISidebar";
+import NavbarPortal from "@/components/NavbarPortal/NavbarPortal";
+import MianSidebar from "@/components/SidebarPortal/MianSidebar";
+import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
+import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
+import { useMainSidebar } from "@/store/SidebaeStore";
+import { MainSidebarSelection } from "@/models/ISidebar";
 
 const HomePortal: React.FC = () => {
-    const { selected, setSelected } = useMainSidebar(); 
+    const { selected } = useMainSidebar(); 
     const ChooseDisplayComponent = () => {
         if(selected === MainSidebarSelection.Channel){
             return <MainChannel/>;

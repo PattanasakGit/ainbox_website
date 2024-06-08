@@ -1,9 +1,9 @@
 "use client";
 import { Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
-import { queryStoresByPageId } from "../../../service/PageService";
-import AddChannelButton from "./AddChannel";
-import CardChannel from "./CardChannel";
+import { queryStoresByPageId } from "@/service/PageService";
+import AddChannelButton from "@/components/ChannelComponent/MainChannel/AddChannel";
+import CardChannel from "@/components/ChannelComponent/MainChannel/CardChannel";
 
 const MainChannel: React.FC = () => {
   const [channels, setChannels] = useState<IStore[]>([]);
