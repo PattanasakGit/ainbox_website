@@ -18,6 +18,7 @@ export enum ChannelSidebarSelection {
     ShopInfo = "ShopInfo",
     AIBehavior = "AIBehavior",
     Products = "Products",
-    Connects = "Connects"
+    Connects = "Connects",
+    Help = 'Help',
 }
   
