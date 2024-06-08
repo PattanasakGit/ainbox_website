@@ -5,10 +5,17 @@
 
 
 const nextConfig = {
-    output: 'standalone',
-    images: {
-      domains: ['cdn.dummyjson.com'],
-    },
-  }
-  
-  export default nextConfig
+  output: 'standalone',
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.dummyjson.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+}
+
+export default nextConfig;
