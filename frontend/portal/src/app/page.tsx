@@ -1,4 +1,4 @@
-import HomePortal from "@/components/HomePortal/HomePortal";
+import HomePortal from "../components/HomePortal/HomePortal";
 
 export default function App() {
   return (

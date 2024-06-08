@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import ModalAddChannel from "@/components/HomePortal/ModalAddChannel";
+import ModalAddChannel from "./ModalAddChannel";
 
 const AddChannelButton: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

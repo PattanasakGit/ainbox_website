@@ -1,26 +1,23 @@
-"use client"
-import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
-import NavbarPortal from "@/components/NavbarPortal/NavbarPortal";
-import MianSidebar from "@/components/SidebarPortal/MianSidebar";
-import React, { useEffect, useState } from "react";
-import { queryStoresByPageId } from "../../service/PageService";
-import CardChannel from "./CardChannel";
-import AddChannelButton from "./AddChannel";
-import { Skeleton } from "antd";
+"use client";
+import React from "react";
+import NavbarPortal from "../NavbarPortal/NavbarPortal";
+import MianSidebar from "../SidebarPortal/MianSidebar";
+import CustomBreadcrumb from "../Breadcrumb/Breadcrumb";
+import MainChannel from "../ChannelComponent/MainChannel/MainChannel";
+import { useMainSidebar } from "../../store/SidebaeStore";
+import { MainSidebarSelection } from "../../models/ISidebar";
 
 const HomePortal: React.FC = () => {
-  const [channels, setChannels] = useState<IStore[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const pageQueryResult = await queryStoresByPageId("Ub4ba514371a70b57f9ed28c8bdfcf9db");
-      setChannels(pageQueryResult);
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
+    const { selected, setSelected } = useMainSidebar(); 
+    const ChooseDisplayComponent = () => {
+        if(selected === MainSidebarSelection.Channel){
+            return <MainChannel/>;
+        }else if (selected === MainSidebarSelection.Monitor){
+            return <div className="flex justify-center items-center h-[80vh]">ทดสอบนี่คือ ส่วนของหน้าการใช้งาน ยังไม่ได้ทำ Component</div>
+        }else{
+            return <div className="flex justify-center items-center h-[80vh]">นี่คือพื้นที่ขอความช่วยเหลือซึ่งตอนนี้ยังไม่รู้ว่าจะทำออกมาอย่างไร</div>
+        }
+    }
 
   return (
     <section className="w-full h-screen">
@@ -28,24 +25,7 @@ const HomePortal: React.FC = () => {
       <div className="pt-[70px] pl-[200px]">
         <MianSidebar />
         <CustomBreadcrumb />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 auto-rows-fr p-16 pt-8">
-          {loading
-            ? Array.from({ length: 8 }).map((_, index) => (
-              <>
-                <Skeleton key={index} active />
-                <Skeleton key={index} active />
-              </>
-              ))
-            : channels.map((channel, index) => (
-                <CardChannel
-                  key={index}
-                  name={channel.details.business_name}
-                  title={channel.details.description}
-                />
-              ))}
-          {!loading && <AddChannelButton />}
-        </div>
+        {ChooseDisplayComponent()}
       </div>
     </section>
   );

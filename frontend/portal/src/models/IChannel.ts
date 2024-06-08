@@ -1,3 +1,8 @@
+interface CardChannelProps {
+    name: string;
+    title: string;
+  }
+  
 interface IProduct {
     name: string;
     price: string;

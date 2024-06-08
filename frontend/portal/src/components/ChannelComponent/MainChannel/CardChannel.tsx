@@ -2,25 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { FaLine } from "react-icons/fa";
 
-interface CardChannelProps {
-  name: string;
-  title: string;
-}
-
 const CardChannel: React.FC<CardChannelProps> = ({ name, title }) => {
   const generateColor = (char: string) => {
-    const colors = [
-      "#FFD54F",
-      "#FF9800", 
-      "#FFC107", 
-      "#F44336", 
-      "#FFB300",
-      "#FF4081",
-      "#E91E63", 
-      "#FF5722",
-      "#FF6F00",
-      "#FF3D00" 
-    ];
+    const colors = ["#FFD54F","#FF9800", "#FFC107", "#F44336", "#FFB300","#FF4081","#E91E63", "#FF5722","#FF6F00","#FF3D00" ];
     const index = char.toUpperCase().charCodeAt(0) % colors.length;
     return colors[index];
   };
