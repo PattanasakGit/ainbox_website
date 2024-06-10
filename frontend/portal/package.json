@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "antd": "^5.18.0",
+    "axios": "^1.7.2",
     "framer-motion": "^11.2.6",
     "next": "14.2.3",
     "react": "^18",
@@ -17,6 +18,7 @@
     "react-icons": "^5.2.1",
     "react-intersection-observer": "^9.10.2",
     "react-scroll": "^1.9.0",
+    "react-thailand-address-typeahead": "^2.0.1",
     "react-toastify": "^10.0.5",
     "zustand": "^4.5.2"
   },

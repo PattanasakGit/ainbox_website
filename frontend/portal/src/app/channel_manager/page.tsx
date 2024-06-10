@@ -4,6 +4,7 @@ import ChannelSidebar from "@/components/SidebarPortal/ChannelSidebar";
 import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import { useChannelSidebar } from "@/store/SidebaeStore";
 import { ChannelSidebarSelection } from "@/models/ISidebar";
+import Ecommerce from "@/components/ChannelComponent/ECommerce/Ecommerce";
 const ChannelManager: React.FC = () => {
 
   const itemsBreadcrumb = [
@@ -16,7 +17,7 @@ const ChannelManager: React.FC = () => {
   const { selected } = useChannelSidebar(); 
     const ChooseDisplayComponent = () => {
       if(selected === ChannelSidebarSelection.ShopInfo){
-        return <div className="flex justify-center items-center h-[80vh]">หน้านี้คือ ข้อมูลร้านค้า</div>
+        return <Ecommerce/>
       }else if (selected === ChannelSidebarSelection.AIBehavior){
           return <div className="flex justify-center items-center h-[80vh]">หน้านี้คือ ข้อมูล ai</div>
       }else if (selected === ChannelSidebarSelection.Products){
