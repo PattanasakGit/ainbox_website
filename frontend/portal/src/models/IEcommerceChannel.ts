@@ -1,4 +1,5 @@
 export interface Address {
+    detailedAddress: any;
     subdistrict: string;
     district: string;
     province: string;

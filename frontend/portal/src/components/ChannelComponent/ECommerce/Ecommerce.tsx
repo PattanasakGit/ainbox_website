@@ -1,14 +1,20 @@
 "use client"
 import React, { useState } from "react";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
-import { Address, FormData } from "@/models/IEcommerceChannel"
+import { Address, FormData } from "@/models/IEcommerceChannel";
 
 const Ecommerce: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     shopName: "",
     shopType: "",
     description: "",
-    address: { subdistrict: "", district: "", province: "", zipcode: "" },
+    address: {
+      detailedAddress: "",
+      subdistrict: "",
+      district: "",
+      province: "",
+      zipcode: "",
+    },
     phone: "",
     email: "",
   });
@@ -28,8 +34,11 @@ const Ecommerce: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // ตรวจสอบความถูกต้องของข้อมูลที่นี่
-    console.log(formData);
+    const { address, ...rest } = formData;
+    const addressString = `${address.detailedAddress}, ตำบล ${address.subdistrict}, อำเภอ ${address.district}, จังหวัด ${address.province}, รหัสไปรษณีย์ ${address.zipcode}`;
+    const dataToSubmit = { ...rest, address: addressString };
+
+    console.log(dataToSubmit);
     // ส่งข้อมูลไปยังเซิร์ฟเวอร์
   };
 
@@ -55,10 +64,11 @@ const Ecommerce: React.FC = () => {
             id="shopName"
             value={formData.shopName}
             onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md focus:ring-2 focus"
+            className="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
             required
           />
         </div>
+
         <div className="mb-4">
           <label
             htmlFor="shopType"
@@ -97,9 +107,6 @@ const Ecommerce: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            ที่อยู่
-          </label>
           <AddressInput
             address={formData.address}
             onChange={handleAddressChange}
@@ -121,15 +128,16 @@ const Ecommerce: React.FC = () => {
             className="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
             pattern="[0-9]{10}"
             title="กรุณากรอกเบอร์โทรศัพท์ 10 หลัก"
+            required
           />
         </div>
 
-        <div className="mb-6">
+        <div className="mb-4">
           <label
             htmlFor="email"
             className="block text-sm font-medium text-gray-700"
           >
-            Email
+            อีเมล
           </label>
           <input
             type="email"
@@ -137,12 +145,13 @@ const Ecommerce: React.FC = () => {
             value={formData.email}
             onChange={handleChange}
             className="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
+            required
           />
         </div>
 
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="mt-4 p-2 w-full bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
         >
           ลงทะเบียน
         </button>
