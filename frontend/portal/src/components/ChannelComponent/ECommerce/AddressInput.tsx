@@ -6,6 +6,7 @@ import {
   ThailandAddressValue,
 } from "react-thailand-address-typeahead";
 import { Address } from "@/models/IEcommerceChannel";
+import '@/components/ChannelComponent/ECommerce/Ecommerce.css'
 
 export const AddressInput: React.FC<{
   address: Address;
@@ -81,53 +82,58 @@ export const AddressInput: React.FC<{
   return (
     <ThailandAddressTypeahead value={val} onValueChange={handleValueChange}>
       <div className="mb-2">
-        <label htmlFor="detailedAddress" className="block text-sm font-medium text-gray-700">ที่อยู่</label>
+        <label htmlFor="detailedAddress" className="EcommerceLabel">ที่อยู่</label>
         <textarea
           id="detailedAddress"
         //placeholder="รายละเอียดที่อยู่"
           value={detailedAddress}
           onChange={handleDetailedAddressChange}
           rows={2}
-          className="p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400 resize-none"
+          className="EcommerceInput resize-none"
+          required
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mb-2">
-          <label htmlFor="subdistrict" className="block text-sm font-medium text-gray-700">ตำบล</label>
+          <label htmlFor="subdistrict" className="EcommerceLabel">ตำบล</label>
           <ThailandAddressTypeahead.SubdistrictInput
             id="subdistrict"
             // placeholder="ตำบล"
-            className="p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
+            className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
+            required
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="district" className="block text-sm font-medium text-gray-700">อำเภอ</label>
+          <label htmlFor="district" className="EcommerceLabel">อำเภอ</label>
           <ThailandAddressTypeahead.DistrictInput
             id="district"
             // placeholder="อำเภอ"
-            className="p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
+            className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
+            required
           />
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="mb-2">
-          <label htmlFor="province" className="block text-sm font-medium text-gray-700">จังหวัด</label>
+          <label htmlFor="province" className="EcommerceLabel">จังหวัด</label>
           <ThailandAddressTypeahead.ProvinceInput
             id="province"
             // placeholder="จังหวัด"
-            className="p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
+            className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
+            required
           />
         </div>
         <div className="mb-2">
-          <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">รหัสไปรษณีย์</label>
+          <label htmlFor="postalCode" className="EcommerceLabel">รหัสไปรษณีย์</label>
           <ThailandAddressTypeahead.PostalCodeInput
             id="postalCode"
             // placeholder="รหัสไปรษณีย์"
-            className="p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
-            onFocus={() => setShowSuggestions(true)}
+            className="EcommerceInput"
+            onFocus={() => setShowSuggestions(false)}
+            required
           />
         </div>
       </div>

@@ -1,15 +1,16 @@
-interface CardChannelProps {
+export interface CardChannelProps {
     name: string;
     title: string;
+    onClick?: () => void;
   }
   
-interface IProduct {
+export interface IProduct {
     name: string;
     price: string;
     description: string;
 }
 
-interface IStoreDetails {
+export interface IStoreDetails {
     ai_name: string;
     ai_behavior: string;
     ai_age: string;
@@ -28,7 +29,7 @@ interface IStoreDetails {
     ai_gender: string;
 }
 
-interface IStore {
+export interface IStore {
     _id: { $oid: string };
     page_id: string;
     details: IStoreDetails;

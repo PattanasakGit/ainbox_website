@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { FaLine } from "react-icons/fa";
+import { CardChannelProps } from "@/models/IChannel";
 
 const CardChannel: React.FC<CardChannelProps> = ({ name, title }) => {
   const generateColor = (char: string) => {
@@ -13,8 +14,8 @@ const CardChannel: React.FC<CardChannelProps> = ({ name, title }) => {
   const backgroundColor = generateColor(initial);
 
   return (
-    <div className="h-full w-full relative rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 hover:shadow-lg bg-white">
-      <div className="bg-gradient-to-b from-orange-100 to-white h-28 flex items-center justify-center">
+    <div className="border border-orange-100 hover:border-orange-400 h-full w-full relative rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 hover:shadow-lg bg-white">
+      <div className="h-28 flex items-center justify-center">
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-inner border-2 border-[#33333344]"
           style={{ backgroundColor }}

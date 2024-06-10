@@ -7,10 +7,10 @@ export interface Address {
 }
 
 export interface FormData {
-    shopName: string;
-    shopType: string;
-    description: string;
+    shopName?: string;
+    shopType?: string;
+    description?: string;
     address: Address;
-    phone: string;
-    email: string;
+    phone?: string;
+    email?: string;
 }

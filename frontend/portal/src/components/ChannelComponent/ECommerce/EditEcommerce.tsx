@@ -8,9 +8,9 @@ import { useDataChannel } from "@/store/dataChannel";
 const Ecommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
   const [formData, setFormData] = useState<FormData>({
-    shopName: dataChannel?.details.business_name,
-    shopType: dataChannel?.details.business_type,
-    description: dataChannel?.details.description,
+    shopName: "",
+    shopType: "",
+    description: "",
     address: {
       detailedAddress: "",
       subdistrict: "",
@@ -18,8 +18,8 @@ const Ecommerce: React.FC = () => {
       province: "",
       zipcode: "",
     },
-    phone: dataChannel?.details.phone,
-    email: dataChannel?.details.email,
+    phone: "",
+    email: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -42,11 +42,11 @@ const Ecommerce: React.FC = () => {
   };
 
   return (
-    <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">
+    <section className="w-full min-h-screen bg-[#fff0] p-8">
 
       <div className="">
-        <h2 className="text-center text-3xl font-black text-orange-500 mb-16">
-            {formData.shopName}
+        <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">
+            ลงทะเบียนร้านค้า
         </h2>
       </div>
 
@@ -80,7 +80,7 @@ const Ecommerce: React.FC = () => {
               id="shopType"
               value={formData.shopType}
               onChange={handleChange}
-              className="EcommerceInput"
+              className="EcommerceInput "
               required
             >
               <option value="">เลือกประเภทร้านค้า</option>

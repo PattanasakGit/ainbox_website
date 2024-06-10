@@ -1,0 +1,24 @@
+.EcommerceLabel {
+    display: block; 
+    font-size: 16px;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+.EcommerceInput {
+    margin-top: 0.25rem; 
+    padding: 0.5rem;   
+    width: 100%;    
+    border: 1px solid #cccccc52;
+    border-radius: 0.5rem; 
+    outline: none;
+    transition: box-shadow 0.2s ease-in-out;
+    font-size: 16px;
+    color: #555; 
+}
+
+.EcommerceInput:focus {
+    box-shadow: 0 0 0 1px rgb(255, 169, 70); 
+}

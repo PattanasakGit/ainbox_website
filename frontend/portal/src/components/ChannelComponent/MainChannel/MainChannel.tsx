@@ -4,10 +4,13 @@ import React, { useEffect, useState } from "react";
 import { queryStoresByPageId } from "@/service/PageService";
 import AddChannelButton from "@/components/ChannelComponent/MainChannel/AddChannel";
 import CardChannel from "@/components/ChannelComponent/MainChannel/CardChannel";
+import { IStore } from "@/models/IChannel";
+import { useDataChannel } from "@/store/dataChannel";
 
 const MainChannel: React.FC = () => {
   const [channels, setChannels] = useState<IStore[]>([]);
   const [loading, setLoading] = useState(true);
+  const { setDataChannel } = useDataChannel();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,11 +30,13 @@ const MainChannel: React.FC = () => {
               <Skeleton key={index} active />
             ))
           : channels.map((channel) => (
+            <div onClick={()=>{setDataChannel(channel)}}>
               <CardChannel
                 key={channel._id.$oid}
                 name={channel.details.business_name}
                 title={channel.details.description}
               />
+            </div>
             ))}
         {!loading && <AddChannelButton />}
       </div>
