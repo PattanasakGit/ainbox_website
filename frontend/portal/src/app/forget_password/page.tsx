@@ -20,7 +20,7 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <section className="flex justify-center items-center h-screen">
+    <section className="flex justify-center items-center h-screen bg-[url('/images/bg.webp')] bg-cover bg-fixed bg-center">
       <ToastContainer 
         position="top-center"
         autoClose={3000}

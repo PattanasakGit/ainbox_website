@@ -24,7 +24,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <section className="flex justify-center items-center h-screen">
+    <section className="flex justify-center items-center h-screen bg-[url('/images/bg.webp')] bg-cover bg-fixed bg-center">
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -37,7 +37,7 @@ const SignUp: React.FC = () => {
         pauseOnHover
         theme="colored"
       />
-      <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center">
+      <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center ">
         <Image
           src="/images/logo.png"
           alt="Ainbox Logo"

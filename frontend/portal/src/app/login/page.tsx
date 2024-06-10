@@ -5,7 +5,7 @@ import Link from 'next/link'
 const Login: React.FC = () => {
 
   return (
-    <section className="flex justify-center items-center h-screen">
+    <section className="flex justify-center items-center h-screen bg-[url('/images/bg.webp')] bg-cover bg-fixed bg-center">
       <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center">
         <Image src="/images/logo.png" alt="Ainbox Logo" width={200} height={20} className="mx-auto mb-14" />
         <form>
