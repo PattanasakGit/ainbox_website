@@ -4,8 +4,10 @@ import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInp
 import { Address, FormData } from "@/models/IEcommerceChannel";
 import '@/components/ChannelComponent/ECommerce/Ecommerce.css'
 import { useDataChannel } from "@/store/dataChannel";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Ecommerce: React.FC = () => {
+const CreateEcommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
   const [formData, setFormData] = useState<FormData>({
     shopName: dataChannel?.details.business_name,
@@ -148,8 +150,8 @@ const Ecommerce: React.FC = () => {
         <div className="mb-4">
           <AddressInput
             address={formData.address}
-            onChange={handleAddressChange}
-          />
+            onChange={handleAddressChange} 
+            disabled={false}          />
         </div>
 
         <button
@@ -163,4 +165,4 @@ const Ecommerce: React.FC = () => {
   );
 };
 
-export default Ecommerce;
+export default CreateEcommerce;

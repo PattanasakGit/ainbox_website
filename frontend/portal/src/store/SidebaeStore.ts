@@ -1,3 +1,4 @@
+"use client"
 import { create } from "zustand";
 import { ChannelSidebarSelection, IChannelSidebar, IMainSidebar, MainSidebarSelection } from "@/models/ISidebar";
 

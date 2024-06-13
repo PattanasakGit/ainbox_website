@@ -11,7 +11,8 @@ import '@/components/ChannelComponent/ECommerce/Ecommerce.css'
 export const AddressInput: React.FC<{
   address: Address;
   onChange: (newAddress: Address) => void;
-}> = ({ address, onChange }) => {
+  disabled: boolean;
+}> = ({ address, onChange, disabled }) => {
   const [val, setVal] = useState(
     ThailandAddressValue.fromDatasourceItem({
       d: address.district,
@@ -85,11 +86,11 @@ export const AddressInput: React.FC<{
         <label htmlFor="detailedAddress" className="EcommerceLabel">ที่อยู่</label>
         <textarea
           id="detailedAddress"
-        //placeholder="รายละเอียดที่อยู่"
           value={detailedAddress}
           onChange={handleDetailedAddressChange}
           rows={2}
           className="EcommerceInput resize-none"
+          disabled={disabled}
           required
         />
       </div>
@@ -98,9 +99,9 @@ export const AddressInput: React.FC<{
           <label htmlFor="subdistrict" className="EcommerceLabel">ตำบล</label>
           <ThailandAddressTypeahead.SubdistrictInput
             id="subdistrict"
-            // placeholder="ตำบล"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
+            disabled={disabled}
             required
           />
         </div>
@@ -108,9 +109,9 @@ export const AddressInput: React.FC<{
           <label htmlFor="district" className="EcommerceLabel">อำเภอ</label>
           <ThailandAddressTypeahead.DistrictInput
             id="district"
-            // placeholder="อำเภอ"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
+            disabled={disabled}
             required
           />
         </div>
@@ -120,9 +121,9 @@ export const AddressInput: React.FC<{
           <label htmlFor="province" className="EcommerceLabel">จังหวัด</label>
           <ThailandAddressTypeahead.ProvinceInput
             id="province"
-            // placeholder="จังหวัด"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
+            disabled={disabled}
             required
           />
         </div>
@@ -130,9 +131,9 @@ export const AddressInput: React.FC<{
           <label htmlFor="postalCode" className="EcommerceLabel">รหัสไปรษณีย์</label>
           <ThailandAddressTypeahead.PostalCodeInput
             id="postalCode"
-            // placeholder="รหัสไปรษณีย์"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(false)}
+            disabled={disabled}
             required
           />
         </div>
@@ -144,5 +145,5 @@ export const AddressInput: React.FC<{
       </CustomSuggestionPanel>
     </ThailandAddressTypeahead>
   );
-  
+
 };

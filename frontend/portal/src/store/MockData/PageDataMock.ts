@@ -1,3 +1,5 @@
+import { IStore } from "@/models/IChannel";
+
 // Mock Up Data ของร้านค้า
 export const stores: IStore[] = [
     {

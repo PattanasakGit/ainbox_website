@@ -43,7 +43,7 @@ const CustomBreadcrumb: React.FC<BreadcrumbProps> = ({ items = [] }) => {
   return (
     <Breadcrumb className='h-12 flex items-center px-8'>
       {allItems.map((item, index) => (
-        <Breadcrumb.Item key={index} href={item.href}>
+        <Breadcrumb.Item key={index} href={item.href} className='text-gray-500'>
            {item.title}
         </Breadcrumb.Item>
       ))}

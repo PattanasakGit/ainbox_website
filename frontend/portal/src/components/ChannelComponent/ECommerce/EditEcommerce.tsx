@@ -4,13 +4,17 @@ import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInp
 import { Address, FormData } from "@/models/IEcommerceChannel";
 import '@/components/ChannelComponent/ECommerce/Ecommerce.css'
 import { useDataChannel } from "@/store/dataChannel";
+import ecommerceService from "@/service/ChannelService/EcommerceService";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Ecommerce: React.FC = () => {
+const EditEcommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
-    shopName: "",
-    shopType: "",
-    description: "",
+    shopName: dataChannel?.details.business_name,
+    shopType: dataChannel?.details.business_type,
+    description: dataChannel?.details.description,
     address: {
       detailedAddress: "",
       subdistrict: "",
@@ -18,8 +22,8 @@ const Ecommerce: React.FC = () => {
       province: "",
       zipcode: "",
     },
-    phone: "",
-    email: "",
+    phone: dataChannel?.details.phone,
+    email: dataChannel?.details.email,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -31,32 +35,55 @@ const Ecommerce: React.FC = () => {
     setFormData((prev) => ({ ...prev, address: newAddress }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const toggleEdit = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { address, ...rest } = formData;
     const addressString = `${address.detailedAddress}, ตำบล ${address.subdistrict}, อำเภอ ${address.district}, จังหวัด ${address.province}, รหัสไปรษณีย์ ${address.zipcode}`;
     const dataToSubmit = { ...rest, address: addressString };
 
+    if (dataChannel){
+      try {
+        await ecommerceService.edit(dataChannel.page_id, dataToSubmit);
+        toast.success('ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
+        toggleEdit();
+      } catch (error) {
+        toast.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+      }
+    }
     console.log(dataToSubmit);
-    // ส่งข้อมูลไปยังเซิร์ฟเวอร์
   };
 
   return (
-    <section className="w-full min-h-screen bg-[#fff0] p-8">
-
+    <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">
+      <ToastContainer
+        // position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="">
-        <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">
-            ลงทะเบียนร้านค้า
+        <h2 className="text-center text-[42px] font-black text-orange-400 mb-10">
+        <input type="text" id="shopName" value={formData.shopName}disabled={true}
+          className="bg-white text-center"
+        />
         </h2>
       </div>
 
       <form onSubmit={handleSubmit} className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8" >
+
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
-            <label
-              htmlFor="shopName"
-              className="EcommerceLabel"
-            >
+            <label htmlFor="shopName" className="EcommerceLabel">
               ชื่อร้านค้า *
             </label>
             <input
@@ -64,23 +91,22 @@ const Ecommerce: React.FC = () => {
               id="shopName"
               value={formData.shopName}
               onChange={handleChange}
-              className="EcommerceInput "
+              className="EcommerceInput"
+              disabled={!isEditing}
               required
             />
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="shopType"
-              className="EcommerceLabel"
-            >
+            <label htmlFor="shopType" className="EcommerceLabel">
               ประเภทของร้านค้า *
             </label>
             <select
               id="shopType"
               value={formData.shopType}
               onChange={handleChange}
-              className="EcommerceInput "
+              className="EcommerceInput"
+              disabled={!isEditing}
               required
             >
               <option value="">เลือกประเภทร้านค้า</option>
@@ -91,10 +117,7 @@ const Ecommerce: React.FC = () => {
           </div>
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="EcommerceLabel"
-          >
+          <label htmlFor="description" className="EcommerceLabel">
             อธิบายร้านค้าของคุณ *
           </label>
           <textarea
@@ -102,17 +125,15 @@ const Ecommerce: React.FC = () => {
             value={formData.description}
             onChange={handleChange}
             rows={6}
-            className="EcommerceInput  resize-none"
+            className="EcommerceInput resize-none"
+            disabled={!isEditing}
             required
           ></textarea>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
-            <label
-              htmlFor="phone"
-              className="EcommerceLabel"
-            >
+            <label htmlFor="phone" className="EcommerceLabel">
               เบอร์โทรศัพท์
             </label>
             <input
@@ -120,18 +141,16 @@ const Ecommerce: React.FC = () => {
               id="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="EcommerceInput "
+              className="EcommerceInput"
               pattern="[0-9]{10}"
               title="กรุณากรอกเบอร์โทรศัพท์ 10 หลัก"
+              disabled={!isEditing}
               required
             />
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="EcommerceLabel"
-            >
+            <label htmlFor="email" className="EcommerceLabel">
               อีเมล
             </label>
             <input
@@ -139,7 +158,8 @@ const Ecommerce: React.FC = () => {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="EcommerceInput "
+              className="EcommerceInput"
+              disabled={!isEditing}
               required
             />
           </div>
@@ -149,18 +169,40 @@ const Ecommerce: React.FC = () => {
           <AddressInput
             address={formData.address}
             onChange={handleAddressChange}
+            disabled={!isEditing}
           />
         </div>
 
-        <button
-          type="submit"
-          className="mt-4 p-2 w-full bg-orange-300 text-white rounded-md hover:bg-orange-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-        >
-          ลงทะเบียน
-        </button>
+        <div className="flex justify-end space-x-2">
+          {isEditing ? (
+            <>
+              <button
+                type="button"
+                onClick={toggleEdit}
+                className="mt-4 p-2 px-4 bg-gray-100 text-[#333] rounded-md hover:text-white hover:bg-gray-600 focus:ring-2 focus:ring-white focus:outline-none"
+              >
+                ยกเลิก
+              </button>
+              <button
+                type="submit"
+                className="mt-4 p-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+              >
+                บันทึก
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={toggleEdit}
+              className="mt-4 p-2 bg-orange-400 text-white rounded-md hover:bg-orange-500 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+            >
+              แก้ไขข้อมูล
+            </button>
+          )}
+        </div>
       </form>
     </section>
   );
 };
 
-export default Ecommerce;
+export default EditEcommerce;
