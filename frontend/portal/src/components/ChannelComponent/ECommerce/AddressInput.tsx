@@ -41,7 +41,9 @@ export const AddressInput: React.FC<{
     setShowSuggestions(false);
   };
 
-  const handleDetailedAddressChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleDetailedAddressChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const newDetailedAddress = e.target.value;
     setDetailedAddress(newDetailedAddress);
     onChange({
@@ -50,7 +52,10 @@ export const AddressInput: React.FC<{
     });
   };
 
-  const renderSuggestions = (suggestions: any[], onSelectSuggestion: (nextVal: any) => void) => {
+  const renderSuggestions = (
+    suggestions: any[],
+    onSelectSuggestion: (nextVal: any) => void
+  ) => {
     if (!showSuggestions) return null;
 
     return (
@@ -62,7 +67,8 @@ export const AddressInput: React.FC<{
             onClick={() => onSelectSuggestion(address)}
           >
             <span className="text-gray-800 font-medium hover:text-orange-600">
-              {address.subdistrict}, {address.district}, {address.province} {address.postalCode}
+              {address.subdistrict}, {address.district}, {address.province}{" "}
+              {address.postalCode}
             </span>
           </li>
         ))}
@@ -70,24 +76,18 @@ export const AddressInput: React.FC<{
     );
   };
 
-  const InputField: React.FC<{ label: string; id: string; children: ReactNode }> = ({ label, id, children }) => (
-    <div className="mb-2">
-      <label htmlFor={id} className="EcommerceLabel">{label}</label>
-      {children}
-    </div>
-  );
-
   return (
-    <ThailandAddressTypeahead
+    <ThailandAddressTypeahead 
       value={{
         subdistrict: address.subdistrict,
         district: address.district,
         province: address.province,
         postalCode: address.zipcode,
-      }}
+      }} 
       onValueChange={handleValueChange}
     >
-      <InputField label="ที่อยู่" id="detailedAddress">
+      <div className="mb-2">
+        <label htmlFor="detailedAddress" className="EcommerceLabel">ที่อยู่</label>
         <textarea
           id="detailedAddress"
           value={detailedAddress}
@@ -97,9 +97,10 @@ export const AddressInput: React.FC<{
           disabled={disabled}
           required
         />
-      </InputField>
+      </div>
       <div className="grid grid-cols-2 gap-4">
-        <InputField label="ตำบล" id="subdistrict">
+        <div className="mb-2">
+          <label htmlFor="subdistrict" className="EcommerceLabel">ตำบล</label>
           <SubdistrictInput
             id="subdistrict"
             className="EcommerceInput"
@@ -107,8 +108,9 @@ export const AddressInput: React.FC<{
             disabled={disabled}
             required
           />
-        </InputField>
-        <InputField label="อำเภอ" id="district">
+        </div>
+        <div className="mb-2">
+          <label htmlFor="district" className="EcommerceLabel">อำเภอ</label>
           <DistrictInput
             id="district"
             className="EcommerceInput"
@@ -116,10 +118,11 @@ export const AddressInput: React.FC<{
             disabled={disabled}
             required
           />
-        </InputField>
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <InputField label="จังหวัด" id="province">
+        <div className="mb-2">
+          <label htmlFor="province" className="EcommerceLabel">จังหวัด</label>
           <ProvinceInput
             id="province"
             className="EcommerceInput"
@@ -127,8 +130,9 @@ export const AddressInput: React.FC<{
             disabled={disabled}
             required
           />
-        </InputField>
-        <InputField label="รหัสไปรษณีย์" id="postalCode">
+        </div>
+        <div className="mb-2">
+          <label htmlFor="postalCode" className="EcommerceLabel">รหัสไปรษณีย์</label>
           <PostalCodeInput
             id="postalCode"
             className="EcommerceInput"
@@ -136,7 +140,7 @@ export const AddressInput: React.FC<{
             disabled={disabled}
             required
           />
-        </InputField>
+        </div>
       </div>
       <CustomSuggestionPanel>
         {(suggestions, _) =>
