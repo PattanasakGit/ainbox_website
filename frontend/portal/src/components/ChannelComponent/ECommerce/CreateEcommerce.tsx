@@ -75,40 +75,42 @@ const CreateEcommerce: React.FC = () => {
         theme="colored"
       />
 
-      <h2 className="text-center text-[42px] font-black text-orange-400 mb-10">Create E-commerce</h2>
+      <h2 className="text-center text-[42px] font-black text-orange-400 mb-10">สร้างช่องใหม่สำหรับธุรกิจของคุณ</h2>
 
       <form onSubmit={handleSubmit} className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8" >
 
-        <div className="mb-4">
-          <label htmlFor="shopName" className="EcommerceLabel">
-            ชื่อร้านค้า *
-          </label>
-          <input
-            type="text"
-            id="shopName"
-            value={formData.shopName}
-            onChange={handleChange}
-            className="EcommerceInput"
-            required
-          />
-        </div>
+      <div className="grid grid-cols-2 gap-4">
+          <div className="mb-4">
+            <label htmlFor="shopName" className="EcommerceLabel">
+              ชื่อร้านค้า *
+            </label>
+            <input
+              type="text"
+              id="shopName"
+              value={formData.shopName}
+              onChange={handleChange}
+              className="EcommerceInput"
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="shopType" className="EcommerceLabel">
-            ประเภทของร้านค้า *
-          </label>
-          <select
-            id="shopType"
-            value={formData.shopType}
-            onChange={handleChange}
-            className="EcommerceInput"
-            required
-          >
-            <option value="">เลือกประเภทร้านค้า</option>
-            <option value="food">อาหาร</option>
-            <option value="clothing">เสื้อผ้า</option>
-            <option value="electronics">อิเล็กทรอนิกส์</option>
-          </select>
+          <div className="mb-4">
+            <label htmlFor="shopType" className="EcommerceLabel">
+              ประเภทของร้านค้า *
+            </label>
+            <select
+              id="shopType"
+              value={formData.shopType}
+              onChange={handleChange}
+              className="EcommerceInput"
+              required
+            >
+              <option value="">เลือกประเภทร้านค้า</option>
+              <option value="food">อาหาร</option>
+              <option value="clothing">เสื้อผ้า</option>
+              <option value="electronics">อิเล็กทรอนิกส์</option>
+            </select>
+          </div>
         </div>
 
         <div className="mb-4">
