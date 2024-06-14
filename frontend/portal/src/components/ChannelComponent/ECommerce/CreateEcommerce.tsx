@@ -1,18 +1,17 @@
-"use client"
-import React, { useState } from "react";
+"use client";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
+import ecommerceService from "@/service/ChannelService/EcommerceService";
+import '@/components/ChannelComponent/ECommerce/Ecommerce.css';
 import { Address, FormData } from "@/models/IEcommerceChannel";
-import '@/components/ChannelComponent/ECommerce/Ecommerce.css'
-import { useDataChannel } from "@/store/dataChannel";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
 
 const CreateEcommerce: React.FC = () => {
-  const { dataChannel } = useDataChannel();
   const [formData, setFormData] = useState<FormData>({
-    shopName: dataChannel?.details.business_name,
-    shopType: dataChannel?.details.business_type,
-    description: dataChannel?.details.description,
+    shopName: "",
+    shopType: "",
+    description: "",
     address: {
       detailedAddress: "",
       subdistrict: "",
@@ -20,8 +19,8 @@ const CreateEcommerce: React.FC = () => {
       province: "",
       zipcode: "",
     },
-    phone: dataChannel?.details.phone,
-    email: dataChannel?.details.email,
+    phone: "",
+    email: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -33,70 +32,87 @@ const CreateEcommerce: React.FC = () => {
     setFormData((prev) => ({ ...prev, address: newAddress }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { address, ...rest } = formData;
     const addressString = `${address.detailedAddress}, ตำบล ${address.subdistrict}, อำเภอ ${address.district}, จังหวัด ${address.province}, รหัสไปรษณีย์ ${address.zipcode}`;
-    const dataToSubmit = { ...rest, address: addressString };
+    const dataToCreate = { ...rest, address: addressString };
 
-    console.log(dataToSubmit);
-    // ส่งข้อมูลไปยังเซิร์ฟเวอร์
+    try {
+      await ecommerceService.create(dataToCreate);
+      toast.success('ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
+      // Optionally, you can reset formData here to clear the form inputs after submission
+      setFormData({
+        shopName: "",
+        shopType: "",
+        description: "",
+        address: {
+          detailedAddress: "",
+          subdistrict: "",
+          district: "",
+          province: "",
+          zipcode: "",
+        },
+        phone: "",
+        email: "",
+      });
+    } catch (error) {
+      toast.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+    }
   };
 
   return (
     <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">
+      <ToastContainer
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
 
-      <div className="">
-        <h2 className="text-center text-3xl font-black text-orange-500 mb-16">
-            {formData.shopName}
-        </h2>
-      </div>
+      <h2 className="text-center text-[42px] font-black text-orange-400 mb-10">Create E-commerce</h2>
 
       <form onSubmit={handleSubmit} className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8" >
-        <div className="grid grid-cols-2 gap-4">
-          <div className="mb-4">
-            <label
-              htmlFor="shopName"
-              className="EcommerceLabel"
-            >
-              ชื่อร้านค้า *
-            </label>
-            <input
-              type="text"
-              id="shopName"
-              value={formData.shopName}
-              onChange={handleChange}
-              className="EcommerceInput "
-              required
-            />
-          </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="shopType"
-              className="EcommerceLabel"
-            >
-              ประเภทของร้านค้า *
-            </label>
-            <select
-              id="shopType"
-              value={formData.shopType}
-              onChange={handleChange}
-              className="EcommerceInput"
-              required
-            >
-              <option value="">เลือกประเภทร้านค้า</option>
-              <option value="food">อาหาร</option>
-              <option value="clothing">เสื้อผ้า</option>
-              <option value="electronics">อิเล็กทรอนิกส์</option>
-            </select>
-          </div>
-        </div>
         <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="EcommerceLabel"
+          <label htmlFor="shopName" className="EcommerceLabel">
+            ชื่อร้านค้า *
+          </label>
+          <input
+            type="text"
+            id="shopName"
+            value={formData.shopName}
+            onChange={handleChange}
+            className="EcommerceInput"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="shopType" className="EcommerceLabel">
+            ประเภทของร้านค้า *
+          </label>
+          <select
+            id="shopType"
+            value={formData.shopType}
+            onChange={handleChange}
+            className="EcommerceInput"
+            required
           >
+            <option value="">เลือกประเภทร้านค้า</option>
+            <option value="food">อาหาร</option>
+            <option value="clothing">เสื้อผ้า</option>
+            <option value="electronics">อิเล็กทรอนิกส์</option>
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="description" className="EcommerceLabel">
             อธิบายร้านค้าของคุณ *
           </label>
           <textarea
@@ -104,17 +120,14 @@ const CreateEcommerce: React.FC = () => {
             value={formData.description}
             onChange={handleChange}
             rows={6}
-            className="EcommerceInput  resize-none"
+            className="EcommerceInput resize-none"
             required
           ></textarea>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
-            <label
-              htmlFor="phone"
-              className="EcommerceLabel"
-            >
+            <label htmlFor="phone" className="EcommerceLabel">
               เบอร์โทรศัพท์
             </label>
             <input
@@ -122,7 +135,7 @@ const CreateEcommerce: React.FC = () => {
               id="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="EcommerceInput "
+              className="EcommerceInput"
               pattern="[0-9]{10}"
               title="กรุณากรอกเบอร์โทรศัพท์ 10 หลัก"
               required
@@ -130,10 +143,7 @@ const CreateEcommerce: React.FC = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="EcommerceLabel"
-            >
+            <label htmlFor="email" className="EcommerceLabel">
               อีเมล
             </label>
             <input
@@ -141,7 +151,7 @@ const CreateEcommerce: React.FC = () => {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="EcommerceInput "
+              className="EcommerceInput"
               required
             />
           </div>
@@ -150,16 +160,18 @@ const CreateEcommerce: React.FC = () => {
         <div className="mb-4">
           <AddressInput
             address={formData.address}
-            onChange={handleAddressChange} 
-            disabled={false}          />
+            onChange={handleAddressChange}
+          />
         </div>
 
-        <button
-          type="submit"
-          className="mt-4 p-2 w-full bg-orange-300 text-white rounded-md hover:bg-orange-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-        >
-          ลงทะเบียน
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="mt-4 p-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+          >
+            บันทึก
+          </button>
+        </div>
       </form>
     </section>
   );

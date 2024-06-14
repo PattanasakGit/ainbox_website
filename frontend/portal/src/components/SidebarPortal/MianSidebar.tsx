@@ -15,7 +15,7 @@ const MianSidebar: React.FC = () => {
   return (
     <section className="mt-[70px] h-screen w-[200px] bg-gray-100 fixed top-0 left-0 flex flex-col justify-start">
       <button
-        className={selected === MainSidebarSelection.Channel ? activeBtnStyle : btnStyle}
+        className={(selected === MainSidebarSelection.Channel || selected === MainSidebarSelection.CreateDataWarehouse || selected === MainSidebarSelection.CreateEcommerce || selected === MainSidebarSelection.CreatePersonal ) ? activeBtnStyle : btnStyle}
         onClick={() => handleMenuClick(MainSidebarSelection.Channel)}
       >
         ร้านค้า

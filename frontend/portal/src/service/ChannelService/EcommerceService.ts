@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const API_URL = '/api';
 
@@ -31,7 +31,7 @@ const apiCall = async <T>(method: 'get' | 'post' | 'put' | 'patch' | 'delete', u
 };
 
 const ecommerceService = { 
-  async submit(dataToSubmit: DataToSubmit): Promise<unknown> {
+  async create(dataToSubmit: DataToSubmit): Promise<unknown> {
     return await apiCall('post', '/submit', dataToSubmit);
   },
   async update(id: string, dataToUpdate: DataToUpdate): Promise<unknown> {

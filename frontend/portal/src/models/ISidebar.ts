@@ -12,6 +12,9 @@ export enum MainSidebarSelection {
     Channel = 'Channel',
     Monitor = 'Monitor',
     Help = 'Help',
+    CreateEcommerce = 'CreateEcommerce',
+    CreateDataWarehouse = 'CreateDataWarehouse',
+    CreatePersonal = 'CreatePersonal',
 }
 
 export enum ChannelSidebarSelection {
@@ -21,4 +24,5 @@ export enum ChannelSidebarSelection {
     Connects = "Connects",
     Help = 'Help',
 }
+
   

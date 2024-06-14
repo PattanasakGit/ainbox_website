@@ -16,7 +16,7 @@ const CustomSuggestionPanel = dynamic(() => import("react-thailand-address-typea
 export const AddressInput: React.FC<{
   address: Address;
   onChange: (newAddress: Address) => void;
-  disabled: boolean;
+  disabled?: boolean;
 }> = ({ address, onChange, disabled }) => {
   const [detailedAddress, setDetailedAddress] = useState(address.detailedAddress);
   const [showSuggestions, setShowSuggestions] = useState(false);
