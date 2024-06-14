@@ -1,26 +1,23 @@
-"use client"
-import React, { useState, useEffect } from "react";
-import {
-  CustomSuggestionPanel,
-  ThailandAddressTypeahead,
-  ThailandAddressValue,
-} from "react-thailand-address-typeahead";
+"use client";
+import React, { useState, useEffect, ReactNode } from "react";
+import dynamic from 'next/dynamic';
 import { Address } from "@/models/IEcommerceChannel";
-import '@/components/ChannelComponent/ECommerce/Ecommerce.css'
+import '@/components/ChannelComponent/ECommerce/Ecommerce.css';
+
+// ใช้งาน Dynamic imports เพื่อป้องกันการ render ที่ serverSide
+// หาก render ที่ serverSide จะเกิด err ใน lib
+const ThailandAddressTypeahead = dynamic(() => import("react-thailand-address-typeahead").then(mod => mod.ThailandAddressTypeahead),{ ssr: false });
+const SubdistrictInput = dynamic(() => import("react-thailand-address-typeahead").then(mod => mod.ThailandAddressTypeahead.SubdistrictInput),{ ssr: false });
+const DistrictInput = dynamic(() => import("react-thailand-address-typeahead").then(mod => mod.ThailandAddressTypeahead.DistrictInput),{ ssr: false });
+const ProvinceInput = dynamic(() => import("react-thailand-address-typeahead").then(mod => mod.ThailandAddressTypeahead.ProvinceInput),{ ssr: false });
+const PostalCodeInput = dynamic(() => import("react-thailand-address-typeahead").then(mod => mod.ThailandAddressTypeahead.PostalCodeInput),{ ssr: false });
+const CustomSuggestionPanel = dynamic(() => import("react-thailand-address-typeahead").then(mod => mod.CustomSuggestionPanel),{ ssr: false });
 
 export const AddressInput: React.FC<{
   address: Address;
   onChange: (newAddress: Address) => void;
   disabled: boolean;
 }> = ({ address, onChange, disabled }) => {
-  const [val, setVal] = useState(
-    ThailandAddressValue.fromDatasourceItem({
-      d: address.district,
-      p: address.province,
-      po: address.zipcode,
-      s: address.subdistrict,
-    })
-  );
   const [detailedAddress, setDetailedAddress] = useState(address.detailedAddress);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -28,8 +25,7 @@ export const AddressInput: React.FC<{
     setDetailedAddress(address.detailedAddress);
   }, [address.detailedAddress]);
 
-  const handleValueChange = (newVal: ThailandAddressValue) => {
-    setVal(newVal);
+  const handleValueChange = (newVal: any) => {
     onChange({
       ...address,
       subdistrict: newVal.subdistrict,
@@ -40,14 +36,12 @@ export const AddressInput: React.FC<{
     setShowSuggestions(true);
   };
 
-  const handleSuggestionSelected = (nextVal: ThailandAddressValue) => {
+  const handleSuggestionSelected = (nextVal: any) => {
     handleValueChange(nextVal);
     setShowSuggestions(false);
   };
 
-  const handleDetailedAddressChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleDetailedAddressChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newDetailedAddress = e.target.value;
     setDetailedAddress(newDetailedAddress);
     onChange({
@@ -56,10 +50,7 @@ export const AddressInput: React.FC<{
     });
   };
 
-  const renderSuggestions = (
-    suggestions: ThailandAddressValue[],
-    onSelectSuggestion: (nextVal: ThailandAddressValue) => void
-  ) => {
+  const renderSuggestions = (suggestions: any[], onSelectSuggestion: (nextVal: any) => void) => {
     if (!showSuggestions) return null;
 
     return (
@@ -71,8 +62,7 @@ export const AddressInput: React.FC<{
             onClick={() => onSelectSuggestion(address)}
           >
             <span className="text-gray-800 font-medium hover:text-orange-600">
-              {address.subdistrict}, {address.district}, {address.province}{" "}
-              {address.postalCode}
+              {address.subdistrict}, {address.district}, {address.province} {address.postalCode}
             </span>
           </li>
         ))}
@@ -80,10 +70,24 @@ export const AddressInput: React.FC<{
     );
   };
 
+  const InputField: React.FC<{ label: string; id: string; children: ReactNode }> = ({ label, id, children }) => (
+    <div className="mb-2">
+      <label htmlFor={id} className="EcommerceLabel">{label}</label>
+      {children}
+    </div>
+  );
+
   return (
-    <ThailandAddressTypeahead value={val} onValueChange={handleValueChange}>
-      <div className="mb-2">
-        <label htmlFor="detailedAddress" className="EcommerceLabel">ที่อยู่</label>
+    <ThailandAddressTypeahead
+      value={{
+        subdistrict: address.subdistrict,
+        district: address.district,
+        province: address.province,
+        postalCode: address.zipcode,
+      }}
+      onValueChange={handleValueChange}
+    >
+      <InputField label="ที่อยู่" id="detailedAddress">
         <textarea
           id="detailedAddress"
           value={detailedAddress}
@@ -93,50 +97,46 @@ export const AddressInput: React.FC<{
           disabled={disabled}
           required
         />
-      </div>
+      </InputField>
       <div className="grid grid-cols-2 gap-4">
-        <div className="mb-2">
-          <label htmlFor="subdistrict" className="EcommerceLabel">ตำบล</label>
-          <ThailandAddressTypeahead.SubdistrictInput
+        <InputField label="ตำบล" id="subdistrict">
+          <SubdistrictInput
             id="subdistrict"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
             disabled={disabled}
             required
           />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="district" className="EcommerceLabel">อำเภอ</label>
-          <ThailandAddressTypeahead.DistrictInput
+        </InputField>
+        <InputField label="อำเภอ" id="district">
+          <DistrictInput
             id="district"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
             disabled={disabled}
             required
           />
-        </div>
+        </InputField>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div className="mb-2">
-          <label htmlFor="province" className="EcommerceLabel">จังหวัด</label>
-          <ThailandAddressTypeahead.ProvinceInput
+        <InputField label="จังหวัด" id="province">
+          <ProvinceInput
             id="province"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(true)}
             disabled={disabled}
             required
           />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="postalCode" className="EcommerceLabel">รหัสไปรษณีย์</label>
-          <ThailandAddressTypeahead.PostalCodeInput
+        </InputField>
+        <InputField label="รหัสไปรษณีย์" id="postalCode">
+          <PostalCodeInput
             id="postalCode"
             className="EcommerceInput"
             onFocus={() => setShowSuggestions(false)}
             disabled={disabled}
             required
           />
-        </div>
+        </InputField>
       </div>
       <CustomSuggestionPanel>
         {(suggestions, _) =>
@@ -145,5 +145,4 @@ export const AddressInput: React.FC<{
       </CustomSuggestionPanel>
     </ThailandAddressTypeahead>
   );
-
 };
