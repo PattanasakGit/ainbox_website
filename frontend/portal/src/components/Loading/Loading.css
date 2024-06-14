@@ -1,0 +1,21 @@
+.colorScroll {
+    animation: colorScroll 0.5s infinite linear;
+  }
+
+  @keyframes colorScroll {
+    0% {
+      color: rgb(255, 130, 0); 
+    }
+    25% {
+      color: rgb(255, 165, 0);
+    }
+    50% {
+      color: rgb(255, 190, 0);
+    }
+    75% {
+      color: rgb(255, 165, 0);
+    }
+    100% {
+      color: rgb(255, 130, 0); 
+    }
+  }

@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ChannelSidebar from "@/components/SidebarPortal/ChannelSidebar";
 import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import { useChannelSidebar } from "@/store/SidebaeStore";
 import { ChannelSidebarSelection } from "@/models/ISidebar";
 import EditEcommerce from "@/components/ChannelComponent/ECommerce/EditEcommerce";
+import AinboxLoading from "@/components/Loading/Loading";
 
 const ChannelManager: React.FC = () => {
   const itemsBreadcrumb = [
@@ -14,10 +15,27 @@ const ChannelManager: React.FC = () => {
   ];
 
   const { selected } = useChannelSidebar();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [selected]);
 
   const ChooseDisplayComponent = () => {
     if (selected === ChannelSidebarSelection.ShopInfo) {
-      return <EditEcommerce />;
+      return (
+        <>
+          {loading && (
+            <AinboxLoading/>
+          )}
+          <div className={loading ? "hidden" : ""}>
+            <EditEcommerce />
+          </div>
+        </>
+      );
     } else if (selected === ChannelSidebarSelection.AIBehavior) {
       return (
         <div className="flex justify-center items-center h-[80vh]">
@@ -53,4 +71,5 @@ const ChannelManager: React.FC = () => {
     </section>
   );
 };
+
 export default ChannelManager;
