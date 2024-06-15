@@ -1,28 +1,19 @@
-"use client";
+import React from "react";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
-import ecommerceService from "@/service/ChannelService/EcommerceService";
-import '@/components/ChannelComponent/ECommerce/Ecommerce.css';
-import { Address, FormData } from "@/models/IEcommerceChannel";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useState } from "react";
+import { Address, FormData } from "@/models/IEcommerceChannel";
+import Link from "next/link";
 
-const CreateEcommerce: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    shopName: "",
-    shopType: "",
-    description: "",
-    address: {
-      detailedAddress: "",
-      subdistrict: "",
-      district: "",
-      province: "",
-      zipcode: "",
-    },
-    phone: "",
-    email: "",
-  });
+interface CreateEcommerceProps {
+  next: () => void;
+  handleData: (data: any) => void;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+}
 
+const CreateEcommerce: React.FC<CreateEcommerceProps> = ({ next, handleData, formData, setFormData }) => {
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
@@ -34,31 +25,8 @@ const CreateEcommerce: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { address, ...rest } = formData;
-    const addressString = `${address.detailedAddress}, ตำบล ${address.subdistrict}, อำเภอ ${address.district}, จังหวัด ${address.province}, รหัสไปรษณีย์ ${address.zipcode}`;
-    const dataToCreate = { ...rest, address: addressString };
-
-    try {
-      await ecommerceService.create(dataToCreate);
-      toast.success('ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
-      // Optionally, you can reset formData here to clear the form inputs after submission
-      setFormData({
-        shopName: "",
-        shopType: "",
-        description: "",
-        address: {
-          detailedAddress: "",
-          subdistrict: "",
-          district: "",
-          province: "",
-          zipcode: "",
-        },
-        phone: "",
-        email: "",
-      });
-    } catch (error) {
-      toast.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
-    }
+    handleData(formData);
+    next();
   };
 
   return (
@@ -75,11 +43,9 @@ const CreateEcommerce: React.FC = () => {
         theme="colored"
       />
 
-      <h2 className="text-center text-[42px] font-black text-orange-400 mb-10">สร้างช่องใหม่สำหรับธุรกิจของคุณ</h2>
-
       <form onSubmit={handleSubmit} className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8" >
 
-      <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="shopName" className="EcommerceLabel">
               ชื่อร้านค้า *
@@ -96,7 +62,7 @@ const CreateEcommerce: React.FC = () => {
 
           <div className="mb-4">
             <label htmlFor="shopType" className="EcommerceLabel">
-              ประเภทของร้านค้า *
+              ประเภทร้านค้า *
             </label>
             <select
               id="shopType"
@@ -140,6 +106,7 @@ const CreateEcommerce: React.FC = () => {
               className="EcommerceInput"
               pattern="[0-9]{10}"
               title="กรุณากรอกเบอร์โทรศัพท์ 10 หลัก"
+              maxLength={10}
               required
             />
           </div>
@@ -168,10 +135,17 @@ const CreateEcommerce: React.FC = () => {
 
         <div className="flex justify-end">
           <button
-            type="submit"
-            className="mt-4 p-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+            type="button"
+            onClick={()=>{window.location.reload()}}
+            className="mt-4 ml-2 p-2 px-4 border text-[#555] rounded-md hover:bg-orange-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
           >
-            บันทึก
+            ยกเลิก
+          </button>
+          <button
+            type="submit"
+            className="mt-4 ml-2 p-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+          >
+            ถัดไป
           </button>
         </div>
       </form>

@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
-import NavbarPortal from "@/components/NavbarPortal/NavbarPortal";
-import MianSidebar from "@/components/SidebarPortal/MianSidebar";
 import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
-import { useMainSidebar } from "@/store/SidebaeStore";
+import NavbarPortal from "@/components/NavbarPortal/NavbarPortal";
+import MianSidebar from "@/components/SidebarPortal/MianSidebar";
 import { MainSidebarSelection } from "@/models/ISidebar";
-import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
+import { useMainSidebar } from "@/store/SidebaeStore";
+import React from "react";
+import FormAddNewChannel from "@/components/ChannelComponent/MainChannel/CreateNewChannel/FormAddNewChannel";
 
 const HomePortal: React.FC = () => {
     const { selected } = useMainSidebar(); 
@@ -16,11 +16,11 @@ const HomePortal: React.FC = () => {
         }else if (selected === MainSidebarSelection.Monitor){
             return <div className="flex justify-center items-center h-[80vh]">ทดสอบนี่คือ ส่วนของหน้าการใช้งาน ยังไม่ได้ทำ Component</div>
         }else if (selected === MainSidebarSelection.CreateEcommerce){
-            return <CreateEcommerce/>
+            return <FormAddNewChannel componentForShow={MainSidebarSelection.CreateEcommerce}/>;
         }else if (selected === MainSidebarSelection.CreateDataWarehouse){
-            return <div className="flex justify-center items-center h-[80vh]">ทดสอบนี่คือ ส่วนของหน้าการใช้งาน ยังไม่ได้ทำ Component</div>
+            return <FormAddNewChannel componentForShow={MainSidebarSelection.CreateDataWarehouse}/>;
         }else if (selected === MainSidebarSelection.CreatePersonal){
-            return <div className="flex justify-center items-center h-[80vh]">ทดสอบนี่คือ ส่วนของหน้าการใช้งาน ยังไม่ได้ทำ Component</div>
+             return <FormAddNewChannel componentForShow={MainSidebarSelection.CreatePersonal}/>;
         }else{
             return <div className="flex justify-center items-center h-[80vh]">นี่คือพื้นที่ขอความช่วยเหลือซึ่งตอนนี้ยังไม่รู้ว่าจะทำออกมาอย่างไร</div>
         }

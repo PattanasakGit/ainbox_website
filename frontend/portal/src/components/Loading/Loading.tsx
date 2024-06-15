@@ -4,7 +4,7 @@ import "@/components/Loading/Loading.css";
 
 const AinboxLoading: React.FC = () => {
   return (
-    <div className="h-[70vh] w-full flex justify-center items-center text-[64px] font-bold colorScroll">
+    <div className="fixed inset-y-0 right-[35%] flex justify-center items-center transform translate-x-[-20%] text-[64px] font-bold colorScroll">
       ainbox
     </div>
   );

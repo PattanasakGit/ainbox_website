@@ -54,7 +54,6 @@ const EditEcommerce: React.FC = () => {
         toast.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
       }
     }
-    console.log(dataToSubmit);
   };
 
   return (

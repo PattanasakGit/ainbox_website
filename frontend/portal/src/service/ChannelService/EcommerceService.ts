@@ -32,6 +32,7 @@ const apiCall = async <T>(method: 'get' | 'post' | 'put' | 'patch' | 'delete', u
 
 const ecommerceService = { 
   async create(dataToSubmit: DataToSubmit): Promise<unknown> {
+    console.log('dataToSubmit -> ',dataToSubmit);
     return await apiCall('post', '/submit', dataToSubmit);
   },
   async update(id: string, dataToUpdate: DataToUpdate): Promise<unknown> {
