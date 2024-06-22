@@ -1,15 +1,15 @@
-import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
 import CreateAIbehavior from "@/components/ChannelComponent/AIbehavior/CreateAIbehavior";
 import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
+import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
 import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
-import ecommerceService from "@/service/ChannelService/EcommerceService";
-import { MainSidebarSelection } from "@/models/ISidebar";
-import { FormData } from "@/models/IEcommerceChannel";
 import { IFormAiDetail } from "@/models/IChannel";
+import { FormData } from "@/models/IEcommerceChannel";
+import { MainSidebarSelection } from "@/models/ISidebar";
+import ecommerceService from "@/service/ChannelService/EcommerceService";
+import { Steps } from 'antd';
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from "react";
-import { Steps } from 'antd';
 
 const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebarSelection }) => {
   const [current, setCurrent] = useState(0);
@@ -32,13 +32,21 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     },
     phone: "",
     email: "",
+    opentime: {
+      Monday: { open: true, from: '00:00', to: '16:30' },
+      Tuesday: { open: true, from: '00:00', to: '16:30' },
+      Wednesday: { open: true, from: '00:00', to: '16:30' },
+      Thursday: { open: true, from: '00:00', to: '16:30' },
+      Friday: { open: true, from: '00:00', to: '16:30' },
+      Saturday: { open: false, from: '00:00', to: '16:30' },
+      Sunday: { open: false, from: '00:00', to: '16:30' },
+    }
   });
 
   const dataCreateChannel = {
     ...formData,
     ...formAI,
   };
-
 
   const next = () => {
     setCurrent(current + 1);
@@ -67,7 +75,6 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     }
   };
   
-
   const steps = [
     {
       title: 'เพิ่มรายละเอียดช่องของคุณ',
@@ -79,7 +86,7 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     },
     {
       title: 'ตรวจสอบและยืนยัน',
-      content: <SummaryToSubmit formData={formData} formAI={formAI} />, // Use the Summary component
+      content: <SummaryToSubmit formData={formData} formAI={formAI} />,
     }
   ];
 
@@ -127,7 +134,7 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
         <Steps
           current={current}
           items={items}
-          className="w-[70%] mx-auto mt-16 mb-4"
+          className="w-[70%] mx-auto mt-16 mb-12"
         />
         {renderStepContent()}
       </div>
@@ -143,29 +150,28 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
           </button>
           <button
             type="button"
-            onClick={()=>{handleSubmit()}}
+            onClick={handleSubmit}
             className="w-[200px] mt-4 ml-2 p-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
           >
             บันทึกข้อมูล
           </button>
         </div>
       )}
-
       {/* <div className="mt-6">
         {current < steps.length - 1 && (
-          <Button type="primary" onClick={next}>
+          <button onClick={next}>
             Next
-          </Button>
+          </button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
+          <button  onClick={() => message.success('Processing complete!')}>
             Done
-          </Button>
+          </button>
         )}
         {current > 0 && (
-          <Button className="mx-2" onClick={prev}>
+          <button className="mx-2" onClick={prev}>
             Previous
-          </Button>
+          </button>
         )}
       </div> */}
     </section>

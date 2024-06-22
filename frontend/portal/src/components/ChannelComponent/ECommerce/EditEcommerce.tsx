@@ -1,12 +1,14 @@
-"use client"
-import React, { useState } from "react";
+"use client";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
+import "@/components/ChannelComponent/ECommerce/Ecommerce.css";
+import Opentime from "@/components/OpenTime/Opentime";
 import { Address, FormData } from "@/models/IEcommerceChannel";
-import '@/components/ChannelComponent/ECommerce/Ecommerce.css'
-import { useDataChannel } from "@/store/dataChannel";
+import { IOpenTime } from "@/models/IOpenTime";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDataChannel } from "@/store/dataChannel";
+import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditEcommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
@@ -24,9 +26,22 @@ const EditEcommerce: React.FC = () => {
     },
     phone: dataChannel?.details.phone,
     email: dataChannel?.details.email,
+    opentime: {
+      Monday: { open: true, from: "09:00", to: "16:30" },
+      Tuesday: { open: true, from: "09:00", to: "16:30" },
+      Wednesday: { open: true, from: "09:00", to: "16:30" },
+      Thursday: { open: true, from: "09:00", to: "16:30" },
+      Friday: { open: true, from: "09:00", to: "16:30" },
+      Saturday: { open: false, from: "09:00", to: "16:30" },
+      Sunday: { open: false, from: "09:00", to: "16:30" },
+    },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
@@ -43,23 +58,50 @@ const EditEcommerce: React.FC = () => {
     e.preventDefault();
     const { address, ...rest } = formData;
     const addressString = `${address.detailedAddress}, ตำบล ${address.subdistrict}, อำเภอ ${address.district}, จังหวัด ${address.province}, รหัสไปรษณีย์ ${address.zipcode}`;
-    const dataToSubmit = { ...rest, address: addressString };
+    const dataToSubmit = {
+      ...rest,
+      address: address,
+      hours: formData.opentime,
+    };
 
-    if (dataChannel){
+    if (dataChannel) {
       try {
         await ecommerceService.edit(dataChannel.page_id, dataToSubmit);
-        toast.success('ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
+        toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
         toggleEdit();
       } catch (error) {
-        toast.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+        toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
       }
     }
+  };
+
+  const toggleOpen = (day: keyof IOpenTime) => {
+    setFormData((prev) => ({
+      ...prev,
+      opentime: {
+        ...prev.opentime,
+        [day]: { ...prev.opentime[day], open: !prev.opentime[day].open },
+      },
+    }));
+  };
+
+  const handleTimeChange = (
+    day: keyof IOpenTime,
+    type: "from" | "to",
+    value: string
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      opentime: {
+        ...prev.opentime,
+        [day]: { ...prev.opentime[day], [type]: value },
+      },
+    }));
   };
 
   return (
     <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">
       <ToastContainer
-        // position="top-center"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -72,14 +114,20 @@ const EditEcommerce: React.FC = () => {
       />
       <div className="">
         <h2 className="text-center text-[42px] font-black text-orange-400 mb-10">
-        <input type="text" id="shopName" value={formData.shopName}disabled={true}
-          className="bg-white text-center"
-        />
+          <input
+            type="text"
+            id="shopName"
+            value={formData.shopName}
+            disabled={true}
+            className="bg-white text-center"
+          />
         </h2>
       </div>
 
-      <form onSubmit={handleSubmit} className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8" >
-
+      <form
+        onSubmit={handleSubmit}
+        className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8"
+      >
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="shopName" className="EcommerceLabel">
@@ -129,7 +177,6 @@ const EditEcommerce: React.FC = () => {
             required
           ></textarea>
         </div>
-
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="phone" className="EcommerceLabel">
@@ -169,6 +216,19 @@ const EditEcommerce: React.FC = () => {
             address={formData.address}
             onChange={handleAddressChange}
             disabled={!isEditing}
+          />
+        </div>
+
+        <div className="">
+          <label htmlFor="opentime" className="EcommerceLabel">
+            {" "}
+            ช่วงเวลาทำการ{" "}
+          </label>
+          <Opentime
+            hours={formData.opentime}
+            toggleOpen={toggleOpen}
+            handleTimeChange={handleTimeChange}
+            isEditing={isEditing}
           />
         </div>
 

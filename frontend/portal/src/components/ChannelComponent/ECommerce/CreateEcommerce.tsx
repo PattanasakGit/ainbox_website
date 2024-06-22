@@ -1,20 +1,30 @@
-import React from "react";
+"use client";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Opentime from "@/components/OpenTime/Opentime";
 import { Address, FormData } from "@/models/IEcommerceChannel";
-import Link from "next/link";
+import { IOpenTime } from "@/models/IOpenTime";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface CreateEcommerceProps {
   next: () => void;
-  handleData: (data: any) => void;
+  handleData: (data: FormData) => void;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }
 
-const CreateEcommerce: React.FC<CreateEcommerceProps> = ({ next, handleData, formData, setFormData }) => {
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
+  next,
+  handleData,
+  formData,
+  setFormData,
+}) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
@@ -27,6 +37,30 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({ next, handleData, for
     e.preventDefault();
     handleData(formData);
     next();
+  };
+
+  const toggleOpen = (day: keyof IOpenTime) => {
+    setFormData((prev) => ({
+      ...prev,
+      opentime: {
+        ...prev.opentime,
+        [day]: { ...prev.opentime[day], open: !prev.opentime[day].open },
+      },
+    }));
+  };
+
+  const handleTimeChange = (
+    day: keyof IOpenTime,
+    type: "from" | "to",
+    value: string
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      opentime: {
+        ...prev.opentime,
+        [day]: { ...prev.opentime[day], [type]: value },
+      },
+    }));
   };
 
   return (
@@ -43,8 +77,10 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({ next, handleData, for
         theme="colored"
       />
 
-      <form onSubmit={handleSubmit} className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8" >
-
+      <form
+        onSubmit={handleSubmit}
+        className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8"
+      >
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="shopName" className="EcommerceLabel">
@@ -133,10 +169,25 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({ next, handleData, for
           />
         </div>
 
+        <div className="">
+          <label htmlFor="opentime" className="EcommerceLabel">
+            {" "}
+            ช่วงเวลาทำการ{" "}
+          </label>
+          <Opentime
+            hours={formData.opentime}
+            toggleOpen={toggleOpen}
+            handleTimeChange={handleTimeChange}
+            isEditing={true}
+          />
+        </div>
+
         <div className="flex justify-end">
           <button
             type="button"
-            onClick={()=>{window.location.reload()}}
+            onClick={() => {
+              window.location.reload();
+            }}
             className="mt-4 ml-2 p-2 px-4 border text-[#555] rounded-md hover:bg-orange-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
           >
             ยกเลิก

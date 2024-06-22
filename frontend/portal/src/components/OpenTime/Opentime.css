@@ -1,0 +1,10 @@
+.toggle-checkbox:checked {
+    @apply: right-0 border-orange-400;
+    right: 0;
+    border-color: #fa923f;
+  }
+  
+  .toggle-checkbox:checked + .toggle-label {
+    @apply: bg-orange-400;
+    background-color: #fa923f;
+  }
