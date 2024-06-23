@@ -1,7 +1,7 @@
-import React from "react";
 import { IFormAiDetail } from "@/models/IChannel";
 import { FormData } from "@/models/IEcommerceChannel";
 import { IOpenTime, OpenHours } from "@/models/IOpenTime";
+import React from "react";
 
 interface SummaryProps {
   formData: FormData;

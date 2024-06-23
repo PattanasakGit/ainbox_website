@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { IOpenTime } from "@/models/IOpenTime";
+import "react-toastify/dist/ReactToastify.css";
 import { useDataChannel } from "@/store/dataChannel";
 import Opentime from "@/components/OpenTime/Opentime";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,8 +14,8 @@ const EditEcommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
 
   if (!dataChannel) {
-    window.location.href = '/';
-    return null; 
+    window.location.href = "/";
+    return null;
   }
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
@@ -25,7 +25,8 @@ const EditEcommerce: React.FC = () => {
     address: dataChannel.details.address,
     phone: dataChannel.details.phone,
     email: dataChannel.details.email,
-    opentime: dataChannel.details.opentime ,
+    website: dataChannel.details.website,
+    opentime: dataChannel.details.opentime,
   });
 
   const handleChange = (
@@ -49,10 +50,9 @@ const EditEcommerce: React.FC = () => {
     e.preventDefault();
     const { address, ...rest } = formData;
     const addressString = `${address.detailedAddress}, ตำบล ${address.subdistrict}, อำเภอ ${address.district}, จังหวัด ${address.province}, รหัสไปรษณีย์ ${address.zipcode}`;
-    const dataToSubmit = {
+    const dataToSubmit: FormData = {
       ...rest,
       address: address,
-      // hours: formData.opentime,
     };
 
     if (dataChannel) {
@@ -168,6 +168,20 @@ const EditEcommerce: React.FC = () => {
             required
           ></textarea>
         </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="EcommerceLabel">
+            เว็ปไซต์
+          </label>
+          <input
+            type="text"
+            id="website"
+            value={formData.website}
+            onChange={handleChange}
+            className="EcommerceInput"
+            disabled={!isEditing}
+            required
+          />
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
             <label htmlFor="phone" className="EcommerceLabel">
@@ -201,7 +215,6 @@ const EditEcommerce: React.FC = () => {
             />
           </div>
         </div>
-
         <div className="mb-4">
           <AddressInput
             address={formData.address}

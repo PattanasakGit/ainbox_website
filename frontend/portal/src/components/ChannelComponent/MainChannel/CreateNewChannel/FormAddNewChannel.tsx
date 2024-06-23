@@ -1,15 +1,15 @@
-import { Steps } from 'antd';
-import { useState } from "react";
-import 'react-toastify/dist/ReactToastify.css';
+import CreateAIbehavior from "@/components/ChannelComponent/AIbehavior/CreateAIbehavior";
+import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
+import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
+import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
 import { IFormAiDetail } from "@/models/IChannel";
 import { FormData } from "@/models/IEcommerceChannel";
-import { ToastContainer, toast } from "react-toastify";
 import { MainSidebarSelection } from "@/models/ISidebar";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
-import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
-import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
-import CreateAIbehavior from "@/components/ChannelComponent/AIbehavior/CreateAIbehavior";
-import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
+import { Steps } from 'antd';
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebarSelection }) => {
   const [current, setCurrent] = useState(0);
@@ -32,6 +32,7 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     },
     phone: "",
     email: "",
+    website:"",
     opentime: {
       Monday: { open: true, from: '09:00', to: '16:30' },
       Tuesday: { open: true, from: '09:00', to: '16:30' },

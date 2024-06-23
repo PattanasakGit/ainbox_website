@@ -15,5 +15,6 @@ export interface FormData {
     address: Address;
     phone: string;
     email: string;
+    website: string;
     opentime: IOpenTime
 }

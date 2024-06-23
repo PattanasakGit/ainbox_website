@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
-import { IOpenTime } from "@/models/IOpenTime";
+import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
 import Opentime from "@/components/OpenTime/Opentime";
 import { Address, FormData } from "@/models/IEcommerceChannel";
-import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
+import { IOpenTime } from "@/models/IOpenTime";
+import React from "react";
 
 interface CreateEcommerceProps {
   next: () => void;
@@ -113,6 +113,20 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
             className="EcommerceInput resize-none"
             required
           ></textarea>
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="email" className="EcommerceLabel">
+            เว็ปไซต์
+          </label>
+          <input
+            type="text"
+            id="website"
+            value={formData.website}
+            onChange={handleChange}
+            className="EcommerceInput"
+            required
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
