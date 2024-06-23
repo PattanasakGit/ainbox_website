@@ -6,35 +6,27 @@ import { Address, FormData } from "@/models/IEcommerceChannel";
 import { IOpenTime } from "@/models/IOpenTime";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { useDataChannel } from "@/store/dataChannel";
+import Link from "next/link";
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const EditEcommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
+
+  if (!dataChannel) {
+    window.location.href = '/';
+    return null; 
+  }
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
-    shopName: dataChannel?.details.business_name,
-    shopType: dataChannel?.details.business_type,
-    description: dataChannel?.details.description,
-    address: {
-      detailedAddress: "",
-      subdistrict: "",
-      district: "",
-      province: "",
-      zipcode: "",
-    },
-    phone: dataChannel?.details.phone,
-    email: dataChannel?.details.email,
-    opentime: {
-      Monday: { open: true, from: "09:00", to: "16:30" },
-      Tuesday: { open: true, from: "09:00", to: "16:30" },
-      Wednesday: { open: true, from: "09:00", to: "16:30" },
-      Thursday: { open: true, from: "09:00", to: "16:30" },
-      Friday: { open: true, from: "09:00", to: "16:30" },
-      Saturday: { open: false, from: "09:00", to: "16:30" },
-      Sunday: { open: false, from: "09:00", to: "16:30" },
-    },
+    shopName: dataChannel.details.business_name,
+    shopType: dataChannel.details.business_type,
+    description: dataChannel.details.description,
+    address: dataChannel.details.address,
+    phone: dataChannel.details.phone,
+    email: dataChannel.details.email,
+    opentime: dataChannel.details.opentime ,
   });
 
   const handleChange = (

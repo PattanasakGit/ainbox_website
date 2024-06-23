@@ -1,335 +1,487 @@
 import { IStore } from "@/models/IChannel";
-
-// Mock Up Data ของร้านค้า
 export const stores: IStore[] = [
     {
-        "_id": {"$oid": "6663c04a199198f5d15157da"},
-        "page_id": "U0e2ed57c6601a22574b71fb020c7a330",
+        "_id": {"$oid": "15153c04a199198f5d15157e4"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
         "details": {
-            "ai_name": "Addy",
-            "ai_behavior": "Good , Polite , Friendly , talk like a friend",
-            "ai_age": "20-30",
-            "business_name": "Advoice",
-            "business_type": "IT Store",
-            "address": "1234 Main St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94111",
-            "phone": "415-555-1234",
-            "email": "Test@gmail.com",
-            "website": "www.test.com",
-            "hours": "Mon-Fri 9-5",
-            "description": "ร้าน Advoice IT เป็นร้านที่เกี่ยวข้องกับสินค้าไอที ซึ่งรวมถึง Macbook, Notebook, Computer, Smartphone และอุปกรณ์ต่อพ่วงคอมพิวเตอร์อื่นๆ คุณสามารถช้อปปิ้งสินค้าไอทีที่มีคุณภาพและราคาดีได้ที่นี่ พร้อมโปรโมชั่น 0% และบริการจัดส่งที่รวดเร็ว บริการดี 24 ชั่วโมง. นอกจากนี้ยังมีบริการด้านการขายปลีกคอมพิวเตอร์และอุปกรณ์ต่อพ่วงคอมพิวเตอร์",
+            "ai_name": "Luna",
+            "ai_behavior": "Friendly, Helpful, Patient",
+            "ai_age": "25-35",
+            "business_name": "Book Haven",
+            "business_type": "Book Store",
+            "address": {
+                "detailedAddress": "123 Maple St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "90210"
+            },
+            "phone": "0123456789",
+            "email": "Contact@bookhaven.com",
+            "website": "www.bookhaven.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Tuesday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Wednesday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Thursday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Friday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Saturday": { "open": true, "from": "10:00", "to": "16:00" },
+                "Sunday": { "open": false, "from": "00:00", "to": "16:30" }
+            },
+            "description": "Book Haven เป็นร้านหนังสือที่รวบรวมหนังสือหลากหลายประเภททั้งนิยาย วรรณกรรม และหนังสือวิชาการ ที่จะช่วยเติมเต็มความรู้และความสนุกให้คุณ",
             "product": [
                 {
-                    "name": "Notebook Asus Vivobook 16 X1605ZA-MB332W (Indie Black)",
-                    "price": "12,990",
-                    "description": "16.0 inch / Intel i3-1215U / 8GB DDR4 / 512GB SSD / Integrated Graphics / Win 11"
+                    "name": "Fantasy Novel ABC",
+                    "price": "399",
+                    "description": "Paperback / 500 Pages / Adventure / English"
                 },
                 {
-                    "name": "Notebook Asus Vivobook 16 X1605ZA-MB523WS (Indie Black) ฟรี Microsoft Office Home&Student 2021 (ในเครื่อง)",
-                    "price": "18,990",
-                    "description": "16.0 inch / Intel i5-12500H / 16GB DDR4 / 512GB SSD / Integrated Graphics / Win 11"
-                }
-            ],
-            "ai_gender": "male"
-        }
-    },
-    {
-        "_id": {"$oid": "7773c04a199198f5d15157db"},
-        "page_id": "U0e2ed57c6601a22574b71fb020c7a330",
-        "details": {
-            "ai_name": "Beta",
-            "ai_behavior": "Intelligent, Helpful, Professional",
-            "ai_age": "30-40",
-            "business_name": "TechWorld",
-            "business_type": "Electronics Store",
-            "address": "5678 Second St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94112",
-            "phone": "415-555-5678",
-            "email": "Info@techworld.com",
-            "website": "www.techworld.com",
-            "hours": "Mon-Sat 10-6",
-            "description": "TechWorld เป็นร้านขายสินค้าอิเล็กทรอนิกส์ที่มีสินค้ามากมายรวมถึงสมาร์ทโฟน แล็ปท็อป อุปกรณ์เกมมิ่ง และเครื่องใช้ไฟฟ้าต่างๆ คุณจะพบกับสินค้าใหม่ล่าสุดและบริการที่ยอดเยี่ยมจากเรา พร้อมโปรโมชั่นและบริการหลังการขายที่ดีเยี่ยม",
-            "product": [
-                {
-                    "name": "Smartphone XYZ Model A",
-                    "price": "9,990",
-                    "description": "6.5 inch / Octa-core / 6GB RAM / 128GB Storage / 48MP Camera / Android 12"
-                },
-                {
-                    "name": "Gaming Laptop XYZ Model B",
-                    "price": "39,990",
-                    "description": "15.6 inch / Intel i7-10750H / 16GB DDR4 / 1TB SSD / RTX 3060 / Win 11"
+                    "name": "Science Book XYZ",
+                    "price": "499",
+                    "description": "Hardcover / 300 Pages / Educational / Color Illustrations"
                 }
             ],
             "ai_gender": "female"
         }
     },
     {
-        "_id": {"$oid": "8883c04a199198f5d15157dc"},
-        "page_id": "U0e2ed57c6601a22574b71fb020c7a330",
+        "_id": {"$oid": "15153c04a199198f5d15157e5"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
         "details": {
-            "ai_name": "Gamma",
-            "ai_behavior": "Cheerful, Knowledgeable, Energetic",
+            "ai_name": "Max",
+            "ai_behavior": "Energetic, Enthusiastic, Charismatic",
+            "ai_age": "30-40",
+            "business_name": "Fitness Pro",
+            "business_type": "Fitness Equipment Store",
+            "address": {
+                "detailedAddress": "456 Oak St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "80501"
+            },
+            "phone": "0981234567",
+            "email": "Contact@fitnesspro.com",
+            "website": "www.fitnesspro.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "08:00", "to": "20:00" },
+                "Tuesday": { "open": true, "from": "08:00", "to": "20:00" },
+                "Wednesday": { "open": true, "from": "08:00", "to": "20:00" },
+                "Thursday": { "open": true, "from": "08:00", "to": "20:00" },
+                "Friday": { "open": true, "from": "08:00", "to": "20:00" },
+                "Saturday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Sunday": { "open": true, "from": "10:00", "to": "16:00" }
+            },
+            "description": "Fitness Pro จำหน่ายอุปกรณ์ออกกำลังกายหลากหลายชนิด ไม่ว่าจะเป็นลู่วิ่ง จักรยานออกกำลังกาย หรือเครื่องยกน้ำหนัก เพื่อให้คุณมีสุขภาพที่แข็งแรง",
+            "product": [
+                {
+                    "name": "Treadmill Model ABC",
+                    "price": "25,990",
+                    "description": "Electric / Foldable / LCD Display / Multiple Modes"
+                },
+                {
+                    "name": "Exercise Bike Model XYZ",
+                    "price": "15,990",
+                    "description": "Magnetic Resistance / Adjustable Seat / Heart Rate Monitor"
+                }
+            ],
+            "ai_gender": "male"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157e6"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Bella",
+            "ai_behavior": "Charming, Attentive, Compassionate",
+            "ai_age": "22-32",
+            "business_name": "Pet Paradise",
+            "business_type": "Pet Store",
+            "address": {
+                "detailedAddress": "789 Pine St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "60614"
+            },
+            "phone": "0998765432",
+            "email": "Contact@petparadise.com",
+            "website": "www.petparadise.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Tuesday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Wednesday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Thursday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Friday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Saturday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Sunday": { "open": true, "from": "12:00", "to": "17:00" }
+            },
+            "description": "Pet Paradise จำหน่ายสินค้าสำหรับสัตว์เลี้ยงทุกชนิด ไม่ว่าจะเป็นอาหารสัตว์ ของเล่นสัตว์ หรืออุปกรณ์ดูแลสัตว์ เพื่อให้สัตว์เลี้ยงของคุณมีความสุขและสุขภาพดี",
+            "product": [
+                {
+                    "name": "Dog Food Premium",
+                    "price": "1,299",
+                    "description": "High Protein / Grain-Free / 5kg"
+                },
+                {
+                    "name": "Cat Toy Interactive",
+                    "price": "599",
+                    "description": "Feather Wand / Durable / Safe Materials"
+                }
+            ],
+            "ai_gender": "female"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157e7"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Leo",
+            "ai_behavior": "Professional, Efficient, Knowledgeable",
+            "ai_age": "35-45",
+            "business_name": "Tech World",
+            "business_type": "Electronics Store",
+            "address": {
+                "detailedAddress": "1011 Birch St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "30303"
+            },
+            "phone": "0897654321",
+            "email": "Contact@techworld.com",
+            "website": "www.techworld.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Tuesday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Wednesday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Thursday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Friday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Saturday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Sunday": { "open": true, "from": "12:00", "to": "17:00" }
+            },
+            "description": "Tech World จำหน่ายอุปกรณ์อิเล็กทรอนิกส์ทันสมัย ไม่ว่าจะเป็นสมาร์ทโฟน แล็ปท็อป หรืออุปกรณ์เสริมต่างๆ เพื่อให้คุณได้ประสบการณ์การใช้งานที่ดีที่สุด",
+            "product": [
+                {
+                    "name": "Smartphone Model ABC",
+                    "price": "29,990",
+                    "description": "6.5-inch Display / 128GB / Dual Camera / 5G"
+                },
+                {
+                    "name": "Laptop Model XYZ",
+                    "price": "45,990",
+                    "description": "15.6-inch Display / Intel i7 / 16GB RAM / 512GB SSD"
+                }
+            ],
+            "ai_gender": "male"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157e8"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Sophie",
+            "ai_behavior": "Creative, Inspiring, Warm",
+            "ai_age": "28-38",
+            "business_name": "Art Studio",
+            "business_type": "Art Supply Store",
+            "address": {
+                "detailedAddress": "1213 Cedar St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "80203"
+            },
+            "phone": "0812345678",
+            "email": "Contact@artstudio.com",
+            "website": "www.artstudio.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Tuesday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Wednesday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Thursday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Friday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Saturday": { "open": true, "from": "10:00", "to": "16:00" },
+                "Sunday": { "open": false, "from": "00:00", "to": "16:30" }
+            },
+            "description": "Art Studio เป็นร้านจำหน่ายอุปกรณ์ศิลปะหลากหลายชนิด ไม่ว่าจะเป็นสี วาดภาพ อุปกรณ์ปั้น หรือเครื่องมือสำหรับงานศิลป์ต่างๆ เพื่อช่วยเสริมสร้างความคิดสร้างสรรค์",
+            "product": [
+                {
+                    "name": "Acrylic Paint Set",
+                    "price": "999",
+                    "description": "12 Colors / Non-Toxic / Fast Drying / 20ml Tubes"
+                },
+                {
+                    "name": "Sculpting Tools",
+                    "price": "699",
+                    "description": "15 Pieces / Stainless Steel / Ergonomic Handles"
+                }
+            ],
+            "ai_gender": "female"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157e9"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Alex",
+            "ai_behavior": "Innovative, Resourceful, Dynamic",
             "ai_age": "25-35",
-            "business_name": "GadgetHub",
+            "business_name": "Gadget Hub",
             "business_type": "Gadget Store",
-            "address": "9101 Third St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94113",
-            "phone": "415-555-9101",
+            "address": {
+                "detailedAddress": "1415 Elm St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "10001"
+            },
+            "phone": "0865432109",
             "email": "Contact@gadgethub.com",
             "website": "www.gadgethub.com",
-            "hours": "Mon-Fri 10-7",
-            "description": "GadgetHub เป็นร้านจำหน่ายแกดเจ็ตที่มีสินค้าหลากหลาย ไม่ว่าจะเป็นสมาร์ทวอทช์ หูฟังล้ำสมัย โดรน และอุปกรณ์เทคโนโลยีต่างๆ ด้วยราคาที่เป็นมิตรและบริการที่ยอดเยี่ยม",
+            "opentime": {
+                "Monday": { "open": true, "from": "11:00", "to": "19:00" },
+                "Tuesday": { "open": true, "from": "11:00", "to": "19:00" },
+                "Wednesday": { "open": true, "from": "11:00", "to": "19:00" },
+                "Thursday": { "open": true, "from": "11:00", "to": "19:00" },
+                "Friday": { "open": true, "from": "11:00", "to": "19:00" },
+                "Saturday": { "open": true, "from": "12:00", "to": "18:00" },
+                "Sunday": { "open": true, "from": "12:00", "to": "18:00" }
+            },
+            "description": "Gadget Hub จำหน่ายอุปกรณ์แกดเจ็ตทันสมัย ไม่ว่าจะเป็นอุปกรณ์สมาร์ทโฮม อุปกรณ์เสริมสำหรับโทรศัพท์ หรือแกดเจ็ตสำหรับการเดินทาง เพื่อให้ชีวิตคุณสะดวกสบายยิ่งขึ้น",
             "product": [
                 {
-                    "name": "Smartwatch ABC Model 1",
-                    "price": "5,990",
-                    "description": "1.5 inch / AMOLED / Heart Rate Monitor / GPS / Waterproof"
-                },
-                {
-                    "name": "Drone ABC Model 2",
-                    "price": "15,990",
-                    "description": "4K Camera / 30 Min Flight Time / GPS / Follow Me Mode"
-                }
-            ],
-            "ai_gender": "male"
-        }
-    },
-    {
-        "_id": {"$oid": "9993c04a199198f5d15157dd"},
-        "page_id": "U0e2ed57c6601a22574b71fb020c7a330",
-        "details": {
-            "ai_name": "Delta",
-            "ai_behavior": "Calm, Professional, Patient",
-            "ai_age": "35-45",
-            "business_name": "HomeElectro",
-            "business_type": "Home Electronics Store",
-            "address": "1112 Fourth St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94114",
-            "phone": "415-555-1112",
-            "email": "Support@homeelectro.com",
-            "website": "www.homeelectro.com",
-            "hours": "Tue-Sun 11-8",
-            "description": "HomeElectro จำหน่ายเครื่องใช้ไฟฟ้าภายในบ้าน เช่น ตู้เย็น เครื่องซักผ้า และไมโครเวฟ ด้วยคุณภาพสูงและราคาประหยัด พร้อมบริการจัดส่งและติดตั้งฟรี",
-            "product": [
-                {
-                    "name": "Refrigerator DEF Model X",
-                    "price": "19,990",
-                    "description": "600L / Energy Star / Inverter / Stainless Steel"
-                },
-                {
-                    "name": "Washing Machine DEF Model Y",
-                    "price": "12,990",
-                    "description": "10kg / Front Load / Inverter / Silent Operation"
-                }
-            ],
-            "ai_gender": "female"
-        }
-    },
-    {
-        "_id": {"$oid": "10103c04a199198f5d15157de"},
-        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
-        "details": {
-            "ai_name": "Epsilon",
-            "ai_behavior": "Friendly, Outgoing, Helpful",
-            "ai_age": "20-30",
-            "business_name": "TechStop",
-            "business_type": "Computer Store",
-            "address": "1314 Fifth St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94115",
-            "phone": "415-555-1314",
-            "email": "Service@techstop.com",
-            "website": "www.techstop.com",
-            "hours": "Mon-Fri 9-6",
-            "description": "TechStop มีสินค้าเกี่ยวกับคอมพิวเตอร์หลากหลาย ตั้งแต่แล็ปท็อป เครื่องพีซี อุปกรณ์เครือข่าย และอุปกรณ์เสริม พร้อมทีมงานผู้เชี่ยวชาญให้คำปรึกษาและบริการหลังการขาย",
-            "product": [
-                {
-                    "name": "Desktop PC GHI Model Z",
-                    "price": "29,990",
-                    "description": "Intel i7-11700 / 16GB RAM / 512GB SSD / RTX 3070 / Win 11"
-                },
-                {
-                    "name": "Router GHI Model A",
-                    "price": "3,990",
-                    "description": "Dual Band / Wi-Fi 6 / 4x4 MIMO / Gigabit Ports"
-                }
-            ],
-            "ai_gender": "male"
-        }
-    },
-    {
-        "_id": {"$oid": "11113c04a199198f5d15157df"},
-        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
-        "details": {
-            "ai_name": "Zeta",
-            "ai_behavior": "Knowledgeable, Courteous, Efficient",
-            "ai_age": "25-35",
-            "business_name": "OfficeDepot",
-            "business_type": "Office Supplies Store",
-            "address": "1516 Sixth St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94116",
-            "phone": "415-555-1516",
-            "email": "Sales@officedepot.com",
-            "website": "www.officedepot.com",
-            "hours": "Mon-Sat 9-5",
-            "description": "OfficeDepot มีทุกสิ่งที่คุณต้องการสำหรับสำนักงาน ตั้งแต่เฟอร์นิเจอร์ เครื่องเขียน อุปกรณ์สำนักงาน ไปจนถึงเครื่องใช้ไฟฟ้าในสำนักงาน บริการดีพร้อมส่งถึงที่",
-            "product": [
-                {
-                    "name": "Office Chair JKL Model 1",
+                    "name": "Smart Home Assistant",
                     "price": "4,990",
-                    "description": "Ergonomic / Adjustable Height / Lumbar Support / Black"
+                    "description": "Voice Control / Wi-Fi / Smart Hub / Compatible with Multiple Devices"
                 },
                 {
-                    "name": "Printer JKL Model 2",
-                    "price": "6,990",
-                    "description": "Laser / All-in-One / Duplex Printing / Wi-Fi"
-                }
-            ],
-            "ai_gender": "female"
-        }
-    },
-    {
-        "_id": {"$oid": "12123c04a199198f5d15157e0"},
-        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
-        "details": {
-            "ai_name": "Eta",
-            "ai_behavior": "Cheerful, Professional, Fast",
-            "ai_age": "30-40",
-            "business_name": "ApplianceCenter",
-            "business_type": "Appliance Store",
-            "address": "1718 Seventh St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94117",
-            "phone": "415-555-1718",
-            "email": "Help@appliancecenter.com",
-            "website": "www.appliancecenter.com",
-            "hours": "Mon-Fri 10-6",
-            "description": "ApplianceCenter จำหน่ายเครื่องใช้ไฟฟ้าต่างๆ เช่น เครื่องซักผ้า เตาอบ และเครื่องดูดฝุ่น มีบริการจัดส่งและติดตั้งฟรี พร้อมทีมงานผู้เชี่ยวชาญให้คำแนะนำและบริการหลังการขาย",
-            "product": [
-                {
-                    "name": "Oven MNO Model 1",
-                    "price": "14,990",
-                    "description": "60L / Convection / Self-Cleaning / Stainless Steel"
-                },
-                {
-                    "name": "Vacuum Cleaner MNO Model 2",
-                    "price": "9,990",
-                    "description": "Bagless / HEPA Filter / 1800W / Cordless"
-                }
-            ],
-            "ai_gender": "male"
-        }
-    },
-    {
-        "_id": {"$oid": "13133c04a199198f5d15157e1"},
-        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
-        "details": {
-            "ai_name": "Theta",
-            "ai_behavior": "Friendly, Efficient, Knowledgeable",
-            "ai_age": "20-30",
-            "business_name": "CameraShop",
-            "business_type": "Camera Store",
-            "address": "1920 Eighth St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94118",
-            "phone": "415-555-1920",
-            "email": "Support@camerashop.com",
-            "website": "www.camerashop.com",
-            "hours": "Tue-Sun 10-6",
-            "description": "CameraShop มีทุกอย่างเกี่ยวกับกล้องและอุปกรณ์เสริม ไม่ว่าจะเป็นกล้อง DSLR กล้องมิเรอร์เลส เลนส์ และขาตั้งกล้อง พร้อมบริการแนะนำสินค้าจากผู้เชี่ยวชาญ",
-            "product": [
-                {
-                    "name": "DSLR Camera PQR Model A",
-                    "price": "25,990",
-                    "description": "24MP / Full Frame / 4K Video / Wi-Fi"
-                },
-                {
-                    "name": "Mirrorless Camera PQR Model B",
-                    "price": "34,990",
-                    "description": "26MP / APS-C / 4K Video / Touchscreen"
-                }
-            ],
-            "ai_gender": "female"
-        }
-    },
-    {
-        "_id": {"$oid": "14143c04a199198f5d15157e2"},
-        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
-        "details": {
-            "ai_name": "Iota",
-            "ai_behavior": "Patient, Helpful, Professional",
-            "ai_age": "25-35",
-            "business_name": "MusicMart",
-            "business_type": "Music Store",
-            "address": "2122 Ninth St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94119",
-            "phone": "415-555-2122",
-            "email": "Info@musicmart.com",
-            "website": "www.musicmart.com",
-            "hours": "Mon-Fri 10-7",
-            "description": "MusicMart มีเครื่องดนตรีหลากหลายประเภท ทั้งกีตาร์ เปียโน กลอง และเครื่องดนตรีอื่นๆ รวมถึงอุปกรณ์เสริมสำหรับนักดนตรีทุกระดับ พร้อมบริการแนะนำสินค้าและการซ่อมบำรุง",
-            "product": [
-                {
-                    "name": "Acoustic Guitar STU Model A",
-                    "price": "8,990",
-                    "description": "Solid Top / Mahogany Back & Sides / Satin Finish"
-                },
-                {
-                    "name": "Digital Piano STU Model B",
-                    "price": "19,990",
-                    "description": "88 Keys / Weighted / Bluetooth / USB"
-                }
-            ],
-            "ai_gender": "male"
-        }
-    },
-    {
-        "_id": {"$oid": "15153c04a199198f5d15157e3"},
-        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
-        "details": {
-            "ai_name": "Kappa",
-            "ai_behavior": "Cheerful, Knowledgeable, Courteous",
-            "ai_age": "20-30",
-            "business_name": "ToyLand",
-            "business_type": "Toy Store",
-            "address": "2324 Tenth St",
-            "city": "San Francisco",
-            "state": "CA",
-            "zip": "94120",
-            "phone": "415-555-2324",
-            "email": "Contact@toyland.com",
-            "website": "www.toyland.com",
-            "hours": "Mon-Sat 9-6",
-            "description": "ToyLand จำหน่ายของเล่นสำหรับเด็กทุกวัย ไม่ว่าจะเป็นของเล่นเสริมพัฒนาการ ของเล่นเพื่อการเรียนรู้ และของเล่นสนุกๆ ที่จะช่วยให้เด็กๆ มีความสุขและสร้างสรรค์",
-            "product": [
-                {
-                    "name": "Building Blocks UVW Model 1",
+                    "name": "Wireless Earbuds",
                     "price": "2,990",
-                    "description": "1000 Pieces / Colorful / Educational / Safe Material"
+                    "description": "Bluetooth 5.0 / Noise Cancelling / Long Battery Life / Water Resistant"
+                }
+            ],
+            "ai_gender": "male"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157ea"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Mia",
+            "ai_behavior": "Gentle, Caring, Trustworthy",
+            "ai_age": "20-30",
+            "business_name": "Beauty Bliss",
+            "business_type": "Cosmetic Store",
+            "address": {
+                "detailedAddress": "1617 Spruce St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "30306"
+            },
+            "phone": "0854321098",
+            "email": "Contact@beautybliss.com",
+            "website": "www.beautybliss.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Tuesday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Wednesday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Thursday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Friday": { "open": true, "from": "10:00", "to": "19:00" },
+                "Saturday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Sunday": { "open": true, "from": "12:00", "to": "17:00" }
+            },
+            "description": "Beauty Bliss จำหน่ายเครื่องสำอางและผลิตภัณฑ์ดูแลผิวคุณภาพสูง ไม่ว่าจะเป็นเมคอัพ สกินแคร์ หรือผลิตภัณฑ์บำรุงผม เพื่อให้คุณดูดีและรู้สึกดีในทุกๆ วัน",
+            "product": [
+                {
+                    "name": "Matte Lipstick Set",
+                    "price": "1,299",
+                    "description": "5 Shades / Long-Lasting / Non-Drying / Smooth Application"
                 },
                 {
-                    "name": "Remote Control Car UVW Model 2",
-                    "price": "3,990",
-                    "description": "1:10 Scale / 4WD / Rechargeable / LED Lights"
+                    "name": "Facial Serum",
+                    "price": "2,499",
+                    "description": "Anti-Aging / Hydrating / Vitamin C / 30ml"
+                }
+            ],
+            "ai_gender": "female"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157eb"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Ethan",
+            "ai_behavior": "Smart, Analytical, Precise",
+            "ai_age": "30-40",
+            "business_name": "Kitchen Master",
+            "business_type": "Kitchenware Store",
+            "address": {
+                "detailedAddress": "1819 Walnut St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "75201"
+            },
+            "phone": "0843210987",
+            "email": "Contact@kitchenmaster.com",
+            "website": "www.kitchenmaster.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Tuesday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Wednesday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Thursday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Friday": { "open": true, "from": "09:00", "to": "18:00" },
+                "Saturday": { "open": true, "from": "10:00", "to": "16:00" },
+                "Sunday": { "open": false, "from": "00:00", "to": "16:30" }
+            },
+            "description": "Kitchen Master จำหน่ายอุปกรณ์ครัวและเครื่องใช้ไฟฟ้าครบวงจร ไม่ว่าจะเป็นหม้อ กระทะ มีด หรือเครื่องปั่น เพื่อช่วยให้การทำอาหารของคุณเป็นเรื่องง่ายและสนุก",
+            "product": [
+                {
+                    "name": "Non-Stick Frying Pan",
+                    "price": "1,199",
+                    "description": "28cm / Non-Toxic Coating / Even Heat Distribution"
+                },
+                {
+                    "name": "High-Speed Blender",
+                    "price": "3,499",
+                    "description": "1000W / Multiple Settings / BPA-Free / Easy to Clean"
+                }
+            ],
+            "ai_gender": "male"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157ec"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Emma",
+            "ai_behavior": "Cheerful, Friendly, Engaging",
+            "ai_age": "24-34",
+            "business_name": "Fashion Forward",
+            "business_type": "Clothing Store",
+            "address": {
+                "detailedAddress": "2021 Aspen St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "10016"
+            },
+            "phone": "0832109876",
+            "email": "Contact@fashionforward.com",
+            "website": "www.fashionforward.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Tuesday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Wednesday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Thursday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Friday": { "open": true, "from": "10:00", "to": "20:00" },
+                "Saturday": { "open": true, "from": "11:00", "to": "18:00" },
+                "Sunday": { "open": true, "from": "12:00", "to": "17:00" }
+            },
+            "description": "Fashion Forward จำหน่ายเสื้อผ้าและเครื่องประดับแฟชั่นที่มีความทันสมัย ไม่ว่าจะเป็นเสื้อผ้า รองเท้า หรือกระเป๋า เพื่อให้คุณมีลุคที่โดดเด่นในทุกๆ โอกาส",
+            "product": [
+                {
+                    "name": "Denim Jacket",
+                    "price": "1,999",
+                    "description": "Unisex / Classic Fit / Multiple Sizes / High-Quality Denim"
+                },
+                {
+                    "name": "Leather Handbag",
+                    "price": "3,299",
+                    "description": "Genuine Leather / Multiple Compartments / Adjustable Strap"
+                }
+            ],
+            "ai_gender": "female"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157ed"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Oliver",
+            "ai_behavior": "Calm, Reliable, Detail-Oriented",
+            "ai_age": "30-40",
+            "business_name": "Home Comfort",
+            "business_type": "Home Goods Store",
+            "address": {
+                "detailedAddress": "2223 Cherry St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "20004"
+            },
+            "phone": "0821098765",
+            "email": "Contact@homecomfort.com",
+            "website": "www.homecomfort.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "09:00", "to": "19:00" },
+                "Tuesday": { "open": true, "from": "09:00", "to": "19:00" },
+                "Wednesday": { "open": true, "from": "09:00", "to": "19:00" },
+                "Thursday": { "open": true, "from": "09:00", "to": "19:00" },
+                "Friday": { "open": true, "from": "09:00", "to": "19:00" },
+                "Saturday": { "open": true, "from": "10:00", "to": "17:00" },
+                "Sunday": { "open": true, "from": "12:00", "to": "17:00" }
+            },
+            "description": "Home Comfort จำหน่ายสินค้าสำหรับบ้านและสวน ไม่ว่าจะเป็นเฟอร์นิเจอร์ อุปกรณ์ตกแต่งบ้าน หรือเครื่องใช้ในครัว เพื่อให้บ้านของคุณสวยงามและน่าอยู่",
+            "product": [
+                {
+                    "name": "Comfortable Sofa",
+                    "price": "9,999",
+                    "description": "3-Seater / Fabric Upholstery / Durable Frame / Multiple Colors"
+                },
+                {
+                    "name": "Decorative Lamp",
+                    "price": "2,499",
+                    "description": "Modern Design / LED / Adjustable Brightness / Energy Efficient"
+                }
+            ],
+            "ai_gender": "male"
+        }
+    },
+    {
+        "_id": {"$oid": "15153c04a199198f5d15157ee"},
+        "page_id": "Ub4ba514371a70b57f9ed28c8bdfcf9db",
+        "details": {
+            "ai_name": "Ava",
+            "ai_behavior": "Lively, Outgoing, Supportive",
+            "ai_age": "22-32",
+            "business_name": "Kids Corner",
+            "business_type": "Children's Clothing Store",
+            "address": {
+                "detailedAddress": "2425 Fir St",
+                "subdistrict": "",
+                "district": "",
+                "province": "",
+                "zipcode": "98101"
+            },
+            "phone": "0810987654",
+            "email": "Contact@kidscorner.com",
+            "website": "www.kidscorner.com",
+            "opentime": {
+                "Monday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Tuesday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Wednesday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Thursday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Friday": { "open": true, "from": "10:00", "to": "18:00" },
+                "Saturday": { "open": true, "from": "11:00", "to": "16:00" },
+                "Sunday": { "open": true, "from": "12:00", "to": "17:00" }
+            },
+            "description": "Kids Corner จำหน่ายเสื้อผ้าและอุปกรณ์สำหรับเด็กทุกวัย ไม่ว่าจะเป็นเสื้อผ้าสำหรับเด็กทารก เด็กเล็ก หรือเด็กโต เพื่อให้เด็กๆ มีความสุขและสบายใจในการสวมใส่",
+            "product": [
+                {
+                    "name": "Baby Onesie",
+                    "price": "499",
+                    "description": "Soft Cotton / Snap Buttons / Cute Designs / Multiple Sizes"
+                },
+                {
+                    "name": "Kids Sneakers",
+                    "price": "999",
+                    "description": "Breathable / Lightweight / Velcro Straps / Durable"
                 }
             ],
             "ai_gender": "female"
         }
     }
-]
+];

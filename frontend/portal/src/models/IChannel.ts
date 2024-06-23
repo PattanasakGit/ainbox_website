@@ -1,3 +1,6 @@
+import { Address } from "@/models/IEcommerceChannel";
+import { IOpenTime } from "@/models/IOpenTime";
+
 export interface CardChannelProps {
     name: string;
     title: string;
@@ -16,14 +19,11 @@ export interface IStoreDetails {
     ai_age: string;
     business_name: string;
     business_type: string;
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
+    address: Address;
     phone: string;
     email: string;
     website: string;
-    hours: string;
+    opentime: IOpenTime;
     description: string;
     product?: IProduct[];
     ai_gender: string;
