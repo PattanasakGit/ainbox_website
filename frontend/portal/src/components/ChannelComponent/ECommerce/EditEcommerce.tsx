@@ -1,15 +1,14 @@
 "use client";
-import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
-import "@/components/ChannelComponent/ECommerce/Ecommerce.css";
-import Opentime from "@/components/OpenTime/Opentime";
-import { Address, FormData } from "@/models/IEcommerceChannel";
-import { IOpenTime } from "@/models/IOpenTime";
-import ecommerceService from "@/service/ChannelService/EcommerceService";
-import { useDataChannel } from "@/store/dataChannel";
-import Link from "next/link";
 import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IOpenTime } from "@/models/IOpenTime";
+import { useDataChannel } from "@/store/dataChannel";
+import Opentime from "@/components/OpenTime/Opentime";
+import { ToastContainer, toast } from "react-toastify";
+import "@/components/ChannelComponent/ECommerce/Ecommerce.css";
+import { Address, FormData } from "@/models/IEcommerceChannel";
+import ecommerceService from "@/service/ChannelService/EcommerceService";
+import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
 
 const EditEcommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
@@ -20,8 +19,8 @@ const EditEcommerce: React.FC = () => {
   }
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
-    shopName: dataChannel.details.business_name,
-    shopType: dataChannel.details.business_type,
+    business_name: dataChannel.details.business_name,
+    business_type: dataChannel.details.business_type,
     description: dataChannel.details.description,
     address: dataChannel.details.address,
     phone: dataChannel.details.phone,
@@ -53,7 +52,7 @@ const EditEcommerce: React.FC = () => {
     const dataToSubmit = {
       ...rest,
       address: address,
-      hours: formData.opentime,
+      // hours: formData.opentime,
     };
 
     if (dataChannel) {
@@ -109,7 +108,7 @@ const EditEcommerce: React.FC = () => {
           <input
             type="text"
             id="shopName"
-            value={formData.shopName}
+            value={formData.business_name}
             disabled={true}
             className="bg-white text-center"
           />
@@ -128,7 +127,7 @@ const EditEcommerce: React.FC = () => {
             <input
               type="text"
               id="shopName"
-              value={formData.shopName}
+              value={formData.business_name}
               onChange={handleChange}
               className="EcommerceInput"
               disabled={!isEditing}
@@ -142,7 +141,7 @@ const EditEcommerce: React.FC = () => {
             </label>
             <select
               id="shopType"
-              value={formData.shopType}
+              value={formData.business_type}
               onChange={handleChange}
               className="EcommerceInput"
               disabled={!isEditing}

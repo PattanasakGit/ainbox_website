@@ -1,15 +1,15 @@
-import CreateAIbehavior from "@/components/ChannelComponent/AIbehavior/CreateAIbehavior";
-import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
-import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
-import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
-import { IFormAiDetail } from "@/models/IChannel";
-import { FormData } from "@/models/IEcommerceChannel";
-import { MainSidebarSelection } from "@/models/ISidebar";
-import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { Steps } from 'antd';
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { IFormAiDetail } from "@/models/IChannel";
+import { FormData } from "@/models/IEcommerceChannel";
+import { ToastContainer, toast } from "react-toastify";
+import { MainSidebarSelection } from "@/models/ISidebar";
+import ecommerceService from "@/service/ChannelService/EcommerceService";
+import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
+import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
+import CreateAIbehavior from "@/components/ChannelComponent/AIbehavior/CreateAIbehavior";
+import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
 
 const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebarSelection }) => {
   const [current, setCurrent] = useState(0);
@@ -20,8 +20,8 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     ai_gender: ","
   });
   const [formData, setFormData] = useState<FormData>({
-    shopName: "",
-    shopType: "",
+    business_name: "",
+    business_type: "",
     description: "",
     address: {
       detailedAddress: "",
@@ -33,13 +33,13 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     phone: "",
     email: "",
     opentime: {
-      Monday: { open: true, from: '00:00', to: '16:30' },
-      Tuesday: { open: true, from: '00:00', to: '16:30' },
-      Wednesday: { open: true, from: '00:00', to: '16:30' },
-      Thursday: { open: true, from: '00:00', to: '16:30' },
-      Friday: { open: true, from: '00:00', to: '16:30' },
-      Saturday: { open: false, from: '00:00', to: '16:30' },
-      Sunday: { open: false, from: '00:00', to: '16:30' },
+      Monday: { open: true, from: '09:00', to: '16:30' },
+      Tuesday: { open: true, from: '09:00', to: '16:30' },
+      Wednesday: { open: true, from: '09:00', to: '16:30' },
+      Thursday: { open: true, from: '09:00', to: '16:30' },
+      Friday: { open: true, from: '09:00', to: '16:30' },
+      Saturday: { open: false, from: '09:00', to: '16:30' },
+      Sunday: { open: false, from: '09:00', to: '16:30' },
     }
   });
 
@@ -64,14 +64,12 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     setFormAI(data);
   };
 
-  const handleSubmit = async () => {
+  const handleCreate = async () => {
     try {
       await ecommerceService.create(dataCreateChannel);
       toast.success('ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
-      console.log('ไม่ error');
     } catch (error) {
       toast.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001');
-      console.log('error');
     }
   };
   
@@ -150,7 +148,7 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
           </button>
           <button
             type="button"
-            onClick={handleSubmit}
+            onClick={handleCreate}
             className="w-[200px] mt-4 ml-2 p-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
           >
             บันทึกข้อมูล

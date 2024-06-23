@@ -1,11 +1,9 @@
 "use client";
-import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
+import React from "react";
+import { IOpenTime } from "@/models/IOpenTime";
 import Opentime from "@/components/OpenTime/Opentime";
 import { Address, FormData } from "@/models/IEcommerceChannel";
-import { IOpenTime } from "@/models/IOpenTime";
-import React from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
 
 interface CreateEcommerceProps {
   next: () => void;
@@ -33,7 +31,7 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
     setFormData((prev) => ({ ...prev, address: newAddress }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     handleData(formData);
     next();
@@ -65,31 +63,19 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
 
   return (
     <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">
-      <ToastContainer
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
-
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleCreate}
         className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8"
       >
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
-            <label htmlFor="shopName" className="EcommerceLabel">
+            <label htmlFor="business_name" className="EcommerceLabel">
               ชื่อร้านค้า *
             </label>
             <input
               type="text"
-              id="shopName"
-              value={formData.shopName}
+              id="business_name"
+              value={formData.business_name}
               onChange={handleChange}
               className="EcommerceInput"
               required
@@ -97,12 +83,12 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
           </div>
 
           <div className="mb-4">
-            <label htmlFor="shopType" className="EcommerceLabel">
+            <label htmlFor="business_type" className="EcommerceLabel">
               ประเภทร้านค้า *
             </label>
             <select
-              id="shopType"
-              value={formData.shopType}
+              id="business_type"
+              value={formData.business_type}
               onChange={handleChange}
               className="EcommerceInput"
               required

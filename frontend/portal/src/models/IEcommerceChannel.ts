@@ -9,8 +9,8 @@ export interface Address {
 }
 
 export interface FormData {
-    shopName: string;
-    shopType: string;
+    business_name: string;
+    business_type: string;
     description: string;
     address: Address;
     phone: string;

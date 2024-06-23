@@ -1,7 +1,7 @@
+import React from "react";
 import { IFormAiDetail } from "@/models/IChannel";
 import { FormData } from "@/models/IEcommerceChannel";
-import React from "react";
-import { IOpenTime, OpenHours } from "../../../../models/IOpenTime";
+import { IOpenTime, OpenHours } from "@/models/IOpenTime";
 
 interface SummaryProps {
   formData: FormData;
@@ -47,12 +47,12 @@ const SummaryToSubmit: React.FC<SummaryProps> = ({ formData, formAI }) => {
   };
 
   return (
-    <section className="w-full p-8 pt-4">
+    <div className="w-full p-8 pt-4">
       <div className="w-[80%] mx-auto bg-white rounded-xl border-2 border-gray-200 shadow-2xl p-8">
         <h3 className="text-[30px] font-bold text-orange-500 mb-6 border-b-2 border-orange-200 pb-2">ข้อมูลร้านค้า</h3>
         <div className="grid grid-cols-1 gap-4">
-          <p className="text-[#555] text-lg"><strong>ชื่อร้านค้า:</strong> {formData.shopName}</p>
-          <p className="text-[#555] text-lg"><strong>ประเภทร้านค้า:</strong> {formData.shopType}</p>
+          <p className="text-[#555] text-lg"><strong>ชื่อร้านค้า:</strong> {formData.business_name}</p>
+          <p className="text-[#555] text-lg"><strong>ประเภทร้านค้า:</strong> {formData.business_type}</p>
           <p className="text-[#555] text-lg"><strong>อธิบายร้านค้าของคุณ:</strong> {formData.description}</p>
           <p className="text-[#555] text-lg"><strong>เบอร์โทรศัพท์:</strong> {formData.phone}</p>
           <p className="text-[#555] text-lg"><strong>อีเมล:</strong> {formData.email}</p>
@@ -69,7 +69,7 @@ const SummaryToSubmit: React.FC<SummaryProps> = ({ formData, formAI }) => {
           <p className="text-[#555] text-lg"><strong>อายุของผู้ช่วยอัจฉริยะ:</strong> {formAI.ai_age}</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
