@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { queryStoresByPageId } from "@/service/PageService";
-import AddChannelButton from "@/components/ChannelComponent/MainChannel/AddChannel";
-import CardChannel from "@/components/ChannelComponent/MainChannel/CardChannel";
 import { IStore } from "@/models/IChannel";
+import React, { useEffect, useState } from "react";
 import { useDataChannel } from "@/store/dataChannel";
 import AinboxLoading from "@/components/Loading/Loading";
+import ecommerceService from "@/service/ChannelService/EcommerceService";
+import CardChannel from "@/components/ChannelComponent/MainChannel/CardChannel";
+import AddChannelButton from "@/components/ChannelComponent/MainChannel/AddChannel";
 
 const MainChannel: React.FC = () => {
   const [channels, setChannels] = useState<IStore[]>([]);
@@ -14,8 +14,8 @@ const MainChannel: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const pageQueryResult = await queryStoresByPageId("Ub4ba514371a70b57f9ed28c8bdfcf9db");
-      setChannels(pageQueryResult);
+      const channelDataResponse = await ecommerceService.listChannel("Ub4ba514371a70b57f9ed28c8bdfcf9db");
+      setChannels(channelDataResponse);
       setLoading(false);
     };
 

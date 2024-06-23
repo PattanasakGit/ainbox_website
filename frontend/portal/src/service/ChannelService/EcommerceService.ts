@@ -1,27 +1,33 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { IStore } from "@/models/IChannel";
+import { mockListChannel } from "@/service/PageService"; //ใช้สำหรับการทดสอบเท่านั้น
 
-const API_URL = '/api';
+const API_URL = "https://webhook.site/c676a33a-a08f-4d74-a9f4-531159acaa7f"; //อย่าลืมย้ายไปใส่ env
 
-interface DataToSubmit {
-    [key: string]: unknown;
-  }
-  
-  interface DataToUpdate {
-    [key: string]: unknown;
-  }
-  
-  interface DataToEdit {
-    [key: string]: unknown;
-  }
+interface DataToCreate {
+  [key: string]: unknown;
+}
 
-const apiCall = async <T>(method: 'get' | 'post' | 'put' | 'patch' | 'delete', url: string, data: unknown = null): Promise<unknown> => {
+interface DataToUpdate {
+  [key: string]: unknown;
+}
+
+interface DataToEdit {
+  [key: string]: unknown;
+}
+
+const apiCall = async <T>(
+  method: "get" | "post" | "put" | "patch" | "delete",
+  url: string,
+  data: unknown = null
+): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await axios({
       method,
       url: `${API_URL}${url}`,
       data,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     return response.data;
@@ -30,19 +36,29 @@ const apiCall = async <T>(method: 'get' | 'post' | 'put' | 'patch' | 'delete', u
   }
 };
 
-const ecommerceService = { 
-  async create(dataToSubmit: DataToSubmit): Promise<unknown> {
-    console.log('dataToSubmit -> ',dataToSubmit);
-    return await apiCall('post', '/submit', dataToSubmit);
+const ecommerceService = {
+  //ส่งข้อมูลบางอย่าของ User ไปแล้วรอรับ IStore[] กลับมายัง frontend
+  async listChannel(user:string): Promise<IStore[]> {
+    // ใช้งานจริง
+    // return await apiCall("get", "/listChannel", user);
+
+    //MockData
+    return await mockListChannel(user)
+  },
+  //ส่งข้อมูลทั้งหมดไป backend เพื่อสร้าง Channel ใหม่
+  async create(dataToCreate: DataToCreate): Promise<unknown> {
+    console.log("dataToCreate -> ", dataToCreate);
+    return await apiCall("post", "/submit", dataToCreate);
   },
   async update(id: string, dataToUpdate: DataToUpdate): Promise<unknown> {
-    return await apiCall('put', `/update/${id}`, dataToUpdate);
+    return await apiCall("put", `/update/${id}`, dataToUpdate);
   },
+  //แก้ไขข้อมูลบางส่วน
   async edit(id: string, dataToEdit: DataToEdit): Promise<unknown> {
-    return await apiCall('patch', `/edit/${id}`, dataToEdit);
+    return await apiCall("patch", `/edit/${id}`, dataToEdit);
   },
   async delete(id: string): Promise<unknown> {
-    return await apiCall('delete', `/delete/${id}`);
+    return await apiCall("delete", `/delete/${id}`);
   },
 };
 
