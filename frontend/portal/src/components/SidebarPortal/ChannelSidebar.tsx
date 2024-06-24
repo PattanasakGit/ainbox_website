@@ -2,6 +2,9 @@
 import React from "react";
 import { ChannelSidebarSelection } from "@/models/ISidebar";
 import { useChannelSidebar } from "@/store/SidebaeStore";
+import { IoChevronBack } from "react-icons/io5";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import Link from "next/link";
 
 const ChannelSidebar: React.FC = () => {
   const btnStyle = 'h-12 hover:bg-orange-500 hover:text-white';
@@ -14,6 +17,14 @@ const ChannelSidebar: React.FC = () => {
 
   return (
     <section className="mt-[70px] h-screen w-[200px] bg-gray-100 fixed top-0 left-0 flex flex-col justify-start">
+      <Link href={'/'}>
+        <button
+          className={`${btnStyle} flex justify-center items-center gap-2 bg-[#e1e1e1] w-full`}
+        >
+          <IoArrowBackCircleOutline />
+          {`หน้าหลัก`}
+        </button>
+      </Link>
       <button
         className={selected === ChannelSidebarSelection.ShopInfo ? activeBtnStyle : btnStyle}
         onClick={() => handleMenuClick(ChannelSidebarSelection.ShopInfo)}
