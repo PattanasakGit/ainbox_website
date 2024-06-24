@@ -41,7 +41,7 @@ export const stores: IStore[] = [
                     "description": "Hardcover / 300 Pages / Educational / Color Illustrations"
                 }
             ],
-            "ai_gender": "female"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -85,7 +85,7 @@ export const stores: IStore[] = [
                     "description": "Magnetic Resistance / Adjustable Seat / Heart Rate Monitor"
                 }
             ],
-            "ai_gender": "male"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -129,7 +129,7 @@ export const stores: IStore[] = [
                     "description": "Feather Wand / Durable / Safe Materials"
                 }
             ],
-            "ai_gender": "female"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -173,7 +173,7 @@ export const stores: IStore[] = [
                     "description": "15.6-inch Display / Intel i7 / 16GB RAM / 512GB SSD"
                 }
             ],
-            "ai_gender": "male"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -217,7 +217,7 @@ export const stores: IStore[] = [
                     "description": "15 Pieces / Stainless Steel / Ergonomic Handles"
                 }
             ],
-            "ai_gender": "female"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -261,7 +261,7 @@ export const stores: IStore[] = [
                     "description": "Bluetooth 5.0 / Noise Cancelling / Long Battery Life / Water Resistant"
                 }
             ],
-            "ai_gender": "male"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -305,7 +305,7 @@ export const stores: IStore[] = [
                     "description": "Anti-Aging / Hydrating / Vitamin C / 30ml"
                 }
             ],
-            "ai_gender": "female"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -349,7 +349,7 @@ export const stores: IStore[] = [
                     "description": "1000W / Multiple Settings / BPA-Free / Easy to Clean"
                 }
             ],
-            "ai_gender": "male"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -393,7 +393,7 @@ export const stores: IStore[] = [
                     "description": "Genuine Leather / Multiple Compartments / Adjustable Strap"
                 }
             ],
-            "ai_gender": "female"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -437,7 +437,7 @@ export const stores: IStore[] = [
                     "description": "Modern Design / LED / Adjustable Brightness / Energy Efficient"
                 }
             ],
-            "ai_gender": "male"
+            "ai_gender": "ชาย"
         }
     },
     {
@@ -481,7 +481,7 @@ export const stores: IStore[] = [
                     "description": "Breathable / Lightweight / Velcro Straps / Durable"
                 }
             ],
-            "ai_gender": "female"
+            "ai_gender": "ชาย"
         }
     }
 ];

@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import ChannelSidebar from "@/components/SidebarPortal/ChannelSidebar";
-import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import { useChannelSidebar } from "@/store/SidebaeStore";
-import { ChannelSidebarSelection } from "@/models/ISidebar";
-import EditEcommerce from "@/components/ChannelComponent/ECommerce/EditEcommerce";
 import AinboxLoading from "@/components/Loading/Loading";
+import { ChannelSidebarSelection } from "@/models/ISidebar";
+import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
+import EditAI from "@/components/ChannelComponent/ECommerce/EditAI";
+import ChannelSidebar from "@/components/SidebarPortal/ChannelSidebar";
+import EditEcommerce from "@/components/ChannelComponent/ECommerce/EditEcommerce";
 
 const ChannelManager: React.FC = () => {
   const itemsBreadcrumb = [
@@ -28,20 +29,14 @@ const ChannelManager: React.FC = () => {
     if (selected === ChannelSidebarSelection.ShopInfo) {
       return (
         <>
-          {loading && (
-            <AinboxLoading/>
-          )}
+          {loading && <AinboxLoading />}
           <div className={loading ? "hidden" : ""}>
             <EditEcommerce />
           </div>
         </>
       );
     } else if (selected === ChannelSidebarSelection.AIBehavior) {
-      return (
-        <div className="flex justify-center items-center h-[80vh]">
-          หน้านี้คือ ข้อมูล ai
-        </div>
-      );
+      return <EditAI/>;
     } else if (selected === ChannelSidebarSelection.Products) {
       return (
         <div className="flex justify-center items-center h-[80vh]">

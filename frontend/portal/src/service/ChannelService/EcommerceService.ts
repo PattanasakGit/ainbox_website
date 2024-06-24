@@ -1,18 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { IStore } from "@/models/IChannel";
+import { IStore, } from "@/models/IChannel";
 import { mockListChannel } from "@/service/PageService"; //ใช้สำหรับการทดสอบเท่านั้น
 
 const API_URL = "https://webhook.site/c676a33a-a08f-4d74-a9f4-531159acaa7f"; //อย่าลืมย้ายไปใส่ env
 
 interface DataToCreate {
-  [key: string]: unknown;
-}
-
-interface DataToUpdate {
-  [key: string]: unknown;
-}
-
-interface DataToEdit {
   [key: string]: unknown;
 }
 
@@ -46,15 +38,14 @@ const ecommerceService = {
     return await mockListChannel(user)
   },
   //ส่งข้อมูลทั้งหมดไป backend เพื่อสร้าง Channel ใหม่
-  async create(dataToCreate: DataToCreate): Promise<unknown> {
-    console.log("dataToCreate -> ", dataToCreate);
-    return await apiCall("post", "/submit", dataToCreate);
+  async create(dataToCreate: unknown): Promise<unknown> {
+    return await apiCall("post", "/create", dataToCreate);
   },
-  async update(id: string, dataToUpdate: DataToUpdate): Promise<unknown> {
+  async update(id: string, dataToUpdate: unknown): Promise<unknown> {
     return await apiCall("put", `/update/${id}`, dataToUpdate);
   },
   //แก้ไขข้อมูลบางส่วน
-  async edit(id: string, dataToEdit: DataToEdit): Promise<unknown> {
+  async edit(id: string, dataToEdit: unknown): Promise<unknown> {
     return await apiCall("patch", `/edit/${id}`, dataToEdit);
   },
   async delete(id: string): Promise<unknown> {
