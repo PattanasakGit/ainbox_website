@@ -11,6 +11,7 @@ export interface IProduct {
     name: string;
     price: string;
     description: string;
+    url_link:string;
 }
 
 export interface IStoreDetails {
@@ -25,7 +26,7 @@ export interface IStoreDetails {
     website: string;
     opentime: IOpenTime;
     description: string;
-    product?: IProduct[];
+    product: IProduct[];
     ai_gender: string;
 }
 

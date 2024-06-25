@@ -6,6 +6,7 @@ import { ChannelSidebarSelection } from "@/models/ISidebar";
 import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import EditAI from "@/components/ChannelComponent/ECommerce/EditAI";
 import ChannelSidebar from "@/components/SidebarPortal/ChannelSidebar";
+import Products from "@/components/ChannelComponent/ECommerce/Products/Products";
 import EditEcommerce from "@/components/ChannelComponent/ECommerce/EditEcommerce";
 
 const ChannelManager: React.FC = () => {
@@ -36,13 +37,9 @@ const ChannelManager: React.FC = () => {
         </>
       );
     } else if (selected === ChannelSidebarSelection.AIBehavior) {
-      return <EditAI/>;
+      return <EditAI />;
     } else if (selected === ChannelSidebarSelection.Products) {
-      return (
-        <div className="flex justify-center items-center h-[80vh]">
-          หน้านี้คือ ข้อมูล สินค้าหรือบริการ
-        </div>
-      );
+      return <Products />;
     } else if (selected === ChannelSidebarSelection.Connects) {
       return (
         <div className="flex justify-center items-center h-[80vh]">
