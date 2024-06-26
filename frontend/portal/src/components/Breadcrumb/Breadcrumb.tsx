@@ -23,7 +23,7 @@ const CustomBreadcrumb: React.FC<BreadcrumbProps> = ({ items = [] }) => {
       setIsLoaded(true);
     }, 100);
     return () => clearTimeout(timeoutId);
-  }, []);
+  }, [isLoaded]);
 
   const homeItem: BreadcrumbItem = {
     href: '/',

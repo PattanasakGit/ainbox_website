@@ -8,16 +8,16 @@ const ModalAddChannel: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
   onClose,
 }) => {
-  if (!isOpen) return null;
-
   const { setSelected } = useMainSidebar();
+
+  if (!isOpen) return null;
 
   const categories = [
     {
       title: "ธุรกิจ",
       icon: "/images/Ecom.svg",
       items: ["E-Commerce", "ระบบจัดการบริหารสินค้า", "ระบบจอง"],
-      showComponent:MainSidebarSelection.CreateEcommerce
+      showComponent: MainSidebarSelection.CreateEcommerce,
     },
     {
       title: "คลังข้อมูล",
@@ -28,7 +28,7 @@ const ModalAddChannel: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
         "ให้ข้อมูลภายในองค์กร",
         "ให้ข้อมูลสาธารณะ",
       ],
-      showComponent:MainSidebarSelection.CreateDataWarehouse
+      showComponent: MainSidebarSelection.CreateDataWarehouse,
     },
     {
       title: "บุคคล",
@@ -39,7 +39,7 @@ const ModalAddChannel: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
         "ผู้เชี่ยวชาญ",
         "ผู้ช่วยส่วนตัวอัจฉริยะ",
       ],
-      showComponent:MainSidebarSelection.CreatePersonal
+      showComponent: MainSidebarSelection.CreatePersonal,
     },
   ];
 
@@ -84,8 +84,9 @@ const ModalAddChannel: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                   ))}
                 </ul>
               </div>
-              <button className="mt-6 w-full py-3 px-4 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition-colors"
-                onClick={()=>setSelected(category.showComponent)}
+              <button
+                className="mt-6 w-full py-3 px-4 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition-colors"
+                onClick={() => setSelected(category.showComponent)}
               >
                 เลือก {category.title}
               </button>

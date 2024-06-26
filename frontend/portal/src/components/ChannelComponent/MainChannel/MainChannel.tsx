@@ -27,10 +27,10 @@ const MainChannel: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 auto-rows-fr p-16 pt-0">
         {loading
           ? <div className="w-[80vw]"><AinboxLoading/></div>
-          : channels.map((channel) => (
+          : channels.map((channel, index) => (
             <div onClick={()=>{setDataChannel(channel)}}>
               <CardChannel
-                key={channel._id.$oid}
+                key={index}
                 name={channel.details.business_name}
                 title={channel.details.description}
               />

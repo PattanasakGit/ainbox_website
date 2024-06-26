@@ -3,25 +3,37 @@ import "@/components/ChannelComponent/ECommerce/Ecommerce.css";
 import { IFormAiDetail } from "@/models/IChannel";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { useDataChannel } from "@/store/dataChannel";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CreateAIbehavior from "../AIbehavior/CreateAIbehavior";
 
 const EditAI: React.FC = () => {
   const { dataChannel } = useDataChannel();
-
-  if (!dataChannel) {
-    window.location.href = "/";
-    return null;
-  }
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formDataAI, setFormDataAI] = useState<IFormAiDetail>({
-    ai_name: dataChannel.details.ai_name,
-    ai_behavior: dataChannel.details.ai_behavior,
-    ai_age: dataChannel.details.ai_age,
-    ai_gender: dataChannel.details.ai_gender,
+    ai_name: "",
+    ai_behavior: "",
+    ai_age: "",
+    ai_gender: "",
   });
+
+  useEffect(() => {
+    if (!dataChannel) {
+      window.location.href = "/";
+    } else {
+      setFormDataAI({
+        ai_name: dataChannel.details.ai_name,
+        ai_behavior: dataChannel.details.ai_behavior,
+        ai_age: dataChannel.details.ai_age,
+        ai_gender: dataChannel.details.ai_gender,
+      });
+    }
+  }, [dataChannel]);
+
+  if (!dataChannel) {
+    return null;
+  }
 
   const handleAiData = (data: IFormAiDetail) => {
     setFormDataAI(data);
@@ -44,9 +56,9 @@ const EditAI: React.FC = () => {
     }
   };
 
-  const btnEditDisplay =()=> {
-    return(
-        <div className="flex justify-end space-x-2">
+  const btnEditDisplay = () => {
+    return (
+      <div className="flex justify-end space-x-2">
         {isEditing ? (
           <>
             <button
@@ -77,8 +89,8 @@ const EditAI: React.FC = () => {
           </button>
         )}
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">

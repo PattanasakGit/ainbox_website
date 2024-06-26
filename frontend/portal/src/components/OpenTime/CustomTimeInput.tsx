@@ -31,8 +31,8 @@ const ScrollableNumberInput: React.FC<ScrollableNumberInputProps> = ({ value, mi
   };
 
   const handleWheel = (event: WheelEvent) => {
-    event.preventDefault(); // Prevent default scrolling behavior
-    const scrollSpeed = 100; // Adjust scroll speed here
+    event.preventDefault();
+    const scrollSpeed = 100;
     if (event.deltaY < 0) {
       setTimeout(() => handleScroll('up'), scrollSpeed);
     } else {
@@ -62,7 +62,7 @@ const ScrollableNumberInput: React.FC<ScrollableNumberInputProps> = ({ value, mi
       container?.removeEventListener('wheel', handleWheel);
       container?.removeEventListener('touchstart', handleTouchStart);
     };
-  }, [value]);
+  }, [handleWheel, handleTouchStart]);
 
   return (
     <div ref={containerRef} className="relative w-24 h-48 overflow-hidden rounded-lg shadow-lg bg-white">
