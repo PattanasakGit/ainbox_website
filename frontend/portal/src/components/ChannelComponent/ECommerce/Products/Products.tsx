@@ -9,12 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { IProductInTable } from "@/models/IEcommerceChannel";
 
 const Products: React.FC = () => {
-  const { dataChannel } = useDataChannel();
-  if (!dataChannel) {
-    window.location.href = "/";
-    return null;
-  }
-
   const blankProduct = {
     key: -1,
     name: "",
@@ -24,11 +18,14 @@ const Products: React.FC = () => {
   };
   const [isModal, setIsModal] = useState(false);
   const [dataCreateProduct, setDataCreateProduct] = useState(blankProduct);
-
   const [isEdit, setIsEdit] = useState(false);
-  const [dataEditProduct, setDataEditProduct] =
-    useState<IProductInTable>(blankProduct);
-
+  const [dataEditProduct, setDataEditProduct] =  useState<IProductInTable>(blankProduct);
+  const { dataChannel } = useDataChannel();
+  if (!dataChannel) {
+    window.location.href = "/";
+    return null;
+  }
+  
   const productsWithKeys = dataChannel.details.product.map((item, index) => ({
     ...item,
     key: index,

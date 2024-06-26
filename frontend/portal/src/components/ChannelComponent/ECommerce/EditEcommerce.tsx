@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IOpenTime } from "@/models/IOpenTime";
 import "react-toastify/dist/ReactToastify.css";
 import { useDataChannel } from "@/store/dataChannel";
@@ -12,22 +12,25 @@ import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInp
 
 const EditEcommerce: React.FC = () => {
   const { dataChannel } = useDataChannel();
-
-  if (!dataChannel) {
-    window.location.href = "/";
-    return null;
-  }
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormData>({
-    business_name: dataChannel.details.business_name,
-    business_type: dataChannel.details.business_type,
-    description: dataChannel.details.description,
-    address: dataChannel.details.address,
-    phone: dataChannel.details.phone,
-    email: dataChannel.details.email,
-    website: dataChannel.details.website,
-    opentime: dataChannel.details.opentime,
-  });
+  const [formData, setFormData] = useState(dataInitial);
+
+  useEffect(() => {
+    if (!dataChannel) {
+      window.location.href = "/";
+    } else {
+      setFormData({
+        business_name: dataChannel.details.business_name,
+        business_type: dataChannel.details.business_type,
+        description: dataChannel.details.description,
+        address: dataChannel.details.address,
+        phone: dataChannel.details.phone,
+        email: dataChannel.details.email,
+        website: dataChannel.details.website,
+        opentime: dataChannel.details.opentime,
+      });
+    }
+  }, [dataChannel]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -269,3 +272,56 @@ const EditEcommerce: React.FC = () => {
 };
 
 export default EditEcommerce;
+
+const dataInitial = {
+  business_name: "",
+  business_type: "",
+  description: "",
+  address: {
+    detailedAddress: "",
+    subdistrict: "",
+    district: "",
+    province: "",
+    zipcode: "",
+  },
+  phone: "",
+  email: "",
+  website: "",
+  opentime: {
+    Monday: {
+      open: false,
+      from: "",
+      to: "",
+    },
+    Tuesday: {
+      open: false,
+      from: "",
+      to: "",
+    },
+    Wednesday: {
+      open: false,
+      from: "",
+      to: "",
+    },
+    Thursday: {
+      open: false,
+      from: "",
+      to: "",
+    },
+    Friday: {
+      open: false,
+      from: "",
+      to: "",
+    },
+    Saturday: {
+      open: false,
+      from: "",
+      to: "",
+    },
+    Sunday: {
+      open: false,
+      from: "",
+      to: "",
+    },
+  },
+};

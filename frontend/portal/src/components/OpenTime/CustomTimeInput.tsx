@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 interface ScrollableNumberInputProps {
@@ -22,15 +22,15 @@ const ScrollableNumberInput: React.FC<ScrollableNumberInputProps> = ({ value, mi
     return numbers;
   };
 
-  const handleScroll = (direction: 'up' | 'down') => {
+  const handleScroll = useCallback((direction: 'up' | 'down') => {
     if (direction === 'up') {
       onChange(value === min ? max : value - 1);
     } else {
       onChange(value === max ? min : value + 1);
     }
-  };
+  }, [value, min, max, onChange]);
 
-  const handleWheel = (event: WheelEvent) => {
+  const handleWheel = useCallback((event: WheelEvent) => {
     event.preventDefault();
     const scrollSpeed = 100;
     if (event.deltaY < 0) {
@@ -38,9 +38,9 @@ const ScrollableNumberInput: React.FC<ScrollableNumberInputProps> = ({ value, mi
     } else {
       setTimeout(() => handleScroll('down'), scrollSpeed);
     }
-  };
+  }, [handleScroll]);
 
-  const handleTouchStart = (event: TouchEvent) => {
+  const handleTouchStart = useCallback((event: TouchEvent) => {
     const touchStartY = event.touches[0].clientY;
     const handleTouchMove = (moveEvent: TouchEvent) => {
       const touchEndY = moveEvent.touches[0].clientY;
@@ -51,7 +51,7 @@ const ScrollableNumberInput: React.FC<ScrollableNumberInputProps> = ({ value, mi
       }
     };
     containerRef.current?.addEventListener('touchmove', handleTouchMove, { once: true });
-  };
+  }, [handleScroll]);
 
   useEffect(() => {
     const container = containerRef.current;

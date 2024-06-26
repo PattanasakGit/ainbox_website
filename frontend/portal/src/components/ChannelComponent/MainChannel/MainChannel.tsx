@@ -1,4 +1,3 @@
-"use client";
 import { IStore } from "@/models/IChannel";
 import React, { useEffect, useState } from "react";
 import { useDataChannel } from "@/store/dataChannel";
@@ -25,17 +24,18 @@ const MainChannel: React.FC = () => {
   return (
     <section className="w-full h-screen">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 auto-rows-fr p-16 pt-0">
-        {loading
-          ? <div className="w-[80vw]"><AinboxLoading/></div>
-          : channels.map((channel, index) => (
-            <div onClick={()=>{setDataChannel(channel)}}>
+        {loading ? (
+          <div className="w-[80vw]"><AinboxLoading /></div>
+        ) : (
+          channels.map((channel) => (
+            <div key={channel._id.$oid} onClick={() => setDataChannel(channel)}>
               <CardChannel
-                key={index}
                 name={channel.details.business_name}
                 title={channel.details.description}
               />
             </div>
-            ))}
+          ))
+        )}
         {!loading && <AddChannelButton />}
       </div>
     </section>

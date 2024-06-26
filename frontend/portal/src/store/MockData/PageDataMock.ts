@@ -33,12 +33,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Fantasy Novel ABC",
                     "price": "399",
-                    "description": "Paperback / 500 Pages / Adventure / English"
+                    "description": "Paperback / 500 Pages / Adventure / English",
+                    url_link: ""
                 },
                 {
                     "name": "Science Book XYZ",
                     "price": "499",
-                    "description": "Hardcover / 300 Pages / Educational / Color Illustrations"
+                    "description": "Hardcover / 300 Pages / Educational / Color Illustrations",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -77,12 +79,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Treadmill Model ABC",
                     "price": "25,990",
-                    "description": "Electric / Foldable / LCD Display / Multiple Modes"
+                    "description": "Electric / Foldable / LCD Display / Multiple Modes",
+                    url_link: ""
                 },
                 {
                     "name": "Exercise Bike Model XYZ",
                     "price": "15,990",
-                    "description": "Magnetic Resistance / Adjustable Seat / Heart Rate Monitor"
+                    "description": "Magnetic Resistance / Adjustable Seat / Heart Rate Monitor",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -121,12 +125,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Dog Food Premium",
                     "price": "1,299",
-                    "description": "High Protein / Grain-Free / 5kg"
+                    "description": "High Protein / Grain-Free / 5kg",
+                    url_link: ""
                 },
                 {
                     "name": "Cat Toy Interactive",
                     "price": "599",
-                    "description": "Feather Wand / Durable / Safe Materials"
+                    "description": "Feather Wand / Durable / Safe Materials",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -165,12 +171,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Smartphone Model ABC",
                     "price": "29,990",
-                    "description": "6.5-inch Display / 128GB / Dual Camera / 5G"
+                    "description": "6.5-inch Display / 128GB / Dual Camera / 5G",
+                    url_link: ""
                 },
                 {
                     "name": "Laptop Model XYZ",
                     "price": "45,990",
-                    "description": "15.6-inch Display / Intel i7 / 16GB RAM / 512GB SSD"
+                    "description": "15.6-inch Display / Intel i7 / 16GB RAM / 512GB SSD",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -209,12 +217,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Acrylic Paint Set",
                     "price": "999",
-                    "description": "12 Colors / Non-Toxic / Fast Drying / 20ml Tubes"
+                    "description": "12 Colors / Non-Toxic / Fast Drying / 20ml Tubes",
+                    url_link: ""
                 },
                 {
                     "name": "Sculpting Tools",
                     "price": "699",
-                    "description": "15 Pieces / Stainless Steel / Ergonomic Handles"
+                    "description": "15 Pieces / Stainless Steel / Ergonomic Handles",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -253,12 +263,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Smart Home Assistant",
                     "price": "4,990",
-                    "description": "Voice Control / Wi-Fi / Smart Hub / Compatible with Multiple Devices"
+                    "description": "Voice Control / Wi-Fi / Smart Hub / Compatible with Multiple Devices",
+                    url_link: ""
                 },
                 {
                     "name": "Wireless Earbuds",
                     "price": "2,990",
-                    "description": "Bluetooth 5.0 / Noise Cancelling / Long Battery Life / Water Resistant"
+                    "description": "Bluetooth 5.0 / Noise Cancelling / Long Battery Life / Water Resistant",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -297,12 +309,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Matte Lipstick Set",
                     "price": "1,299",
-                    "description": "5 Shades / Long-Lasting / Non-Drying / Smooth Application"
+                    "description": "5 Shades / Long-Lasting / Non-Drying / Smooth Application",
+                    url_link: ""
                 },
                 {
                     "name": "Facial Serum",
                     "price": "2,499",
-                    "description": "Anti-Aging / Hydrating / Vitamin C / 30ml"
+                    "description": "Anti-Aging / Hydrating / Vitamin C / 30ml",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -341,12 +355,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Non-Stick Frying Pan",
                     "price": "1,199",
-                    "description": "28cm / Non-Toxic Coating / Even Heat Distribution"
+                    "description": "28cm / Non-Toxic Coating / Even Heat Distribution",
+                    url_link: ""
                 },
                 {
                     "name": "High-Speed Blender",
                     "price": "3,499",
-                    "description": "1000W / Multiple Settings / BPA-Free / Easy to Clean"
+                    "description": "1000W / Multiple Settings / BPA-Free / Easy to Clean",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -385,12 +401,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Denim Jacket",
                     "price": "1,999",
-                    "description": "Unisex / Classic Fit / Multiple Sizes / High-Quality Denim"
+                    "description": "Unisex / Classic Fit / Multiple Sizes / High-Quality Denim",
+                    url_link: ""
                 },
                 {
                     "name": "Leather Handbag",
                     "price": "3,299",
-                    "description": "Genuine Leather / Multiple Compartments / Adjustable Strap"
+                    "description": "Genuine Leather / Multiple Compartments / Adjustable Strap",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -429,12 +447,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Comfortable Sofa",
                     "price": "9,999",
-                    "description": "3-Seater / Fabric Upholstery / Durable Frame / Multiple Colors"
+                    "description": "3-Seater / Fabric Upholstery / Durable Frame / Multiple Colors",
+                    url_link: ""
                 },
                 {
                     "name": "Decorative Lamp",
                     "price": "2,499",
-                    "description": "Modern Design / LED / Adjustable Brightness / Energy Efficient"
+                    "description": "Modern Design / LED / Adjustable Brightness / Energy Efficient",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
@@ -473,12 +493,14 @@ export const stores: IStore[] = [
                 {
                     "name": "Baby Onesie",
                     "price": "499",
-                    "description": "Soft Cotton / Snap Buttons / Cute Designs / Multiple Sizes"
+                    "description": "Soft Cotton / Snap Buttons / Cute Designs / Multiple Sizes",
+                    url_link: ""
                 },
                 {
                     "name": "Kids Sneakers",
                     "price": "999",
-                    "description": "Breathable / Lightweight / Velcro Straps / Durable"
+                    "description": "Breathable / Lightweight / Velcro Straps / Durable",
+                    url_link: ""
                 }
             ],
             "ai_gender": "ชาย"
