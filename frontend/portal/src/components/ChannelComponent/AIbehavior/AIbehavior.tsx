@@ -14,7 +14,7 @@ interface IAiBehaviorProps {
   isEditing?:boolean;
 }
 
-const CreateAIbehavior = ({
+const AIbehavior = ({
   formAI,
   setFormAI,
   handleData,
@@ -23,9 +23,11 @@ const CreateAIbehavior = ({
   btnEditDisplay,
   isEditing,
 }: IAiBehaviorProps) => {
-  const [selectedGender, setSelectedGender] = useState<string>(
-    formAI.ai_gender
-  );
+  const [selectedGender, setSelectedGender] = useState<string>();
+
+  const handleGenderSelect = (gender: string) => {
+    setFormAI((prev) => ({ ...prev, ai_gender: gender }));
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -49,12 +51,9 @@ const CreateAIbehavior = ({
     }
   };
 
-  const handleGenderSelect = (gender: string) => {
-    setSelectedGender(gender);
-    setFormAI((prev) => ({ ...prev, ai_gender: gender }));
-  };
-
-  useEffect(() => {}, [selectedGender]);
+  useEffect(() => {
+    setSelectedGender(formAI.ai_gender);
+  }, [formAI.ai_gender]);
 
   return (
     <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">
@@ -104,7 +103,7 @@ const CreateAIbehavior = ({
               >
                 <button
                   type="button"
-                  className={`flex items-center justify-center w-12 h-12 rounded-full  hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                  className={`flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                     selectedGender === "LGBTQ+"
                       ? "bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400 animate-gradient-x  text-white"
                       : "text-[#555] bg-gray-100"
@@ -120,7 +119,7 @@ const CreateAIbehavior = ({
               >
                 <button
                   type="button"
-                  className={`flex items-center justify-center w-12 h-12 rounded-full  hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                  className={`flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                     selectedGender == "ชาย"
                       ? "bg-sky-400 text-white"
                       : "text-[#555] bg-gray-100"
@@ -136,7 +135,7 @@ const CreateAIbehavior = ({
               >
                 <button
                   type="button"
-                  className={`flex items-center justify-center w-12 h-12 rounded-full  hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                  className={`flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                     selectedGender === "หญิง"
                       ? "bg-pink-400 text-white"
                       : "text-[#555] bg-gray-100"
@@ -152,7 +151,7 @@ const CreateAIbehavior = ({
               >
                 <button
                   type="button"
-                  className={`flex items-center justify-center w-12 h-12 rounded-full  hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                  className={`flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                     selectedGender === "ไม่ระบุ"
                       ? "bg-orange-400 text-white"
                       : "text-[#555] bg-gray-100"
@@ -205,4 +204,4 @@ const CreateAIbehavior = ({
   );
 };
 
-export default CreateAIbehavior;
+export default AIbehavior;

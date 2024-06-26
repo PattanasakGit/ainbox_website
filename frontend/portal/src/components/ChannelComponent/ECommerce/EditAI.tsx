@@ -3,10 +3,10 @@ import "@/components/ChannelComponent/ECommerce/Ecommerce.css";
 import { IFormAiDetail } from "@/models/IChannel";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { useDataChannel } from "@/store/dataChannel";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CreateAIbehavior from "../AIbehavior/CreateAIbehavior";
+import AIbehavior from "../AIbehavior/AIbehavior";
 
 const EditAI: React.FC = () => {
   const { dataChannel } = useDataChannel();
@@ -117,7 +117,7 @@ const EditAI: React.FC = () => {
         </h2>
       </div>
 
-      <CreateAIbehavior
+      <AIbehavior
         formAI={formDataAI}
         setFormAI={setFormDataAI}
         handleData={handleAiData}

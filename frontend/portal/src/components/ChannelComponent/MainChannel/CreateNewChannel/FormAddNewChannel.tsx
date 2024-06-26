@@ -1,4 +1,4 @@
-import CreateAIbehavior from "@/components/ChannelComponent/AIbehavior/CreateAIbehavior";
+import AIbehavior from "@/components/ChannelComponent/AIbehavior/AIbehavior";
 import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
 import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
 import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
@@ -81,7 +81,7 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     },
     {
       title: 'กำหนดพฤตกรรม AI',
-      content: <CreateAIbehavior formAI={formAI} setFormAI={setFormAI} handleData={handleAiData} next={next} prev={prev} />,
+      content: <AIbehavior formAI={formAI} setFormAI={setFormAI} handleData={handleAiData} next={next} prev={prev} />,
     },
     {
       title: 'ตรวจสอบและยืนยัน',

@@ -110,7 +110,7 @@ const EditEcommerce: React.FC = () => {
         <h2 className="text-center text-[42px] font-black text-orange-400 mb-10">
           <input
             type="text"
-            id="shopName"
+            id="business_name"
             value={formData.business_name}
             disabled={true}
             className="bg-white text-center"
@@ -124,12 +124,12 @@ const EditEcommerce: React.FC = () => {
       >
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
-            <label htmlFor="shopName" className="EcommerceLabel">
+            <label htmlFor="business_name" className="EcommerceLabel">
               ชื่อร้านค้า *
             </label>
             <input
               type="text"
-              id="shopName"
+              id="business_name"
               value={formData.business_name}
               onChange={handleChange}
               className="EcommerceInput"
@@ -139,11 +139,11 @@ const EditEcommerce: React.FC = () => {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="shopType" className="EcommerceLabel">
+            <label htmlFor="business_type" className="EcommerceLabel">
               ประเภทของร้านค้า *
             </label>
             <select
-              id="shopType"
+              id="business_type"
               value={formData.business_type}
               onChange={handleChange}
               className="EcommerceInput"
@@ -182,7 +182,6 @@ const EditEcommerce: React.FC = () => {
             onChange={handleChange}
             className="EcommerceInput"
             disabled={!isEditing}
-            required
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -197,6 +196,7 @@ const EditEcommerce: React.FC = () => {
               onChange={handleChange}
               className="EcommerceInput"
               pattern="[0-9]{10}"
+              maxLength={10}
               title="กรุณากรอกเบอร์โทรศัพท์ 10 หลัก"
               disabled={!isEditing}
               required
