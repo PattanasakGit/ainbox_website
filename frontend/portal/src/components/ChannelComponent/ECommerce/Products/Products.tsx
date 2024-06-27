@@ -119,7 +119,10 @@ const Products: React.FC = () => {
   };
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center ">
+      <h1 className="text-center text-[42px] font-black text-orange-400 mb-10 pt-4">
+        {dataChannel ? dataChannel.details.business_name : ""}
+      </h1>
       <ToastContainer
         autoClose={3000}
         hideProgressBar={false}
@@ -131,8 +134,8 @@ const Products: React.FC = () => {
         pauseOnHover
         theme="colored"
       />
-      <div className="p-2 text-xl text-[#333] bg-orange-100 outline outline-7 outline-[#00000013] rounded-2xl flex justify-center items-center gap-8">
-        <h1 className="ml-2"> จำนวนสินค้าทั้งหมด </h1>
+      <div className="p-2 text-xl text-[#555] font-semibold bg-gradient-to-r from-orange-50 to-orange-100 shadow-lg outline outline-7 outline-[#00000008] rounded-2xl flex justify-center items-center gap-8">
+        <h1 className="ml-2 "> จำนวนสินค้าทั้งหมด </h1>
         {dataChannel.details.product.length}
         <h1> รายการ </h1>
         <button
@@ -142,7 +145,7 @@ const Products: React.FC = () => {
           เพิ่มสินค้า
         </button>
       </div>
-      <div className="bg-gray-50 w-[90%] mt-8 pt-2 px-4 rounded-2xl">
+      <div className=" w-[90%] bg-[#fbfbfb] outline outline-[#f7f7f7] shadow-xl  p-4 mt-8 rounded-2xl">
         <TableOfProduct
           dataInTable={productsWithKeys}
           setIsEdit={setIsEdit}

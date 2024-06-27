@@ -22,6 +22,7 @@
     "react-scroll": "^1.9.0",
     "react-thailand-address-typeahead": "^2.0.1",
     "react-toastify": "^10.0.5",
+    "sweetalert2": "^11.12.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

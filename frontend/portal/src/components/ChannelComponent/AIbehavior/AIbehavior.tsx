@@ -56,7 +56,7 @@ const AIbehavior = ({
   }, [formAI.ai_gender]);
 
   return (
-    <section className="w-full min-h-screen bg-[#fff0] p-8 pt-4">
+    <section className="w-full min-h-screen bg-[#fff0] p-8 pt-0">
       <form
         onSubmit={handleSubmit}
         className="w-[70%] mx-auto bg-[#ffffffff] rounded-xl border-2 border-orange-100 shadow-xl p-8"

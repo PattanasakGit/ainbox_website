@@ -8,6 +8,7 @@ import EditAI from "@/components/ChannelComponent/ECommerce/EditAI";
 import ChannelSidebar from "@/components/SidebarPortal/ChannelSidebar";
 import Products from "@/components/ChannelComponent/ECommerce/Products/Products";
 import EditEcommerce from "@/components/ChannelComponent/ECommerce/EditEcommerce";
+import ConnectionSetting from "@/components/ChannelComponent/ConnectionSetting/ConnectionSetting";
 
 const ChannelManager: React.FC = () => {
   const itemsBreadcrumb = [
@@ -41,11 +42,7 @@ const ChannelManager: React.FC = () => {
     } else if (selected === ChannelSidebarSelection.Products) {
       return <Products />;
     } else if (selected === ChannelSidebarSelection.Connects) {
-      return (
-        <div className="flex justify-center items-center h-[80vh]">
-          หน้านี้คือ ตั้งค้าการเชื่อมต่อ
-        </div>
-      );
+      return <ConnectionSetting />;
     } else {
       return (
         <div className="flex justify-center items-center h-[80vh]">

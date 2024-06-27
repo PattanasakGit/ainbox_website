@@ -19,7 +19,7 @@ const ChannelSidebar: React.FC = () => {
     <section className="mt-[70px] h-screen w-[200px] bg-gray-100 fixed top-0 left-0 flex flex-col justify-start">
       <Link href={'/'}>
         <button
-          className={`${btnStyle} flex justify-center items-center gap-2 bg-[#e1e1e1] w-full`}
+          className={`${btnStyle} flex justify-center items-center gap-2 bg-[#e1e1e1] hover:bg-[#8f8f8f] w-full`}
         >
           <IoArrowBackCircleOutline />
           {`หน้าหลัก`}
