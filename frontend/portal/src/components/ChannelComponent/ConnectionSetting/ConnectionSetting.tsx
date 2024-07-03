@@ -4,8 +4,10 @@ import { useDataChannel } from "@/store/dataChannel";
 import ChannelService from "@/service/ChannelService/ChannelService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 const ConnectionSetting: React.FC = () => {
+  ScollUpToTop();
   const { dataChannel } = useDataChannel();
   const [selectedPlatform, setSelectedPlatform] = useState<string>("Line");
   const [lineToken, setLineToken] = useState<string>("");
@@ -99,7 +101,7 @@ const ConnectionSetting: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 px-24 bg-white rounded-lg ">
+    <div className="max-w-2xl mx-auto p-4 px-24 rounded-lg ">
       <h1 className="text-center text-[42px] font-black text-orange-400 mb-10">
         {dataChannel ? dataChannel.details.business_name : ""}
       </h1>

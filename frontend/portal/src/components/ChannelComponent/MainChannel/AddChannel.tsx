@@ -10,7 +10,7 @@ const AddChannelButton: React.FC = () => {
     <>
       <div
         onClick={() => setIsModalOpen(true)}
-        className="h-full w-full flex items-center justify-center bg-white rounded-xl shadow-md border-2 border-orange-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-orange-400 cursor-pointer"
+        className="min-h-[21rem] h-full w-full flex items-center justify-center bg-white rounded-xl shadow-md border-2 border-orange-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-orange-400 cursor-pointer"
       >
         <div className="text-center">
           <div className="mb-4 flex justify-center">

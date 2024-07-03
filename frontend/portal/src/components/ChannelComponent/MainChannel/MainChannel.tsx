@@ -5,8 +5,10 @@ import AinboxLoading from "@/components/Loading/Loading";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import CardChannel from "@/components/ChannelComponent/MainChannel/CardChannel";
 import AddChannelButton from "@/components/ChannelComponent/MainChannel/AddChannel";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 const MainChannel: React.FC = () => {
+  ScollUpToTop();
   const [channels, setChannels] = useState<IStore[]>([]);
   const [loading, setLoading] = useState(true);
   const { setDataChannel } = useDataChannel();
@@ -23,7 +25,7 @@ const MainChannel: React.FC = () => {
 
   return (
     <section className="w-full h-screen">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 auto-rows-fr p-16 pt-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 auto-rows-fr p-16 pt-0">
         {loading ? (
           <div className="w-[80vw]"><AinboxLoading /></div>
         ) : (

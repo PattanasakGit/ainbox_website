@@ -9,8 +9,10 @@ import "@/components/ChannelComponent/ECommerce/Ecommerce.css";
 import { Address, FormData } from "@/models/IEcommerceChannel";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 const EditEcommerce: React.FC = () => {
+  ScollUpToTop();
   const { dataChannel } = useDataChannel();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState(dataInitial);
@@ -113,7 +115,7 @@ const EditEcommerce: React.FC = () => {
             id="business_name"
             value={formData.business_name}
             disabled={true}
-            className="bg-white text-center"
+            className="bg-transparent text-center"
           />
         </h2>
       </div>

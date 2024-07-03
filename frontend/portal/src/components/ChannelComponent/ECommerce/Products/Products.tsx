@@ -7,8 +7,10 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IProductInTable } from "@/models/IEcommerceChannel";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 const Products: React.FC = () => {
+  ScollUpToTop();
   const blankProduct = {
     key: -1,
     name: "",
