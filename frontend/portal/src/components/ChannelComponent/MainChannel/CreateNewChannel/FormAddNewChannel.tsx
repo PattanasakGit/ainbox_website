@@ -2,22 +2,30 @@ import AIbehavior from "@/components/ChannelComponent/AIbehavior/AIbehavior";
 import CreateEcommerce from "@/components/ChannelComponent/ECommerce/CreateEcommerce";
 import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNewChannel/SummaryToSubmit";
 import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
-import { IFormAiDetail } from "@/models/IChannel";
+import { ChannelType, IFormAiDetail } from "@/models/IChannel";
 import { FormData } from "@/models/IEcommerceChannel";
 import { MainSidebarSelection } from "@/models/ISidebar";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
-import { Steps } from 'antd';
+import { Steps } from "antd";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import CreateDataWarehouse from "@/components/ChannelComponent/DataWarehouse/CreateDataWarehouse";
 
-const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebarSelection }) => {
+const FormAddNewChannel = ({
+  componentForShow,
+}: {
+  componentForShow: MainSidebarSelection;
+}) => {
   const [current, setCurrent] = useState(0);
+  const [channel, setchannel] = useState<ChannelType>(ChannelType.ECommerce);
+  const [filedata, setfileData] = useState<string>("");
+  const [textData, setTextData] = useState<string>("");
   const [formAI, setFormAI] = useState<IFormAiDetail>({
     ai_name: "",
     ai_behavior: "",
     ai_age: "",
-    ai_gender: ","
+    ai_gender: ",",
   });
   const [formData, setFormData] = useState<FormData>({
     business_name: "",
@@ -32,16 +40,16 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
     },
     phone: "",
     email: "",
-    website:"",
+    website: "",
     opentime: {
-      Monday: { open: true, from: '09:00', to: '16:30' },
-      Tuesday: { open: true, from: '09:00', to: '16:30' },
-      Wednesday: { open: true, from: '09:00', to: '16:30' },
-      Thursday: { open: true, from: '09:00', to: '16:30' },
-      Friday: { open: true, from: '09:00', to: '16:30' },
-      Saturday: { open: false, from: '09:00', to: '16:30' },
-      Sunday: { open: false, from: '09:00', to: '16:30' },
-    }
+      Monday: { open: true, from: "09:00", to: "16:30" },
+      Tuesday: { open: true, from: "09:00", to: "16:30" },
+      Wednesday: { open: true, from: "09:00", to: "16:30" },
+      Thursday: { open: true, from: "09:00", to: "16:30" },
+      Friday: { open: true, from: "09:00", to: "16:30" },
+      Saturday: { open: false, from: "09:00", to: "16:30" },
+      Sunday: { open: false, from: "09:00", to: "16:30" },
+    },
   });
 
   const dataCreateChannel = {
@@ -68,25 +76,51 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
   const handleCreate = async () => {
     try {
       await ecommerceService.create(dataCreateChannel);
-      toast.success('ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
+      toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
     } catch (error) {
-      toast.error('เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001');
+      toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");
     }
   };
-  
+
+  const handleSetFileData = (urlFile: string) => {
+    setfileData(urlFile);
+    setTextData("");
+  };
+
+  const handleSetTextData = (text: string) => {
+    setTextData(text);
+    setfileData("");
+  };
+
   const steps = [
     {
-      title: 'เพิ่มรายละเอียดช่องของคุณ',
-      content: '',
+      title: "เพิ่มรายละเอียดช่องของคุณ",
+      content: "",
     },
     {
-      title: 'กำหนดพฤตกรรม AI',
-      content: <AIbehavior formAI={formAI} setFormAI={setFormAI} handleData={handleAiData} next={next} prev={prev} />,
+      title: "กำหนดพฤตกรรม AI",
+      content: (
+        <AIbehavior
+          formAI={formAI}
+          setFormAI={setFormAI}
+          handleData={handleAiData}
+          next={next}
+          prev={prev}
+        />
+      ),
     },
     {
-      title: 'ตรวจสอบและยืนยัน',
-      content: <SummaryToSubmit formData={formData} formAI={formAI} />,
-    }
+      title: "ตรวจสอบและยืนยัน",
+      content: (
+        <SummaryToSubmit
+          formData={formData}
+          formAI={formAI}
+          channel={channel}
+          textData={textData}
+          filedata={filedata}
+        />
+      ),
+    },
   ];
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
@@ -100,12 +134,26 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
             handleData={handleEcommerceData}
             formData={formData}
             setFormData={setFormData}
+            setchannel={setchannel}
           />
         );
-      } else if (componentForShow === MainSidebarSelection.CreateDataWarehouse) {
-        return <div className="h-screen text-9xl"> CreateDataWarehouse ยังไม่ทำ </div>;
+      } else if (
+        componentForShow === MainSidebarSelection.CreateDataWarehouse
+      ) {
+        return (
+          <CreateDataWarehouse
+            handleSetFileData={handleSetFileData}
+            handleSetTextData={handleSetTextData}
+            filedata={filedata}
+            textData={textData}
+            setchannel={setchannel}
+            next={next}
+          />
+        );
       } else if (componentForShow === MainSidebarSelection.CreatePersonal) {
-        return <div className="h-screen text-9xl"> CreatePersonal ยังไม่ทำ </div>;
+        return (
+          <div className="h-screen text-9xl"> CreatePersonal ยังไม่ทำ </div>
+        );
       } else {
         return <MainChannel />;
       }
@@ -157,16 +205,7 @@ const FormAddNewChannel = ({ componentForShow }: { componentForShow: MainSidebar
         </div>
       )}
       {/* <div className="mt-6">
-        {current < steps.length - 1 && (
-          <button onClick={next}>
-            Next
-          </button>
-        )}
-        {current === steps.length - 1 && (
-          <button  onClick={() => message.success('Processing complete!')}>
-            Done
-          </button>
-        )}
+        {current < steps.length - 1 && <button onClick={next}>Next</button>}
         {current > 0 && (
           <button className="mx-2" onClick={prev}>
             Previous

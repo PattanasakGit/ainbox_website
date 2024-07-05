@@ -4,12 +4,14 @@ import Opentime from "@/components/OpenTime/Opentime";
 import { Address, FormData } from "@/models/IEcommerceChannel";
 import { IOpenTime } from "@/models/IOpenTime";
 import React from "react";
+import { ChannelType } from "@/models/IChannel";
 
 interface CreateEcommerceProps {
   next: () => void;
   handleData: (data: FormData) => void;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  setchannel: (channel:ChannelType) => void;
 }
 
 const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
@@ -17,6 +19,7 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
   handleData,
   formData,
   setFormData,
+  setchannel,
 }) => {
   const handleChange = (
     e: React.ChangeEvent<
@@ -32,6 +35,7 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
   };
 
   const handleCreate = async (e: React.FormEvent) => {
+    setchannel(ChannelType.ECommerce)
     e.preventDefault();
     handleData(formData);
     next();
