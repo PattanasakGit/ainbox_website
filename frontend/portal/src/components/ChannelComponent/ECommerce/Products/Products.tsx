@@ -61,9 +61,8 @@ const Products: React.FC = () => {
     };
 
     try {
-      await ecommerceService.updateProduct(
+      await ecommerceService.create(
         dataChannel.page_id,
-        dataProductToCreate
       );
       toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
       closeModal();

@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { IStore, } from "@/models/IChannel";
 import { mockListChannel } from "@/service/PageService"; //ใช้สำหรับการทดสอบเท่านั้น
 
-const API_URL = "https://webhook.site/c676a33a-a08f-4d74-a9f4-531159acaa7f"; //อย่าลืมย้ายไปใส่ env
+const API_URL = "http://localhost:3002/api"; //อย่าลืมย้ายไปใส่ env
 
 const apiCall = async <T>(
   method: "get" | "post" | "put" | "patch" | "delete",
@@ -35,7 +35,7 @@ const ecommerceService = {
   },
   //ส่งข้อมูลทั้งหมดไป backend เพื่อสร้าง Channel ใหม่
   async create(dataToCreate: unknown): Promise<unknown> {
-    return await apiCall("post", "/create", dataToCreate);
+    return await apiCall("post", "/product", dataToCreate);
   },
   async update(id: string, dataToUpdate: unknown): Promise<unknown> {
     return await apiCall("put", `/update/${id}`, dataToUpdate);

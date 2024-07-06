@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from 'next/link'
 import { toast, ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp: React.FC = () => {
@@ -10,8 +11,9 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMismatch, setPasswordMismatch] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setPasswordMismatch(true);
@@ -19,7 +21,29 @@ const SignUp: React.FC = () => {
     } else {
       // Handle successful sign-up
       setPasswordMismatch(false);
-      console.log("Form submitted");
+      try {
+        const response = await fetch('http://localhost:3002/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Register failed. Please check your credentials and try again.');
+        }
+  
+        const data = await response.json();
+  
+        if (!data.user) {
+          throw new Error('Invalid response format. Please try again later.');
+        }
+  
+        router.push('http://localhost:3001/login');
+      } catch (error) {
+        console.error('Register error:', error);
+      }
     }
   };
 
