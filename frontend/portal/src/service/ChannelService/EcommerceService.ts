@@ -1,8 +1,14 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { IStore, } from "@/models/IChannel";
+import { IStore, IChannel} from "@/models/IChannel";
 import { mockListChannel } from "@/service/PageService"; //ใช้สำหรับการทดสอบเท่านั้น
+import { IProduct } from "@/models/IChannel";
+import { create } from "domain";
 
 const API_URL = "http://localhost:3002/api"; //อย่าลืมย้ายไปใส่ env
+
+const getAuthToken = () => {
+  return localStorage.getItem('token');
+};
 
 const apiCall = async <T>(
   method: "get" | "post" | "put" | "patch" | "delete",
@@ -10,12 +16,14 @@ const apiCall = async <T>(
   data: unknown = null
 ): Promise<T> => {
   try {
+    const token = getAuthToken();
     const response: AxiosResponse<T> = await axios({
       method,
       url: `${API_URL}${url}`,
       data,
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
     });
     return response.data;
@@ -34,8 +42,11 @@ const ecommerceService = {
     return await mockListChannel(user)
   },
   //ส่งข้อมูลทั้งหมดไป backend เพื่อสร้าง Channel ใหม่
-  async create(dataToCreate: unknown): Promise<unknown> {
-    return await apiCall("post", "/product", dataToCreate);
+  async createChannel(channelDetail: IChannel): Promise<unknown> {
+    return await apiCall("post", "/business", channelDetail);
+  },
+  async create(productDetail: IProduct): Promise<unknown> {
+    return await apiCall("post", "/product", productDetail);
   },
   async update(id: string, dataToUpdate: unknown): Promise<unknown> {
     return await apiCall("put", `/update/${id}`, dataToUpdate);

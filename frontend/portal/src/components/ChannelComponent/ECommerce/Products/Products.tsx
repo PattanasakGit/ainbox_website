@@ -3,12 +3,15 @@ import ModalProduct from "@/components/ChannelComponent/ECommerce/Products/Modal
 import TableOfProduct from "@/components/ChannelComponent/ECommerce/Products/TableOfProduct";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { useDataChannel } from "@/store/dataChannel";
+import { IProduct } from "@/models/IChannel";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IProductInTable } from "@/models/IEcommerceChannel";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 const Products: React.FC = () => {
+  ScollUpToTop();
   const blankProduct = {
     key: -1,
     name: "",
@@ -61,9 +64,7 @@ const Products: React.FC = () => {
     };
 
     try {
-      await ecommerceService.create(
-        dataChannel.page_id,
-      );
+      await ecommerceService.create(dataCreateProduct);
       toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
       closeModal();
     } catch (error) {

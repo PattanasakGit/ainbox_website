@@ -47,14 +47,18 @@ const Login: React.FC = () => {
       }
   
       const data = await response.json();
+      console.log('Login data:', data);
   
       if (!data.user) {
         throw new Error('Invalid response format. Please try again later.');
       }
   
       // Store user email and login type in localStorage
-      localStorage.setItem('userEmail', data.user.email);
+      localStorage.setItem('userEmail', data.user.email); 
       localStorage.setItem('loginType', 'normal');
+
+      // Store the Bearer token in localStorage
+      localStorage.setItem('token', data.token);
   
       router.push('http://localhost:3001');
     } catch (error) {

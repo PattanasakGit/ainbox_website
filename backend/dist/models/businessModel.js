@@ -25,38 +25,30 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const BusinessSchema = new mongoose_1.Schema({
-    page_id: { type: String, required: true, unique: true },
-    details: {
-        ai_name: String,
-        ai_behavior: String,
-        ai_age: String,
-        ai_gender: String,
-        business_name: String,
-        business_type: String,
-        address: {
-            detailedAddress: String,
-            subdistrict: String,
-            district: String,
-            province: String,
-            zipcode: String,
-        },
-        phone: String,
-        email: String,
-        website: String,
-        opentime: {
-            type: Map,
-            of: {
-                open: Boolean,
-                from: String,
-                to: String,
-            },
-        },
-        description: String,
-        product: [{
-                name: String,
-                price: String,
-                description: String,
-            }],
+    ai_name: String,
+    ai_behavior: String,
+    ai_age: String,
+    ai_gender: String,
+    business_name: String,
+    business_type: String,
+    address: {
+        detailedAddress: String,
+        subdistrict: String,
+        district: String,
+        province: String,
+        zipcode: String,
     },
+    phone: String,
+    email: String,
+    website: String,
+    opentime: {
+        type: Map,
+        of: {
+            open: Boolean,
+            from: String,
+            to: String,
+        },
+    },
+    description: String,
 });
 exports.default = mongoose_1.default.model('business', BusinessSchema);

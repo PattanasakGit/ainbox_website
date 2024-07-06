@@ -112,7 +112,7 @@ const EditAI: React.FC = () => {
             id="shopName"
             value={dataChannel.details.business_name}
             disabled={true}
-            className="bg-white text-center"
+            className="bg-transparent text-center"
           />
         </h2>
       </div>

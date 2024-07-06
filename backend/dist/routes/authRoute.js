@@ -11,7 +11,7 @@ router.post('/register', validationMiddleware_1.registerValidation, authControll
 router.post('/login', validationMiddleware_1.loginValidation, authController_1.login);
 router.post('/logout', authMiddleware_1.authMiddleware, authController_1.logout);
 router.post('/refresh-token', authController_1.refreshToken);
-router.post('/business', authMiddleware_1.authMiddleware, validationMiddleware_1.businessValidation, businessController_1.createBusiness);
+router.post('/business', authMiddleware_1.authMiddleware, businessController_1.createBusiness);
 router.post('/product', authMiddleware_1.authMiddleware, validationMiddleware_1.productValidation, productController_1.createProduct);
 router.get('/getProduct', authMiddleware_1.authMiddleware, productController_1.getProducts);
 exports.default = router;

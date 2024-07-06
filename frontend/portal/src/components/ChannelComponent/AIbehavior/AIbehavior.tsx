@@ -3,6 +3,7 @@ import { IFormAiDetail } from "@/models/IChannel";
 import React, { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { FaFemale, FaGenderless, FaMale, FaTransgender } from "react-icons/fa";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 interface IAiBehaviorProps {
   next?: () => void;
@@ -23,6 +24,7 @@ const AIbehavior = ({
   btnEditDisplay,
   isEditing,
 }: IAiBehaviorProps) => {
+  ScollUpToTop();
   const [selectedGender, setSelectedGender] = useState<string>();
 
   const handleGenderSelect = (gender: string) => {

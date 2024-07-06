@@ -12,7 +12,7 @@ router.post('/login', loginValidation, login);
 router.post('/logout', authMiddleware, logout);
 router.post('/refresh-token', refreshToken);
 
-router.post('/business', authMiddleware, businessValidation, createBusiness);
+router.post('/business', authMiddleware, createBusiness);
 
 
 router.post('/product', authMiddleware, productValidation, createProduct);
