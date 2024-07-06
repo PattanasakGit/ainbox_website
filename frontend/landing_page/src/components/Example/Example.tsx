@@ -1,5 +1,5 @@
-import { IFeaturesData } from '@/models/IFeaturesData';
-import { FeaturesData } from '@/store/FeaturesData';
+import { IFeaturesData } from '../../models/IFeaturesData';
+import { FeaturesData } from '../../store/FeaturesData';
 import React from 'react';
 import Title from '../Title/Title';
 import Card from './Card';

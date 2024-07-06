@@ -1,7 +1,7 @@
 "use client"
 import { motion } from "framer-motion";
-import Title from "@/components/Title/Title";
-import { ainboxData } from "@/store/HomeData";
+import Title from "../Title/Title";
+import { ainboxData } from "../../store/HomeData";
 import Image from "next/image";
 import React from "react";
 import { useInView } from 'react-intersection-observer';

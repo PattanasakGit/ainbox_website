@@ -1,6 +1,6 @@
 "use client"
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { IFeaturesData } from '@/models/IFeaturesData';
+import { IFeaturesData } from '../../models/IFeaturesData';
 import { IoCheckmarkDoneSharp, IoInformationCircleOutline } from "react-icons/io5";
 import { BsStars } from "react-icons/bs";
 import { Variants, motion } from "framer-motion";

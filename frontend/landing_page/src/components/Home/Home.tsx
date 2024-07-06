@@ -1,4 +1,4 @@
-import { ainboxData } from "@/store/HomeData";
+import { ainboxData } from "../../store/HomeData";
 import Image from "next/image";
 import React from "react";
 import Features from "./Features";
@@ -8,9 +8,11 @@ const Home: React.FC = () => {
     <section className="pt-[75px] w-full p-4 text-center">
       <div className="h-[90vh] w-full flex flex-wrap items-center justify-center bg-white rounded-3xl">
         <div className="flex flex-wrap items-center justify-center  bg-[#fff0] rounded-3xl text-[30px] text-white relative">
-          <img
+          <Image
             src={ainboxData.home.images[0]}
             alt="main image"
+            width={500}
+            height={500}
             className="w-[500px] my-8 sm:my-0 "
           />
           <div>
