@@ -5,27 +5,40 @@ import ChannelService from "@/service/ChannelService/ChannelService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ScollUpToTop } from "@/utils/Scoll";
+import ModalLineDistination from "@/components/ChannelComponent/ConnectionSetting/ModalLineDistination";
 
 const ConnectionSetting: React.FC = () => {
   ScollUpToTop();
   const { dataChannel } = useDataChannel();
   const [selectedPlatform, setSelectedPlatform] = useState<string>("Line");
   const [lineToken, setLineToken] = useState<string>("");
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [uniqueURL, setUniqueURL] = useState("");
 
   const platforms = ["Line", "Messenger", "API", "Discord", "Embed"];
 
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   const handleSubmit = async (platform: string, data: any) => {
     try {
-      const response = await ChannelService.connectionCheck(platform, {
-        data,
-      });
-      // toast.success("บันทึกการแก้ไขเรียบร้อยแล้ว");
-      console.log('Webhook ',response);
-      
+      // const response = await ChannelService.connectionCheck(platform, { data });
+      setUniqueURL(`platform: ${platform} | data: ${data}`);
     } catch (error) {
       toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
     }
+    handleOpenModal();
   };
+
+  // const handleSaveToDB = async (platform: string, data: any) => {
+  //   // Logic ของปุ่มนี้คือ เป็นการยิ่ง req ไปยัง backend
+  //   // เพื่อตรวจสอบว่ามี distination หรือยัง
+  // }
 
   const line = () => {
     return (
@@ -54,22 +67,23 @@ const ConnectionSetting: React.FC = () => {
             />
             <button
               className="bg-green-500 text-white px-4 py-2 rounded-r-lg hover:bg-green-600 transition"
-              onClick={() => handleSubmit("Line", {       
-              })}
+              onClick={() =>
+                handleSubmit("Line", {
+                  page_id: dataChannel?.page_id,
+                  callback_url: lineToken,
+                })
+              }
             >
               รับ webhook
             </button>
           </div>
-          <div className="mt-6 flex justify-center">
+          {/* <div className="mt-6 flex justify-center">
             <button
               className="px-10 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
-              onClick={() =>
-                handleSubmit("Line", { page_id: dataChannel?.page_id, callback_url: lineToken })
-              }
             >
               บันทึก
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="mt-10">
           <h2 className="text-2xl font-semibold mb-4 text-[#555]">
@@ -125,28 +139,29 @@ const ConnectionSetting: React.FC = () => {
       {selectedPlatform === platforms[0] && line()}
       {selectedPlatform === platforms[1] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
       {selectedPlatform === platforms[2] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
       {selectedPlatform === platforms[3] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
       {selectedPlatform === platforms[4] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
+      <ModalLineDistination
+        uniqueURL={uniqueURL}
+        open={isOpenModal}
+        close={handleCloseModal}
+      />
     </div>
   );
 };
