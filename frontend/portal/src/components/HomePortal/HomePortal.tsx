@@ -7,6 +7,7 @@ import { MainSidebarSelection } from "@/models/ISidebar";
 import { useMainSidebar } from "@/store/SidebaeStore";
 import React from "react";
 import FormAddNewChannel from "@/components/ChannelComponent/MainChannel/CreateNewChannel/FormAddNewChannel";
+import UsageDisplay from "@/components/UsageDisplay/UsageDisplay";
 
 const HomePortal: React.FC = () => {
     const { selected } = useMainSidebar(); 
@@ -14,7 +15,7 @@ const HomePortal: React.FC = () => {
         if(selected === MainSidebarSelection.Channel){
             return <MainChannel/>;
         }else if (selected === MainSidebarSelection.Monitor){
-            return <div className="flex justify-center items-center h-[80vh]">ทดสอบนี่คือ ส่วนของหน้าการใช้งาน ยังไม่ได้ทำ Component</div>
+            return <UsageDisplay/>
         }else if (selected === MainSidebarSelection.CreateEcommerce){
             return <FormAddNewChannel componentForShow={MainSidebarSelection.CreateEcommerce}/>;
         }else if (selected === MainSidebarSelection.CreateDataWarehouse){
