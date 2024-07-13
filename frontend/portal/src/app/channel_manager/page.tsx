@@ -17,8 +17,12 @@ const ChannelManager: React.FC = () => {
     },
   ];
 
-  const { selected } = useChannelSidebar();
+  const { selected, setSelected } = useChannelSidebar();
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setSelected(ChannelSidebarSelection.ShopInfo);
+  }, [setSelected]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
