@@ -5,9 +5,10 @@ import ChannelService from "@/service/ChannelService/ChannelService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ScollUpToTop } from "@/utils/Scoll";
-import { IStore } from "../../../models/IChannel";
-import ecommerceService from "../../../service/ChannelService/EcommerceService";
+import { IStore } from "@/models/IChannel";
+import ecommerceService from "@/service/ChannelService/EcommerceService";
 import ModalLineDistination from "@/components/ChannelComponent/ConnectionSetting/ModalLineDistination";
+import { FaCheck, FaSave, FaEdit } from "react-icons/fa";
 
 const ConnectionSetting: React.FC = () => {
   ScollUpToTop();
@@ -15,15 +16,11 @@ const ConnectionSetting: React.FC = () => {
   const { products } = useProductStore();
   const { dataChannel } = useDataChannel();
   const [selectedPlatform, setSelectedPlatform] = useState<string>("Line");
-  const [lineToken, setLineToken] = useState<string>("");
-  const [isOpenModal, setOpenModal] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [uniqueURL, setUniqueURL] = useState("");
-  // const []
 
   const platforms = ["Line", "Messenger", "API", "Discord", "Embed"];
 
-
-  //test broadcast
   useEffect(() => {
     const socket = new WebSocket('wss://ainbox-ke5m6qbmkq-as.a.run.app/ws');
     let isFirstMessage = true;
@@ -82,113 +79,109 @@ const ConnectionSetting: React.FC = () => {
 
   const handleSubmitStore = async () => {
     if (destination) {
-      await ecommerceService.createShop(destination, storeDetail)
+      await ecommerceService.createShop(destination, storeDetail);
     }
-  }
-  const handleOpenModal = () => {
-    setOpenModal(true);
   };
 
   const handleCloseModal = () => {
-    setOpenModal(false);
+    setIsOpenModal(false);
   };
-
-  const handleSubmit = async (platform: string, data: any) => {
-    try {
-      // const response = await ChannelService.connectionCheck(platform, { data });
-      setUniqueURL(`platform: ${platform} | data: ${data}`);
-    } catch (error) {
-      toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
-    }
-    handleOpenModal();
-  };
-
-  // const handleSaveToDB = async (platform: string, data: any) => {
-  //   // Logic ของปุ่มนี้คือ เป็นการยิ่ง req ไปยัง backend
-  //   // เพื่อตรวจสอบว่ามี distination หรือยัง
-  // }
 
   const line = () => {
+    const [channelSecret, setChannelSecret] = useState("");
+    const [accessToken, setAccessToken] = useState("");
+    const [isChannelSecretSaved, setIsChannelSecretSaved] = useState(false);
+    const [isEditingChannelSecret, setIsEditingChannelSecret] = useState(false);
+
+    const handleSaveChannelSecret = () => {
+      if (channelSecret) {
+        setIsChannelSecretSaved(true);
+        setIsEditingChannelSecret(false);
+        //service for save channelSecret to db
+
+      } else {
+        toast.error("กรุณาป้อน Channel Secret");
+      }
+    };
+
+    const handleEditChannelSecret = () => {
+      setIsEditingChannelSecret(true);
+    };
+
+    const handleSaveAccessToken = () => {
+      if (accessToken) {
+        const webhookURL = `https://example.com/webhook/${accessToken}`;
+        setUniqueURL(webhookURL);
+        setIsOpenModal(true);
+        //service get webhookURL for user coppy to line
+      } else {
+        toast.error("กรุณาป้อน Access Token");
+      }
+    };
+
     return (
       <>
-        <ToastContainer
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-        <div className="bg-gray-50 p-6 rounded-lg shadow-inner mt-16 mb-32">
-          <label className="block mb-3 text-lg font-medium text-gray-700">
-           กรุณาป้อน Channel secret 
-          </label>
-          <div className="flex">
-            <input
-              type="text"
-              className="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-green-300"
-              value={lineToken}
-              onChange={(e) => setLineToken(e.target.value)}
-            />
-            <button
-              className="bg-green-500 text-white px-4 py-2 rounded-r-lg hover:bg-green-600 transition"
-              onClick={() =>
-                handleSubmitStore()
-              }
-            >
-              บันทึก
-            </button>
+        <div className="bg-white p-8 rounded-lg shadow-md mt-16 mb-8">
+          <div className="mb-6">
+            <label className="block mb-3 text-lg font-medium text-gray-700">
+              กรุณาป้อน Channel Secret
+            </label>
+            <div className="flex">
+              <input
+                type="text"
+                className="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-green-300"
+                value={channelSecret}
+                onChange={(e) => setChannelSecret(e.target.value)}
+                placeholder="ป้อน Channel Secret"
+                disabled={isChannelSecretSaved && !isEditingChannelSecret}
+              />
+              {isChannelSecretSaved && !isEditingChannelSecret ? (
+                <button
+                  className="px-6 py-2 bg-orange-500 text-white rounded-r-lg hover:bg-orange-600 transition"
+                  onClick={handleEditChannelSecret}
+                >
+                  <FaEdit className="w-5 h-5" />
+                </button>
+              ) : (
+                <button
+                  className="px-6 py-2 bg-green-500 text-white rounded-r-lg hover:bg-green-600 transition"
+                  onClick={handleSaveChannelSecret}
+                >
+                  <FaSave className="w-5 h-5" />
+                </button>
+              )}
+            </div>
           </div>
-          {/* <div className="mt-6 flex justify-center">
-            <button
-              className="px-10 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
-            >
-              บันทึก
-            </button>
-          </div> */}
-        </div>
 
-
-
-
-
-
-
-
-        <div className="bg-gray-50 p-6 rounded-lg shadow-inner mt-16 mb-32">
-          <label className="block mb-3 text-lg font-medium text-gray-700">
-            กรุณาป้อน AccessToken
-          </label>
-          <div className="flex">
-            <input
-              type="text"
-              className="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-green-300"
-              value={lineToken}
-              onChange={(e) => setLineToken(e.target.value)}
-            />
-            <button
-              className="bg-green-500 text-white px-4 py-2 rounded-r-lg hover:bg-green-600 transition"
-            >
-              รับ webhook
-            </button>
+          <div className="mb-6">
+            <label className="block mb-3 text-lg font-medium text-gray-700">
+              กรุณาป้อน Access Token
+            </label>
+            <div className="flex">
+              <input
+                type="text"
+                className={`flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-green-300 ${
+                  !isChannelSecretSaved ? "bg-gray-100" : ""
+                }`}
+                value={accessToken}
+                onChange={(e) => setAccessToken(e.target.value)}
+                placeholder="ป้อน Access Token"
+                disabled={!isChannelSecretSaved}
+              />
+              <button
+                className={`px-6 py-2 rounded-r-lg transition ${
+                  isChannelSecretSaved
+                    ? "bg-green-500 text-white hover:bg-green-600"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                onClick={handleSaveAccessToken}
+                disabled={!isChannelSecretSaved}
+              >
+                <FaSave className="w-5 h-5" />
+              </button>
+            </div>
           </div>
-          
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
         <div className="mt-10">
           <h2 className="text-2xl font-semibold mb-4 text-[#555]">
@@ -266,6 +259,17 @@ const ConnectionSetting: React.FC = () => {
         uniqueURL={uniqueURL}
         open={isOpenModal}
         close={handleCloseModal}
+      />
+      <ToastContainer
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
       />
     </div>
   );
