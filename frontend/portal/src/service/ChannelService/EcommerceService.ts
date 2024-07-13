@@ -61,6 +61,9 @@ const ecommerceService = {
     return await apiCall("patch", `/updateProduct/${id}`, dataToEdit);
     //ที่แยกออกมาจาก edit เพราะว่าเผื่อต้องทำอะไรหากไม่ได้ทำอะไร สามารถใช้เส้น edit ได้เลย
   },
+  async deleteChennel(id: string): Promise<unknown> {
+    return await apiCall("delete", `/deleteBusiness/${id}`);
+  },
   async delete(id: string): Promise<unknown> {
     return await apiCall("delete", `/delete/${id}`);
   },

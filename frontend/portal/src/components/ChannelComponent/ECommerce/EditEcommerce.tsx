@@ -10,7 +10,8 @@ import { Address, FormData } from "@/models/IEcommerceChannel";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
 import { ScollUpToTop } from "@/utils/Scoll";
-import { IProduct } from "../../../models/IChannel";
+import { IProduct } from "@/models/IChannel";
+import Swal from "sweetalert2";
 
 const EditEcommerce: React.FC = () => {
   ScollUpToTop();
@@ -36,7 +37,9 @@ const EditEcommerce: React.FC = () => {
       });
     }
     const fetchData = async () => {
-      const productDataResponse = await ecommerceService.listProduct(dataChannel!._id);
+      const productDataResponse = await ecommerceService.listProduct(
+        dataChannel!._id
+      );
       setProducts(productDataResponse);
     };
     fetchData();
@@ -105,6 +108,36 @@ const EditEcommerce: React.FC = () => {
         [day]: { ...prev.opentime[day], [type]: value },
       },
     }));
+  };
+
+  const handleDeleteChannel = () => {
+    if(dataChannel){
+    Swal.fire({
+      title: "คุณกำลังลบรายการช่องอย่าถาวร",
+      html: `❗ หากดำเนินการจต่อจะไม่สามารถกู้คือข้อมูลได้ ❗ <br/> โปรดยืนยันการลบโดยการพิมพ์ " ${dataChannel.business_name} " `,
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "ลบ",
+      showLoaderOnConfirm: true,
+      preConfirm: (input) => {
+        return input;
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (result.value === dataChannel.business_name) {
+          ecommerceService.deleteChennel(dataChannel._id);
+        } else {
+          Swal.fire({
+            title: "การลบ " + `${dataChannel.business_name}` + " ผิดพลาด",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
   };
 
   return (
@@ -271,13 +304,22 @@ const EditEcommerce: React.FC = () => {
               </button>
             </>
           ) : (
-            <button
-              type="button"
-              onClick={toggleEdit}
-              className="mt-4 p-2 bg-orange-400 text-white rounded-md hover:bg-orange-500 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
-            >
-              แก้ไขข้อมูล
-            </button>
+            <div>
+              <button
+                type="button"
+                onClick={handleDeleteChannel}
+                className="mt-4 p-2 px-4 bg-red-400 text-white rounded-md hover:text-white hover:bg-red-600 focus:ring-2 focus:ring-white focus:outline-none mr-2"
+              >
+                ลบช่องนี้
+              </button>
+              <button
+                type="button"
+                onClick={toggleEdit}
+                className="mt-4 p-2 bg-orange-400 text-white rounded-md hover:bg-orange-500 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+              >
+                แก้ไขข้อมูล
+              </button>
+            </div>
           )}
         </div>
       </form>

@@ -3,7 +3,7 @@ import { register, login, logout, refreshToken } from '../controllers/authContro
 import { registerValidation, loginValidation, businessValidation, productValidation } from '../middleware/validationMiddleware';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { createStore } from '../controllers/storedbController';
-import { createBusiness, getBusinessById, getBusinesses, updateBusinessById } from '../controllers/businessController';
+import { createBusiness, deleteBusinessById, getBusinessById, getBusinesses, updateBusinessById } from '../controllers/businessController';
 import { createProduct, getProductById, getProducts, updateProductById } from '../controllers/productController';
 
 const router = Router();
@@ -21,7 +21,7 @@ router.post('/business', authMiddleware, businessValidation, createBusiness);
 router.get('/getBusinesses/:userId', authMiddleware, getBusinesses);
 router.get('/getBusiness/:id', authMiddleware, getBusinessById);
 router.patch('/updateBusiness/:id', authMiddleware, updateBusinessById);
-router.delete('/deleteBusiness/:id', authMiddleware, getBusinessById);
+router.delete('/deleteBusiness/:id', authMiddleware, deleteBusinessById);
 
 // Product routes
 router.post('/product', authMiddleware, productValidation, createProduct);
