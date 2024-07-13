@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IBusiness extends Document {
+  user_id: mongoose.Types.ObjectId;
   ai_name: string;
   ai_behavior: string;
   ai_age: string;
@@ -28,6 +29,7 @@ export interface IBusiness extends Document {
 }
 
 const BusinessSchema: Schema = new Schema({
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'user_auth', required: true },
   ai_name: String,
   ai_behavior: String,
   ai_age: String,
@@ -53,6 +55,8 @@ const BusinessSchema: Schema = new Schema({
     },
   },
   description: String,
-});
+}, { timestamps: true, versionKey: false});
 
-export default mongoose.model<IBusiness>('business', BusinessSchema);
+mongoose.pluralize(null);
+const Business: Model<IBusiness> = mongoose.model<IBusiness>('business', BusinessSchema);
+export default Business;

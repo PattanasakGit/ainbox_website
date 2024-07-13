@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import User, { IUser } from '../models/userModel';
+import User from '../models/userModel';
+import bcrypt from 'bcrypt';
 import { generateToken, generateRefreshToken, verifyRefreshToken } from '../services/authService';
 import { validationResult } from 'express-validator';
 
@@ -39,10 +40,12 @@ export const login = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
-    const isPasswordValid = await user.comparePassword(password);
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
+
     const token = generateToken(user);
     const refreshToken = generateRefreshToken(user);
 

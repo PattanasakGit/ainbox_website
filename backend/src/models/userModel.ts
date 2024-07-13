@@ -12,7 +12,7 @@ const UserSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
-}, { timestamps: true });
+}, { timestamps: true, versionKey: false });
 
 UserSchema.pre<IUser>('save', async function (next) {
   if (!this.isModified('password')) {
@@ -33,5 +33,6 @@ UserSchema.methods.comparePassword = async function (
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
+mongoose.pluralize(null);
 const User: Model<IUser> = mongoose.model<IUser>('user_auth', UserSchema);
 export default User;

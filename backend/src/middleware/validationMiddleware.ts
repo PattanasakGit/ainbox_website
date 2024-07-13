@@ -11,11 +11,12 @@ export const loginValidation = [
 ];
 
 export const businessValidation = [
-  body('page_id').notEmpty().withMessage('Page ID is required'),
-  body('details.ai_name').notEmpty().withMessage('AI name is required'),
-  body('details.business_name').notEmpty().withMessage('Business name is required'),
-  body('details.business_type').notEmpty().withMessage('Business type is required'),
-  body('details.address.detailedAddress').notEmpty().withMessage('Detailed address is required'),
+  body('ai_name').notEmpty().withMessage('AI name is required'),
+  body('ai_behavior').notEmpty().withMessage('AI behavior is required'),
+  body('ai_age').notEmpty().withMessage('AI age is required'),
+  body('ai_gender').notEmpty().withMessage('AI gender is required'),
+  body('business_name').notEmpty().withMessage('Business name is required'),
+  body('business_type').notEmpty().withMessage('Business type is required'),
   body('details.phone').notEmpty().withMessage('Phone number is required'),
   body('details.email').isEmail().withMessage('Valid email is required'),
 ];
