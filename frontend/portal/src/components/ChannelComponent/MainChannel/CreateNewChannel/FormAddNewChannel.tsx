@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CreateDataWarehouse from "@/components/ChannelComponent/DataWarehouse/CreateDataWarehouse";
 import { useChannelSidebar } from "@/store/SidebaeStore";
+import showAlert from "@/components/Alert/Alert";
 
 const FormAddNewChannel = ({
   componentForShow,
@@ -87,7 +88,7 @@ const FormAddNewChannel = ({
       // }
       // setSelected(ChannelSidebarSelection.Connects)
       
-      // toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
+      await showAlert({ icon: 'success', title: `บันทึกสำเร็จ` });
       if (typeof window !== "undefined") {
         // window.location.href = "http://localhost:3001/channel_manager";
         window.location.href = "http://localhost:3001/";

@@ -126,7 +126,6 @@ const ModalProduct: React.FC<IProductModalProps> = ({
               value={currentData.url_link}
               onChange={handleChange}
               className="EcommerceInput"
-              required
             />
           </div>
           <div className="flex justify-end">

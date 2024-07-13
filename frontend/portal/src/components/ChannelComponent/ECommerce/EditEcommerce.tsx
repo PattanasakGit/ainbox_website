@@ -12,6 +12,7 @@ import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInp
 import { ScollUpToTop } from "@/utils/Scoll";
 import { IProduct } from "@/models/IChannel";
 import Swal from "sweetalert2";
+import showAlert from "@/components/Alert/Alert";
 
 const EditEcommerce: React.FC = () => {
   ScollUpToTop();
@@ -110,34 +111,47 @@ const EditEcommerce: React.FC = () => {
     }));
   };
 
-  const handleDeleteChannel = () => {
-    if(dataChannel){
-    Swal.fire({
-      title: "คุณกำลังลบรายการช่องอย่าถาวร",
-      html: `❗ หากดำเนินการจต่อจะไม่สามารถกู้คือข้อมูลได้ ❗ <br/> โปรดยืนยันการลบโดยการพิมพ์ " ${dataChannel.business_name} " `,
-      input: "text",
-      inputAttributes: {
-        autocapitalize: "off",
-      },
-      showCancelButton: true,
-      confirmButtonText: "ลบ",
-      showLoaderOnConfirm: true,
-      preConfirm: (input) => {
-        return input;
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        if (result.value === dataChannel.business_name) {
-          ecommerceService.deleteChennel(dataChannel._id);
-        } else {
-          Swal.fire({
-            title: "การลบ " + `${dataChannel.business_name}` + " ผิดพลาด",
-            icon: "error",
-          });
+  const handleDeleteChannel = async () => {
+    try {
+      if (dataChannel) {
+        const result = await Swal.fire({
+          title: "คุณกำลังลบรายการช่องอย่าถาวร",
+          html: `❗ หากดำเนินการจต่อจะไม่สามารถกู้คือข้อมูลได้ ❗ <br/> โปรดยืนยันการลบโดยการพิมพ์ " ${dataChannel.business_name} " `,
+          input: "text",
+          inputAttributes: {
+            autocapitalize: "off",
+          },
+          showCancelButton: true,
+          showLoaderOnConfirm: true,
+          confirmButtonText: "ลบ",
+          cancelButtonText: "ยกเลิก",
+          confirmButtonColor:"#FB923C",
+          preConfirm: (input) => {
+            return input;
+          },
+        });
+  
+        if (result.isConfirmed) {
+          if (result.value === dataChannel.business_name) {
+            await ecommerceService.deleteChennel(dataChannel._id);
+            await showAlert({ icon: 'success', title: `ลบ ${dataChannel.business_name} เสร็จสิ้น` });
+            window.location.href = "http://localhost:3001/";
+          } else {
+            Swal.fire({
+              title: "การลบ " + `${dataChannel.business_name}` + " ผิดพลาด",
+              icon: "error",
+            });
+          }
         }
       }
-    });
-  };
+    } catch (error) {
+      Swal.fire({
+        title: "เกิดข้อผิดพลาด",
+        text: "ไม่สามารถลบช่องได้ โปรดลองอีกครั้ง",
+        icon: "error",
+      });
+      console.error("Error deleting channel:", error);
+    }
   };
 
   return (

@@ -7,11 +7,11 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ScollUpToTop } from "@/utils/Scoll";
-import { IProductToHandle } from "../../../../models/IChannel";
+import { IProductToHandle } from "@/models/IChannel";
 
 const Products: React.FC = () => {
   ScollUpToTop();
-  const { products } = useProductStore();
+  const { products , setProducts } = useProductStore();
   const { dataChannel } = useDataChannel();
   const blankProduct = {
     business_id: dataChannel?._id,
@@ -51,6 +51,7 @@ const Products: React.FC = () => {
   const handleCreateProduct = async () => {
     try {
       await ecommerceService.createProduct(dataCreateProduct);
+      fetchListProduct();
       toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
       closeModal();
     } catch (error) {
@@ -74,7 +75,7 @@ const Products: React.FC = () => {
         product._id === productId ? { ...product, ...filteredUpdatedProduct } : product
       );
       useProductStore.setState({ products: updatedProducts });
-  
+      fetchListProduct();
       toast.success("ข้อมูลถูกอัพเดตเรียบร้อยแล้ว");
       closeModal();
     } catch (error) {
@@ -82,6 +83,13 @@ const Products: React.FC = () => {
       toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");
     }
   };
+
+  const fetchListProduct = async () => {
+    const productDataResponse = await ecommerceService.listProduct(
+      dataChannel!._id
+    );
+    setProducts(productDataResponse);
+  }
 
   // const handleDeleteProduct = async (index: number) => {
   //   try {

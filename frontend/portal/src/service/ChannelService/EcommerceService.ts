@@ -12,7 +12,7 @@ const getAuthToken = () => {
 const apiCall = async <T>(
   method: "get" | "post" | "put" | "patch" | "delete",
   url: string,
-  data: unknown = null
+  data: unknown = {}
 ): Promise<T> => {
   try {
     const token = getAuthToken();
@@ -27,6 +27,11 @@ const apiCall = async <T>(
     });
     return response.data;
   } catch (error: AxiosError | any) {
+    if (error.response && error.response.status === 401) {
+      window.location.href = 'http://localhost:3001/login';
+    }
+    console.log('error = ',error);
+    
     throw error;
   }
 };
@@ -35,13 +40,9 @@ const ecommerceService = {
   async createShop(page_id: string, shopDetail: IStore): Promise<IStore> {
     return await apiCall("post", `/createStore/${page_id}`, shopDetail);
   },
-  //ส่งข้อมูลบางอย่าของ User ไปแล้วรอรับ IStore[] กลับมายัง frontend
   async listChannel(userId: string): Promise<IBusiness[]> {
-    //----ใช้งานจริง
-    // return await apiCall("get", "/listChannel", user);
     return await apiCall("get", `/getBusinesses/${userId}`);
-    //----MockData
-    // return await mockListChannel(user)
+
   },
   async listProduct(businessId: string): Promise<IProduct[]> {
     return await apiCall("get", `/getProducts/${businessId}`);
