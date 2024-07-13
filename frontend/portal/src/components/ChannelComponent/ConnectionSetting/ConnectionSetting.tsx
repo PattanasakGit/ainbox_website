@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ScollUpToTop } from "@/utils/Scoll";
 import { IStore } from "../../../models/IChannel";
 import ecommerceService from "../../../service/ChannelService/EcommerceService";
+import ModalLineDistination from "@/components/ChannelComponent/ConnectionSetting/ModalLineDistination";
 
 const ConnectionSetting: React.FC = () => {
   ScollUpToTop();
@@ -15,6 +16,9 @@ const ConnectionSetting: React.FC = () => {
   const { dataChannel } = useDataChannel();
   const [selectedPlatform, setSelectedPlatform] = useState<string>("Line");
   const [lineToken, setLineToken] = useState<string>("");
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [uniqueURL, setUniqueURL] = useState("");
+  // const []
 
   const platforms = ["Line", "Messenger", "API", "Discord", "Embed"];
 
@@ -81,19 +85,28 @@ const ConnectionSetting: React.FC = () => {
       await ecommerceService.createShop(destination, storeDetail)
     }
   }
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const handleSubmit = async (platform: string, data: any) => {
     try {
-      const response = await ChannelService.connectionCheck(platform, {
-        data,
-      });
-      // toast.success("บันทึกการแก้ไขเรียบร้อยแล้ว");
-      console.log('Webhook ',response);
-      
+      // const response = await ChannelService.connectionCheck(platform, { data });
+      setUniqueURL(`platform: ${platform} | data: ${data}`);
     } catch (error) {
       toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
     }
+    handleOpenModal();
   };
+
+  // const handleSaveToDB = async (platform: string, data: any) => {
+  //   // Logic ของปุ่มนี้คือ เป็นการยิ่ง req ไปยัง backend
+  //   // เพื่อตรวจสอบว่ามี distination หรือยัง
+  // }
 
   const line = () => {
     return (
@@ -111,7 +124,7 @@ const ConnectionSetting: React.FC = () => {
         />
         <div className="bg-gray-50 p-6 rounded-lg shadow-inner mt-16 mb-32">
           <label className="block mb-3 text-lg font-medium text-gray-700">
-            Line Token
+           กรุณาป้อน Channel secret 
           </label>
           <div className="flex">
             <input
@@ -122,15 +135,6 @@ const ConnectionSetting: React.FC = () => {
             />
             <button
               className="bg-green-500 text-white px-4 py-2 rounded-r-lg hover:bg-green-600 transition"
-              onClick={() => handleSubmit("Line", {       
-              })}
-            >
-              รับ webhook
-            </button>
-          </div>
-          <div className="mt-6 flex justify-center">
-            <button
-              className="px-10 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
               onClick={() =>
                 handleSubmitStore()
               }
@@ -138,7 +142,54 @@ const ConnectionSetting: React.FC = () => {
               บันทึก
             </button>
           </div>
+          {/* <div className="mt-6 flex justify-center">
+            <button
+              className="px-10 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
+            >
+              บันทึก
+            </button>
+          </div> */}
         </div>
+
+
+
+
+
+
+
+
+        <div className="bg-gray-50 p-6 rounded-lg shadow-inner mt-16 mb-32">
+          <label className="block mb-3 text-lg font-medium text-gray-700">
+            กรุณาป้อน AccessToken
+          </label>
+          <div className="flex">
+            <input
+              type="text"
+              className="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring focus:ring-green-300"
+              value={lineToken}
+              onChange={(e) => setLineToken(e.target.value)}
+            />
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded-r-lg hover:bg-green-600 transition"
+            >
+              รับ webhook
+            </button>
+          </div>
+          
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div className="mt-10">
           <h2 className="text-2xl font-semibold mb-4 text-[#555]">
             ขั้นตอนการเชื่อมต่อ inbox กับ Line
@@ -193,28 +244,29 @@ const ConnectionSetting: React.FC = () => {
       {selectedPlatform === platforms[0] && line()}
       {selectedPlatform === platforms[1] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
       {selectedPlatform === platforms[2] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
       {selectedPlatform === platforms[3] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
       {selectedPlatform === platforms[4] && (
         <div className="flex justify-center items-center h-[20vw] w-full text-[#555]">
-          {" "}
           เรากำลังพัฒนาเร่ง เพื่อให้พร้อมใช้งานในเร็ว ๆ นี้
         </div>
       )}
+      <ModalLineDistination
+        uniqueURL={uniqueURL}
+        open={isOpenModal}
+        close={handleCloseModal}
+      />
     </div>
   );
 };
