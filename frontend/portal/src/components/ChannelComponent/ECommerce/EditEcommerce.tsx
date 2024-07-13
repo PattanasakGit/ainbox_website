@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { IOpenTime } from "@/models/IOpenTime";
 import "react-toastify/dist/ReactToastify.css";
-import { useDataChannel } from "@/store/dataChannel";
+import { useDataChannel, useProductStore } from "@/store/dataChannel";
 import Opentime from "@/components/OpenTime/Opentime";
 import { ToastContainer, toast } from "react-toastify";
 import "@/components/ChannelComponent/ECommerce/Ecommerce.css";
@@ -10,29 +10,41 @@ import { Address, FormData } from "@/models/IEcommerceChannel";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { AddressInput } from "@/components/ChannelComponent/ECommerce/AddressInput";
 import { ScollUpToTop } from "@/utils/Scoll";
+import { IProduct } from "../../../models/IChannel";
 
 const EditEcommerce: React.FC = () => {
   ScollUpToTop();
   const { dataChannel } = useDataChannel();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState(dataInitial);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const { setProducts: setProductStore } = useProductStore();
 
   useEffect(() => {
     if (!dataChannel) {
       window.location.href = "/";
     } else {
       setFormData({
-        business_name: dataChannel.details.business_name,
-        business_type: dataChannel.details.business_type,
-        description: dataChannel.details.description,
-        address: dataChannel.details.address,
-        phone: dataChannel.details.phone,
-        email: dataChannel.details.email,
-        website: dataChannel.details.website,
-        opentime: dataChannel.details.opentime,
+        business_name: dataChannel.business_name,
+        business_type: dataChannel.business_type,
+        description: dataChannel.description,
+        address: dataChannel.address,
+        phone: dataChannel.phone,
+        email: dataChannel.email,
+        website: dataChannel.website,
+        opentime: dataChannel.opentime,
       });
     }
+    const fetchData = async () => {
+      const productDataResponse = await ecommerceService.listProduct(dataChannel!._id);
+      setProducts(productDataResponse);
+    };
+    fetchData();
   }, [dataChannel]);
+
+  useEffect(() => {
+    setProductStore(products);
+  }, [products, setProductStore]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -62,7 +74,7 @@ const EditEcommerce: React.FC = () => {
 
     if (dataChannel) {
       try {
-        await ecommerceService.edit(dataChannel.page_id, dataToSubmit);
+        await ecommerceService.editChennel(dataChannel._id, dataToSubmit);
         toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
         toggleEdit();
       } catch (error) {

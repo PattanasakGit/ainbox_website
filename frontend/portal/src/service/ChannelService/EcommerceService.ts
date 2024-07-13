@@ -1,8 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { IStore, IChannel} from "@/models/IChannel";
+import { IStore, IBusiness, IProductToHandle, IBusinessToHandle} from "@/models/IChannel";
 import { mockListChannel } from "@/service/PageService"; //ใช้สำหรับการทดสอบเท่านั้น
 import { IProduct } from "@/models/IChannel";
-import { create } from "domain";
 
 const API_URL = "http://localhost:3002/api"; //อย่าลืมย้ายไปใส่ env
 
@@ -33,32 +32,33 @@ const apiCall = async <T>(
 };
 
 const ecommerceService = {
+  async createShop(page_id: string, shopDetail: IStore): Promise<IStore> {
+    return await apiCall("post", `/createStore/${page_id}`, shopDetail);
+  },
   //ส่งข้อมูลบางอย่าของ User ไปแล้วรอรับ IStore[] กลับมายัง frontend
-  async listChannel(user:string): Promise<IStore[]> {
+  async listChannel(userId: string): Promise<IBusiness[]> {
     //----ใช้งานจริง
     // return await apiCall("get", "/listChannel", user);
-
+    return await apiCall("get", `/getBusinesses/${userId}`);
     //----MockData
-    return await mockListChannel(user)
+    // return await mockListChannel(user)
+  },
+  async listProduct(businessId: string): Promise<IProduct[]> {
+    return await apiCall("get", `/getProducts/${businessId}`);
   },
   //ส่งข้อมูลทั้งหมดไป backend เพื่อสร้าง Channel ใหม่
-  async createChannel(channelDetail: IChannel): Promise<unknown> {
+  async createChannel(channelDetail: IBusinessToHandle): Promise<IBusiness> {
     return await apiCall("post", "/business", channelDetail);
   },
-  async create(productDetail: IProduct): Promise<unknown> {
+  async createProduct(productDetail: IProductToHandle): Promise<IProduct> {
     return await apiCall("post", "/product", productDetail);
   },
-  async update(id: string, dataToUpdate: unknown): Promise<unknown> {
-    return await apiCall("put", `/update/${id}`, dataToUpdate);
-  },
-  //แก้ไขข้อมูลบางส่วน
-  async edit(id: string, dataToEdit: unknown): Promise<unknown> {
-    return await apiCall("patch", `/edit/${id}`, dataToEdit);
+  async editChennel(id: string, dataToEdit: IBusinessToHandle): Promise<IBusiness> {
+    return await apiCall("patch", `/updateBusiness/${id}`, dataToEdit);
   },
   //อัพเดต ข้อมูลเพาะส่วนของ Product
-  async updateProduct(page_id: string, dataToEdit: unknown): Promise<unknown> {
-    console.log('EcomService: ',dataToEdit); // ทดสอบเท่่านั้น
-    return await apiCall("patch", `/updateProduct/${page_id}`, dataToEdit);
+  async editProduct(id: string, dataToEdit: IProductToHandle): Promise<IProduct> {
+    return await apiCall("patch", `/updateProduct/${id}`, dataToEdit);
     //ที่แยกออกมาจาก edit เพราะว่าเผื่อต้องทำอะไรหากไม่ได้ทำอะไร สามารถใช้เส้น edit ได้เลย
   },
   async delete(id: string): Promise<unknown> {

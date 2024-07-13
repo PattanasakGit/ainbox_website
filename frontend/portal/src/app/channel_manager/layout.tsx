@@ -1,4 +1,7 @@
-import NavbarPortal from "@/components/NavbarPortal/NavbarPortal";
+import dynamic from 'next/dynamic'
+const NavbarPortal = dynamic(() => import('@/components/NavbarPortal/NavbarPortal'), {
+  ssr: false
+});
 
 export default function ChannelLayout({
   children,

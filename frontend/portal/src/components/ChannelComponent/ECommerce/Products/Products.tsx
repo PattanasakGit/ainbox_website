@@ -2,36 +2,35 @@
 import ModalProduct from "@/components/ChannelComponent/ECommerce/Products/ModalProduct";
 import TableOfProduct from "@/components/ChannelComponent/ECommerce/Products/TableOfProduct";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
-import { useDataChannel } from "@/store/dataChannel";
-import { IProduct } from "@/models/IChannel";
+import { useProductStore, useDataChannel } from "@/store/dataChannel";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { IProductInTable } from "@/models/IEcommerceChannel";
 import { ScollUpToTop } from "@/utils/Scoll";
+import { IProductToHandle } from "../../../../models/IChannel";
 
 const Products: React.FC = () => {
   ScollUpToTop();
+  const { products } = useProductStore();
+  const { dataChannel } = useDataChannel();
   const blankProduct = {
-    key: -1,
+    business_id: dataChannel?._id,
     name: "",
     price: "",
     description: "",
     url_link: "",
   };
   const [isModal, setIsModal] = useState(false);
-  const [dataCreateProduct, setDataCreateProduct] = useState(blankProduct);
+  const [dataCreateProduct, setDataCreateProduct] = useState<IProductToHandle>(blankProduct);
   const [isEdit, setIsEdit] = useState(false);
-  const [dataEditProduct, setDataEditProduct] =  useState<IProductInTable>(blankProduct);
-  const { dataChannel } = useDataChannel();
-  if (!dataChannel) {
+  const [dataEditProduct, setDataEditProduct] =  useState<IProductToHandle>(blankProduct);
+  if (!products) {
     window.location.href = "/";
     return null;
   }
   
-  const productsWithKeys = dataChannel.details.product.map((item, index) => ({
-    ...item,
-    key: index,
+  const productsWithKeys = products.map((item) => ({
+    ...item
   }));
 
   const resetNewdata = () => {
@@ -50,78 +49,62 @@ const Products: React.FC = () => {
   };
 
   const handleCreateProduct = async () => {
-    const updatedProducts = [
-      ...dataChannel.details.product,
-      {
-        name: dataCreateProduct.name,
-        price: dataCreateProduct.price,
-        description: dataCreateProduct.description,
-        url_link: dataCreateProduct.url_link,
-      },
-    ];
-    const dataProductToCreate = {
-      product: updatedProducts,
-    };
-
     try {
-      await ecommerceService.create(dataCreateProduct);
+      await ecommerceService.createProduct(dataCreateProduct);
       toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
       closeModal();
     } catch (error) {
       toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");
     }
   };
-  const handleEditProduct = async (index: number) => {
+
+  const handleEditProduct = async (updatedProduct: IProductToHandle) => {
     try {
-      const updatedProducts = dataChannel.details.product.map((product, i) => {
-        if (i === index) {
-          return {
-            name: dataEditProduct.name,
-            price: dataEditProduct.price,
-            description: dataEditProduct.description,
-            url_link: dataEditProduct.url_link,
-          };
-        }
-        return product;
-      });
+      const productId = products.find(product => product._id === updatedProduct._id)?._id;
+      if (!productId) throw new Error("Product ID is undefined");
   
-      const dataToUpdate = {
-        product: updatedProducts,
-      };
-  
-      await ecommerceService.updateProduct(
-        dataChannel.page_id,
-        dataToUpdate
+      const filteredUpdatedProduct = Object.fromEntries(
+        Object.entries(updatedProduct).filter(([_, v]) => v !== undefined && v !== "")
       );
+  
+      await ecommerceService.editProduct(productId, filteredUpdatedProduct);
+      
+      // Update local state
+      const updatedProducts = products.map(product => 
+        product._id === productId ? { ...product, ...filteredUpdatedProduct } : product
+      );
+      useProductStore.setState({ products: updatedProducts });
+  
       toast.success("ข้อมูลถูกอัพเดตเรียบร้อยแล้ว");
       closeModal();
     } catch (error) {
+      console.error("Edit product error:", error);
       toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");
     }
   };
 
-  const handleDeleteProduct = async (index: number) => {
-    try {
-      const updatedProducts = dataChannel.details.product.filter((_, i) => i !== index);
+  // const handleDeleteProduct = async (index: number) => {
+  //   try {
+  //     const updatedProducts = dataChannel.details.product.filter((_, i) => i !== index);
   
-      const dataToUpdate = {
-        product: updatedProducts,
-      };
+  //     const dataToUpdate = {
+  //       product: updatedProducts,
+  //     };
   
-      await ecommerceService.updateProduct(
-        dataChannel.page_id,
-        dataToUpdate
-      );
-      toast.success("สินค้าถูกลบเรียบร้อยแล้ว");
-    } catch (error) {
-      toast.error("เกิดข้อผิดพลาดในการลบสินค้า\nรหัสความผิดพลาด:FZF0002");
-    }
-  };
+  //     await ecommerceService.updateProduct(
+  //       dataChannel.page_id,
+  //       dataToUpdate
+  //     );
+  //     toast.success("สินค้าถูกลบเรียบร้อยแล้ว");
+  //   } catch (error) {
+  //     toast.error("เกิดข้อผิดพลาดในการลบสินค้า\nรหัสความผิดพลาด:FZF0002");
+  //   }
+  // };
 
   return (
     <section className="flex flex-col items-center ">
       <h1 className="text-center text-[42px] font-black text-orange-400 mb-10 pt-4">
-        {dataChannel ? dataChannel.details.business_name : ""}
+        {dataChannel ? dataChannel.business_name : ""}
       </h1>
       <ToastContainer
         autoClose={3000}
@@ -136,7 +119,7 @@ const Products: React.FC = () => {
       />
       <div className="p-2 text-xl text-[#555] font-semibold bg-gradient-to-r from-orange-50 to-orange-100 shadow-lg outline outline-7 outline-[#00000008] rounded-2xl flex justify-center items-center gap-8">
         <h1 className="ml-2 "> จำนวนสินค้าทั้งหมด </h1>
-        {dataChannel.details.product.length}
+        {products.length}
         <h1> รายการ </h1>
         <button
           onClick={handleModal}
@@ -151,7 +134,6 @@ const Products: React.FC = () => {
           setIsEdit={setIsEdit}
           setDataEditProduct={setDataEditProduct}
           handleModal={handleModal}
-          handleDeleteProduct={handleDeleteProduct}
         />
       </div>
       <ModalProduct

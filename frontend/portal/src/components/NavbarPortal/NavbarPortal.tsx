@@ -11,16 +11,18 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 const NavbarPortal: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGoogleLogin, setIsGoogleLogin] = useState(false);
+  const [isMounted, setIsMounted] = useState(false)
   const [userEmail, setUserEmail] = useState('');
   const router = useRouter();
 
   const clientId = "1037698577728-825l0c6g03vookbm4gkp03pp45o0c3oc.apps.googleusercontent.com";
-
+  
   useEffect(() => {
     const loginType = localStorage.getItem('loginType');
     const email = localStorage.getItem('userEmail');
     setIsGoogleLogin(loginType === 'google');
     setUserEmail(email || '');
+    setIsMounted(true);
   }, []);
 
   const toggleModal = () => {
@@ -51,6 +53,10 @@ const NavbarPortal: React.FC = () => {
       router.push('/login');
     }
   };
+
+  if (!isMounted) {
+    return null
+  }
 
   return (
     <nav className="h-[70px] flex justify-between items-center w-full fixed top-0 z-[1000] bg-[#ffffff] shadow-sm px-2 lg:pl-14">

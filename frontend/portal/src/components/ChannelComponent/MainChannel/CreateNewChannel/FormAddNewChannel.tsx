@@ -51,8 +51,12 @@ const FormAddNewChannel = ({
       Sunday: { open: false, from: "09:00", to: "16:30" },
     },
   });
+  const getUserID = () => {
+    return localStorage.getItem("userId");
+  }
 
   const dataCreateChannel = {
+    user_id: getUserID()!,
     ...formData,
     ...formAI,
   };

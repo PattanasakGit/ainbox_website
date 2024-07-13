@@ -1,4 +1,4 @@
-import { IStore } from "@/models/IChannel";
+import { IBusiness } from "@/models/IChannel";
 import React, { useEffect, useState } from "react";
 import { useDataChannel } from "@/store/dataChannel";
 import AinboxLoading from "@/components/Loading/Loading";
@@ -9,13 +9,16 @@ import { ScollUpToTop } from "@/utils/Scoll";
 
 const MainChannel: React.FC = () => {
   ScollUpToTop();
-  const [channels, setChannels] = useState<IStore[]>([]);
+  const [channels, setChannels] = useState<IBusiness[]>([]);
   const [loading, setLoading] = useState(true);
   const { setDataChannel } = useDataChannel();
+  const getUserID = () => {
+    return localStorage.getItem("userId");
+  }
 
   useEffect(() => {
     const fetchData = async () => {
-      const channelDataResponse = await ecommerceService.listChannel("Ub4ba514371a70b57f9ed28c8bdfcf9db");
+      const channelDataResponse = await ecommerceService.listChannel(getUserID()!);
       setChannels(channelDataResponse);
       setLoading(false);
     };
@@ -30,10 +33,10 @@ const MainChannel: React.FC = () => {
           <div className="w-[80vw]"><AinboxLoading /></div>
         ) : (
           channels.map((channel) => (
-            <div key={channel._id.$oid} onClick={() => setDataChannel(channel)}>
+            <div key={`${channel._id}-${channel.user_id}`} onClick={() => setDataChannel(channel)}>
               <CardChannel
-                name={channel.details.business_name}
-                title={channel.details.description}
+                name={channel.business_name}
+                title={channel.description}
               />
             </div>
           ))

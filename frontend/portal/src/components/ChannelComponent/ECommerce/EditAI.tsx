@@ -23,10 +23,10 @@ const EditAI: React.FC = () => {
       window.location.href = "/";
     } else {
       setFormDataAI({
-        ai_name: dataChannel.details.ai_name,
-        ai_behavior: dataChannel.details.ai_behavior,
-        ai_age: dataChannel.details.ai_age,
-        ai_gender: dataChannel.details.ai_gender,
+        ai_name: dataChannel.ai_name,
+        ai_behavior: dataChannel.ai_behavior,
+        ai_age: dataChannel.ai_age,
+        ai_gender: dataChannel.ai_gender,
       });
     }
   }, [dataChannel]);
@@ -47,7 +47,7 @@ const EditAI: React.FC = () => {
     e.preventDefault();
     if (dataChannel) {
       try {
-        await ecommerceService.edit(dataChannel.page_id, formDataAI);
+        await ecommerceService.editChennel(dataChannel._id, formDataAI);
         toast.success("บันทึกการแก้ไขเรียบร้อยแล้ว");
         toggleEdit();
       } catch (error) {
@@ -110,7 +110,7 @@ const EditAI: React.FC = () => {
           <input
             type="text"
             id="shopName"
-            value={dataChannel.details.business_name}
+            value={dataChannel.business_name}
             disabled={true}
             className="bg-transparent text-center"
           />

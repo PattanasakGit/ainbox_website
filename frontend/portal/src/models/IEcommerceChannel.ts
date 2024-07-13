@@ -1,4 +1,4 @@
-import { IProduct } from "@/models/IChannel";
+import { IProduct, IProductToHandle } from "@/models/IChannel";
 import { IOpenTime } from "@/models/IOpenTime";
 
 export interface Address {
@@ -29,11 +29,11 @@ export interface IProductInTable {
 }
 
 export interface TableOfProductProps {
-  dataInTable: IProductInTable[];
+  dataInTable: IProduct[];
   handleModal: () => void;
-  handleDeleteProduct: (index:number) => void;
+  handleDeleteProduct?: (index:number) => void;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
-  setDataEditProduct: React.Dispatch<React.SetStateAction<IProductInTable>>;
+  setDataEditProduct: React.Dispatch<React.SetStateAction<IProductToHandle>>;
 }
 
 // -----------------------------------------------
@@ -49,9 +49,9 @@ export interface IProductModalProps {
   isEdit: boolean;
   onClose: () => void;
   handleSubmit: () => void;
-  handleEditProduct: (index:number) => void;
-  dataEditProduct: IProductInTable;
-  dataCreateProduct: IProductInTable;
-  setDataCreateProduct: React.Dispatch<React.SetStateAction<IProductInTable>>;
-  setDataEditProduct: React.Dispatch<React.SetStateAction<IProductInTable>>;
+  handleEditProduct: (product: IProductToHandle) => void;
+  dataEditProduct: IProductToHandle;
+  dataCreateProduct: IProductToHandle;
+  setDataCreateProduct: React.Dispatch<React.SetStateAction<IProductToHandle>>;
+  setDataEditProduct: React.Dispatch<React.SetStateAction<IProductToHandle>>;
 }

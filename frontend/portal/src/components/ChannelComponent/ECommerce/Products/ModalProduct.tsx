@@ -39,7 +39,7 @@ const ModalProduct: React.FC<IProductModalProps> = ({
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEdit && dataEditProduct) {
-      handleEditProduct(dataEditProduct.key);
+      handleEditProduct(dataEditProduct);
     } else {
       handleSubmit();
     }

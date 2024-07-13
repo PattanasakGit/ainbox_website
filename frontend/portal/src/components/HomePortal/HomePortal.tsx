@@ -1,12 +1,15 @@
 "use client";
+import dynamic from 'next/dynamic'
 import CustomBreadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
-import NavbarPortal from "@/components/NavbarPortal/NavbarPortal";
 import MianSidebar from "@/components/SidebarPortal/MianSidebar";
 import { MainSidebarSelection } from "@/models/ISidebar";
 import { useMainSidebar } from "@/store/SidebaeStore";
 import React from "react";
 import FormAddNewChannel from "@/components/ChannelComponent/MainChannel/CreateNewChannel/FormAddNewChannel";
+const NavbarPortal = dynamic(() => import('@/components/NavbarPortal/NavbarPortal'), {
+  ssr: false
+});
 
 const HomePortal: React.FC = () => {
     const { selected } = useMainSidebar(); 
