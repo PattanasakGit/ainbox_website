@@ -24,7 +24,6 @@ const AIbehavior = ({
   btnEditDisplay,
   isEditing,
 }: IAiBehaviorProps) => {
-  ScollUpToTop();
   const [selectedGender, setSelectedGender] = useState<string>();
 
   const handleGenderSelect = (gender: string) => {

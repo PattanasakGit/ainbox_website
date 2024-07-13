@@ -3,6 +3,7 @@ import { FormData } from "@/models/IEcommerceChannel";
 import { IOpenTime, OpenHours } from "@/models/IOpenTime";
 import Link from "next/link";
 import React from "react";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 interface SummaryProps {
   formData: FormData;
@@ -20,6 +21,8 @@ const SummaryToSubmit: React.FC<SummaryProps> = ({ formData, formAI, channel, fi
     if (!formData.opentime) {
       return <p className="text-[#555] text-lg">ไม่มีข้อมูลเวลาทำการ</p>;
     }
+
+    ScollUpToTop();
 
     return (
       <div className="overflow-x-auto">

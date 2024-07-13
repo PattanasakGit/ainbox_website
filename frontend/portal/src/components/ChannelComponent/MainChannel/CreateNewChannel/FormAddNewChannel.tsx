@@ -4,19 +4,21 @@ import SummaryToSubmit from "@/components/ChannelComponent/MainChannel/CreateNew
 import MainChannel from "@/components/ChannelComponent/MainChannel/MainChannel";
 import { ChannelType, IFormAiDetail } from "@/models/IChannel";
 import { FormData } from "@/models/IEcommerceChannel";
-import { MainSidebarSelection } from "@/models/ISidebar";
+import { ChannelSidebarSelection, MainSidebarSelection } from "@/models/ISidebar";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { Steps } from "antd";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CreateDataWarehouse from "@/components/ChannelComponent/DataWarehouse/CreateDataWarehouse";
+import { useChannelSidebar } from "@/store/SidebaeStore";
 
 const FormAddNewChannel = ({
   componentForShow,
 }: {
   componentForShow: MainSidebarSelection;
 }) => {
+  const { setSelected } = useChannelSidebar(); 
   const [current, setCurrent] = useState(0);
   const [channel, setchannel] = useState<ChannelType>(ChannelType.ECommerce);
   const [filedata, setfileData] = useState<string>("");
@@ -80,7 +82,16 @@ const FormAddNewChannel = ({
   const handleCreate = async () => {
     try {
       await ecommerceService.createChannel(dataCreateChannel);
-      toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
+      // if (typeof window !== 'undefined') {
+      //   sessionStorage.setItem('dataChannel', JSON.stringify(dataCreateChannel));
+      // }
+      // setSelected(ChannelSidebarSelection.Connects)
+      
+      // toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
+      if (typeof window !== "undefined") {
+        // window.location.href = "http://localhost:3001/channel_manager";
+        window.location.href = "http://localhost:3001/";
+      }
     } catch (error) {
       toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");
     }
