@@ -65,8 +65,8 @@ const ecommerceService = {
   async deleteChennel(id: string): Promise<unknown> {
     return await apiCall("delete", `/deleteBusiness/${id}`);
   },
-  async delete(id: string): Promise<unknown> {
-    return await apiCall("delete", `/delete/${id}`);
+  async deleteProuct(id: string): Promise<unknown> {
+    return await apiCall("delete", `/deleteProduct/${id}`);
   },
 };
 

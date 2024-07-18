@@ -1,14 +1,15 @@
-import useSearch from "@/components/ChannelComponent/ECommerce/Products/SearchInTable";
 import type {
   IProductInTable,
   TableOfProductProps,
 } from "@/models/IEcommerceChannel";
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
 import React from "react";
+import { Table } from "antd";
+import Swal from "sweetalert2";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import Swal from "sweetalert2";
+import { IProduct } from "@/models/Product";
+import type { ColumnsType } from "antd/es/table";
+import useSearch from "@/components/ChannelComponent/ECommerce/Products/SearchInTable";
 
 const TableOfProduct: React.FC<TableOfProductProps> = ({
   dataInTable,
@@ -60,7 +61,7 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
       title: "",
       dataIndex: "key",
       key: "key",
-      render: (_, record: IProductInTable) => (
+      render: (_, record:any) => (
         <div>
           <button
             className="py-4 px-3 bg-orange-400 text-white rounded-l-lg hover:bg-[#888] shadow-sm"
@@ -84,7 +85,9 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
                 cancelButtonText: "ยกเลิก",
               }).then((result: { isConfirmed: any }) => {
                 if (result.isConfirmed) {
-                  handleDeleteProduct(record.key);
+                  if (record){
+                    handleDeleteProduct(record._id);
+                  }
                 }
               });
             }}
@@ -98,7 +101,7 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
 
   return (
     <Table
-      columns={columns}
+      columns={columns as ColumnsType<IProduct>}
       dataSource={dataInTable}
       size="middle"
       pagination={{
