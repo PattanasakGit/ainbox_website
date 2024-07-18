@@ -1,9 +1,11 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { IStore, IBusiness, IProductToHandle, IBusinessToHandle} from "@/models/IChannel";
-import { mockListChannel } from "@/service/PageService"; //ใช้สำหรับการทดสอบเท่านั้น
 import { IProduct } from "@/models/IChannel";
 
-const API_URL = "http://localhost:3002/api"; //อย่าลืมย้ายไปใส่ env
+const frontendUrl =
+  process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
+const backendUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
 
 const getAuthToken = () => {
   return localStorage.getItem('token');
@@ -18,7 +20,7 @@ const apiCall = async <T>(
     const token = getAuthToken();
     const response: AxiosResponse<T> = await axios({
       method,
-      url: `${API_URL}${url}`,
+      url: `${backendUrl}${url}`,
       data,
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +30,7 @@ const apiCall = async <T>(
     return response.data;
   } catch (error: AxiosError | any) {
     if (error.response && error.response.status === 401) {
-      window.location.href = 'http://localhost:3001/login';
+      window.location.href = `${frontendUrl}/login`;
     }
     console.log('error = ',error);
     

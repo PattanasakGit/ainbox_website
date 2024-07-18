@@ -21,6 +21,9 @@ const EditEcommerce: React.FC = () => {
   const [formData, setFormData] = useState(dataInitial);
   const [products, setProducts] = useState<IProduct[]>([]);
   const { setProducts: setProductStore } = useProductStore();
+  const frontendUrl =
+    process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
+
 
   useEffect(() => {
     if (!dataChannel) {
@@ -135,7 +138,7 @@ const EditEcommerce: React.FC = () => {
           if (result.value === dataChannel.business_name) {
             await ecommerceService.deleteChennel(dataChannel._id);
             await showAlert({ icon: 'success', title: `ลบ ${dataChannel.business_name} เสร็จสิ้น` });
-            window.location.href = "http://localhost:3001/";
+            window.location.href = frontendUrl;
           } else {
             Swal.fire({
               title: "การลบ " + `${dataChannel.business_name}` + " ผิดพลาด",
