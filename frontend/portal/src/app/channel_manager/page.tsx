@@ -9,6 +9,7 @@ import ChannelSidebar from "@/components/SidebarPortal/ChannelSidebar";
 import Products from "@/components/ChannelComponent/ECommerce/Products/Products";
 import EditEcommerce from "@/components/ChannelComponent/ECommerce/EditEcommerce";
 import ConnectionSetting from "@/components/ChannelComponent/ConnectionSetting/ConnectionSetting";
+import AIControlList from "@/components/ChannelComponent/AIControl/AIControl";
 
 const ChannelManager: React.FC = () => {
   const itemsBreadcrumb = [
@@ -43,6 +44,8 @@ const ChannelManager: React.FC = () => {
       );
     } else if (selected === ChannelSidebarSelection.AIBehavior) {
       return <EditAI />;
+    } else if (selected === ChannelSidebarSelection.AIControl) {
+      return <AIControlList/>;
     } else if (selected === ChannelSidebarSelection.Products) {
       return <Products />;
     } else if (selected === ChannelSidebarSelection.Connects) {
