@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from 'react';
-import { HomeOutlined } from '@ant-design/icons';
+import HomeOutlined from '@ant-design/icons/HomeOutlined';
 import { Breadcrumb, Skeleton } from 'antd';
 import { useBreadcrumbState } from '@/store/BreadcrumbState'
 

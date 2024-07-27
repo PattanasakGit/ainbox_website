@@ -23,7 +23,7 @@ const Login: React.FC = () => {
     localStorage.setItem('userEmail', email);
     localStorage.setItem('loginType', 'google');
   
-    router.push('http://localhost:3001');
+    router.push('https://backend-ke5m6qbmkq-as.a.run.app');
   };
 
   const onFailure = (response: any) => {
@@ -34,7 +34,7 @@ const Login: React.FC = () => {
     e.preventDefault();
   
     try {
-      const response = await fetch('http://localhost:3002/api/login', {
+      const response = await fetch('https://backend-ke5m6qbmkq-as.a.run.app/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const Login: React.FC = () => {
       localStorage.setItem('token', data.token);
       console.log('Login success:', localStorage.getItem('userId'));
   
-      router.push('http://localhost:3001');
+      router.push('https://protal-ke5m6qbmkq-as.a.run.app');
     } catch (error) {
       console.error('Login error:', error);
       alert('Login failed. Your Email or Password is incorrect. Please try again.');

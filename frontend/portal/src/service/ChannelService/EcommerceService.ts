@@ -1,9 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { IStore, IBusiness, IProductToHandle, IBusinessToHandle} from "@/models/IChannel";
-import { mockListChannel } from "@/service/PageService"; //ใช้สำหรับการทดสอบเท่านั้น
 import { IProduct } from "@/models/IChannel";
 
-const API_URL = "http://localhost:3002/api"; //อย่าลืมย้ายไปใส่ env
+const API_URL = "https://backend-ke5m6qbmkq-as.a.run.app/api"; //อย่าลืมย้ายไปใส่ env
 
 const getAuthToken = () => {
   return localStorage.getItem('token');
@@ -28,7 +27,7 @@ const apiCall = async <T>(
     return response.data;
   } catch (error: AxiosError | any) {
     if (error.response && error.response.status === 401) {
-      window.location.href = 'http://localhost:3001/login';
+      window.location.href = 'https://protal-ke5m6qbmkq-as.a.run.appsh/login';
     }
     console.log('error = ',error);
     
@@ -37,8 +36,8 @@ const apiCall = async <T>(
 };
 
 const ecommerceService = {
-  async createShop(page_id: string, shopDetail: IStore): Promise<IStore> {
-    return await apiCall("post", `/createStore/${page_id}`, shopDetail);
+  async createShop(user_id: string, shopDetail: IStore): Promise<IStore> {
+    return await apiCall("post", `/createStore/${user_id}`, shopDetail);
   },
   async listChannel(userId: string): Promise<IBusiness[]> {
     return await apiCall("get", `/getBusinesses/${userId}`);

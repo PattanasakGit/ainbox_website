@@ -14,7 +14,7 @@ router.post('/logout', authMiddleware, logout);
 router.post('/refresh-token', refreshToken);
 
 //Store_db routes
-router.post('/createStore/:destination', authMiddleware, createStore);
+router.post('/createStore/:userId', authMiddleware, createStore);
 
 // Product routes
 router.post('/business', authMiddleware, businessValidation, createBusiness);

@@ -14,7 +14,7 @@ const CustomNavbar: React.FC = () => {
 
   const loginHandle = () => {
     if (typeof window !== "undefined") {
-      window.location.href = "http://localhost:3001/login"; //จะทำการจัดเก็บไว้ใน .env ภายหลัง
+      window.location.href = "https://protal-ke5m6qbmkq-as.a.run.app/login"; //จะทำการจัดเก็บไว้ใน .env ภายหลัง
     }
   }
 

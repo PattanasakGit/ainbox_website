@@ -78,6 +78,7 @@ export interface IStoreDetails {
 }
 
 export interface IStore {
+  page_access_token: string;
   page_id: string;
   details: IStoreDetails;
 }

@@ -9,6 +9,7 @@ import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { IProduct } from "../../../../models/IChannel";
 
 const TableOfProduct: React.FC<TableOfProductProps> = ({
   dataInTable,
@@ -84,7 +85,7 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
                 cancelButtonText: "ยกเลิก",
               }).then((result: { isConfirmed: any }) => {
                 if (result.isConfirmed) {
-                  handleDeleteProduct(record.key);
+                  handleDeleteProduct && handleDeleteProduct(record.key);
                 }
               });
             }}
@@ -98,7 +99,7 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
 
   return (
     <Table
-      columns={columns}
+      columns={columns as ColumnsType<IProduct>}
       dataSource={dataInTable}
       size="middle"
       pagination={{

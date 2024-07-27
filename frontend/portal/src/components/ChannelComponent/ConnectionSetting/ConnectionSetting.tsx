@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDataChannel, useProductStore } from "@/store/dataChannel";
@@ -9,6 +10,7 @@ import { IStore } from "@/models/IChannel";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import ModalLineDistination from "@/components/ChannelComponent/ConnectionSetting/ModalLineDistination";
 import { FaCheck, FaSave, FaEdit } from "react-icons/fa";
+import { access } from "fs";
 
 const ConnectionSetting: React.FC = () => {
   ScollUpToTop();
@@ -51,38 +53,6 @@ const ConnectionSetting: React.FC = () => {
     };
   }, []);
 
-  const storeDetail: IStore = {
-    page_id: destination,
-    details: {
-      ai_name: dataChannel!.ai_name,
-      ai_behavior: dataChannel!.ai_behavior,
-      ai_age: dataChannel!.ai_age,
-      business_name: dataChannel!.business_name,
-      business_type: dataChannel!.business_type,
-      address: dataChannel!.address,
-      phone: dataChannel!.phone,
-      email: dataChannel!.email,
-      website: dataChannel!.website,
-      opentime: dataChannel!.opentime,
-      description: dataChannel!.description,
-      ai_gender: dataChannel!.ai_gender,
-      product: products.map((product) => {
-        return {
-          name: product.name,
-          price: product.price,
-          description: product.description,
-          url_link: product.url_link,
-        };
-      })
-    }
-  };
-
-  const handleSubmitStore = async () => {
-    if (destination) {
-      await ecommerceService.createShop(destination, storeDetail);
-    }
-  };
-
   const handleCloseModal = () => {
     setIsOpenModal(false);
   };
@@ -93,6 +63,33 @@ const ConnectionSetting: React.FC = () => {
     const [isChannelSecretSaved, setIsChannelSecretSaved] = useState(false);
     const [isEditingChannelSecret, setIsEditingChannelSecret] = useState(false);
 
+    const userId = localStorage.getItem("userId");
+    const storeDetail: IStore = {
+      page_access_token: accessToken,
+      page_id: destination,
+      details: {
+        ai_name: dataChannel!.ai_name,
+        ai_behavior: dataChannel!.ai_behavior,
+        ai_age: dataChannel!.ai_age,
+        business_name: dataChannel!.business_name,
+        business_type: dataChannel!.business_type,
+        address: dataChannel!.address,
+        phone: dataChannel!.phone,
+        email: dataChannel!.email,
+        website: dataChannel!.website,
+        opentime: dataChannel!.opentime,
+        description: dataChannel!.description,
+        ai_gender: dataChannel!.ai_gender,
+        product: products.map((product) => {
+          return {
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            url_link: product.url_link,
+          };
+        })
+      }
+    };
     const handleSaveChannelSecret = () => {
       if (channelSecret) {
         setIsChannelSecretSaved(true);
@@ -108,12 +105,13 @@ const ConnectionSetting: React.FC = () => {
       setIsEditingChannelSecret(true);
     };
 
-    const handleSaveAccessToken = () => {
-      if (accessToken) {
-        const webhookURL = `https://example.com/webhook/${accessToken}`;
-        setUniqueURL(webhookURL);
-        setIsOpenModal(true);
+    const handleSaveAccessToken = async () => {
+      if (accessToken && destination) {
+        // const webhookURL = `https://example.com/webhook/${accessToken}`;
+        // setUniqueURL(webhookURL);
+        // setIsOpenModal(false);
         //service get webhookURL for user coppy to line
+        await ecommerceService.createShop(userId!, storeDetail);
       } else {
         toast.error("กรุณาป้อน Access Token");
       }

@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  # Application service
+  web:
+    build:
+      context: .
+    stdin_open: true
+    tty: true
+    ports:
+      - "3002:3002"
+    volumes:
+      - .:/app
+      - ./data:/data
+    env_file: .env
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
