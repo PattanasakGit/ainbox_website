@@ -4,7 +4,7 @@ import { registerValidation, loginValidation, businessValidation, productValidat
 import { authMiddleware } from '../middleware/authMiddleware';
 import { createStore } from '../controllers/storedbController';
 import { createBusiness, deleteBusinessById, getBusinessById, getBusinesses, updateBusinessById } from '../controllers/businessController';
-import { createProduct, getProductById, getProducts, updateProductById } from '../controllers/productController';
+import { createProduct, deleteProductById, getProductById, getProducts, updateProductById } from '../controllers/productController';
 
 const router = Router();
 
@@ -14,9 +14,9 @@ router.post('/logout', authMiddleware, logout);
 router.post('/refresh-token', refreshToken);
 
 //Store_db routes
-router.post('/createStore/:userId', authMiddleware, createStore);
+router.post('/createStore/:destination', authMiddleware, createStore);
 
-// Product routes
+// Business routes
 router.post('/business', authMiddleware, businessValidation, createBusiness);
 router.get('/getBusinesses/:userId', authMiddleware, getBusinesses);
 router.get('/getBusiness/:id', authMiddleware, getBusinessById);
@@ -28,6 +28,6 @@ router.post('/product', authMiddleware, productValidation, createProduct);
 router.get('/getProducts/:businessId', authMiddleware, getProducts);
 router.get('/getProduct/:id', authMiddleware, getProductById);
 router.patch('/updateProduct/:id', authMiddleware, updateProductById);
-router.delete('/deleteProduct/:id', authMiddleware, getProductById);
+router.delete('/deleteProduct/:id', authMiddleware, deleteProductById);
 
 export default router;

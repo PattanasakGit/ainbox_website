@@ -19,6 +19,7 @@ const FormAddNewChannel = ({
 }: {
   componentForShow: MainSidebarSelection;
 }) => {
+  const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
   const { setSelected } = useChannelSidebar(); 
   const [current, setCurrent] = useState(0);
   const [channel, setchannel] = useState<ChannelType>(ChannelType.ECommerce);
@@ -91,7 +92,7 @@ const FormAddNewChannel = ({
       await showAlert({ icon: 'success', title: `บันทึกสำเร็จ` });
       if (typeof window !== "undefined") {
         // window.location.href = "http://localhost:3001/channel_manager";
-        window.location.href = "http://localhost:3001/";
+        window.location.href = frontendUrl;
       }
     } catch (error) {
       toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");

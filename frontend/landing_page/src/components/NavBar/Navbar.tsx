@@ -11,10 +11,12 @@ const CustomNavbar: React.FC = () => {
 
   const textColorActive = "text-orange-500";
   const styleBtnNavbar = "hover:text-orange-600 cursor-pointer";
+  const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
+
 
   const loginHandle = () => {
     if (typeof window !== "undefined") {
-      window.location.href = "https://protal-ke5m6qbmkq-as.a.run.app/login"; //จะทำการจัดเก็บไว้ใน .env ภายหลัง
+      window.location.href = `${frontendUrl}/login`; //จะทำการจัดเก็บไว้ใน .env ภายหลัง
     }
   }
 

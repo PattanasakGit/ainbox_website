@@ -12,6 +12,11 @@ const SignUp: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMismatch, setPasswordMismatch] = useState(false);
   const router = useRouter();
+  const frontendUrl =
+    process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
+  const backendUrl =
+    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +27,7 @@ const SignUp: React.FC = () => {
       // Handle successful sign-up
       setPasswordMismatch(false);
       try {
-        const response = await fetch('http://localhost:3002/api/register', {
+        const response = await fetch(`${backendUrl}/api/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -40,7 +45,7 @@ const SignUp: React.FC = () => {
           throw new Error('Invalid response format. Please try again later.');
         }
   
-        router.push('http://localhost:3001/login');
+        router.push(`${frontendUrl}/login`);
       } catch (error) {
         console.error('Register error:', error);
       }

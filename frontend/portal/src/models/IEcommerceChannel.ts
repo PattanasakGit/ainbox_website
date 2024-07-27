@@ -31,7 +31,7 @@ export interface IProductInTable {
 export interface TableOfProductProps {
   dataInTable: IProduct[];
   handleModal: () => void;
-  handleDeleteProduct?: (index:number) => void;
+  handleDeleteProduct: (index:string) => void;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   setDataEditProduct: React.Dispatch<React.SetStateAction<IProductToHandle>>;
 }

@@ -1,13 +1,12 @@
 "use client";
+import React, { useState } from "react";
 import ModalProduct from "@/components/ChannelComponent/ECommerce/Products/ModalProduct";
 import TableOfProduct from "@/components/ChannelComponent/ECommerce/Products/TableOfProduct";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
 import { useProductStore, useDataChannel } from "@/store/dataChannel";
-import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ScollUpToTop } from "@/utils/Scoll";
 import { IProductToHandle } from "@/models/IChannel";
+import showAlert from "@/components/Alert/Alert";
+import { ScollUpToTop } from "@/utils/Scoll";
 
 const Products: React.FC = () => {
   ScollUpToTop();
@@ -52,10 +51,10 @@ const Products: React.FC = () => {
     try {
       await ecommerceService.createProduct(dataCreateProduct);
       fetchListProduct();
-      toast.success("ข้อมูลถูกบันทึกเรียบร้อยแล้ว");
+      await showAlert({ icon: 'success', title: `ข้อมูลถูกบันทึกเรียบร้อยแล้ว` });
       closeModal();
     } catch (error) {
-      toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");
+      await showAlert({ icon: 'error', title: `เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001` });
     }
   };
 
@@ -76,11 +75,21 @@ const Products: React.FC = () => {
       );
       useProductStore.setState({ products: updatedProducts });
       fetchListProduct();
-      toast.success("ข้อมูลถูกอัพเดตเรียบร้อยแล้ว");
+      await showAlert({ icon: 'success', title: `ข้อมูลถูกอัพเดตเรียบร้อยแล้ว` });
       closeModal();
     } catch (error) {
       console.error("Edit product error:", error);
-      toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001");
+      await showAlert({ icon: 'error', title: `เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001` });
+    }
+  };
+
+  const handleDeleteProduct = async (index: string) => {
+    try {
+      ecommerceService.deleteProuct(index.toString())
+      fetchListProduct();
+      await showAlert({ icon: 'success', title: `ลบสินค้าสำเร็จ` });
+    } catch (error) {
+      await showAlert({ icon: 'error', title: `ลบสินค้าล้มเหลว` });
     }
   };
 
@@ -91,40 +100,11 @@ const Products: React.FC = () => {
     setProducts(productDataResponse);
   }
 
-  // const handleDeleteProduct = async (index: number) => {
-  //   try {
-  //     const updatedProducts = dataChannel.details.product.filter((_, i) => i !== index);
-  
-  //     const dataToUpdate = {
-  //       product: updatedProducts,
-  //     };
-  
-  //     await ecommerceService.updateProduct(
-  //       dataChannel.page_id,
-  //       dataToUpdate
-  //     );
-  //     toast.success("สินค้าถูกลบเรียบร้อยแล้ว");
-  //   } catch (error) {
-  //     toast.error("เกิดข้อผิดพลาดในการลบสินค้า\nรหัสความผิดพลาด:FZF0002");
-  //   }
-  // };
-
   return (
     <section className="flex flex-col items-center ">
       <h1 className="text-center text-[42px] font-black text-orange-400 mb-10 pt-4">
         {dataChannel ? dataChannel.business_name : ""}
       </h1>
-      <ToastContainer
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
       <div className="p-2 text-xl text-[#555] font-semibold bg-gradient-to-r from-orange-50 to-orange-100 shadow-lg outline outline-7 outline-[#00000008] rounded-2xl flex justify-center items-center gap-8">
         <h1 className="ml-2 "> จำนวนสินค้าทั้งหมด </h1>
         {products.length}
@@ -142,6 +122,7 @@ const Products: React.FC = () => {
           setIsEdit={setIsEdit}
           setDataEditProduct={setDataEditProduct}
           handleModal={handleModal}
+          handleDeleteProduct={handleDeleteProduct}
         />
       </div>
       <ModalProduct

@@ -2,7 +2,10 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { IStore, IBusiness, IProductToHandle, IBusinessToHandle} from "@/models/IChannel";
 import { IProduct } from "@/models/IChannel";
 
-const API_URL = "https://backend-ke5m6qbmkq-as.a.run.app/api"; //อย่าลืมย้ายไปใส่ env
+const frontendUrl =
+  process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
+const backendUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
 
 const getAuthToken = () => {
   return localStorage.getItem('token');
@@ -17,7 +20,7 @@ const apiCall = async <T>(
     const token = getAuthToken();
     const response: AxiosResponse<T> = await axios({
       method,
-      url: `${API_URL}${url}`,
+      url: `${backendUrl}${url}`,
       data,
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +30,7 @@ const apiCall = async <T>(
     return response.data;
   } catch (error: AxiosError | any) {
     if (error.response && error.response.status === 401) {
-      window.location.href = 'https://protal-ke5m6qbmkq-as.a.run.appsh/login';
+      window.location.href = `${frontendUrl}/login`;
     }
     console.log('error = ',error);
     
@@ -64,8 +67,8 @@ const ecommerceService = {
   async deleteChennel(id: string): Promise<unknown> {
     return await apiCall("delete", `/deleteBusiness/${id}`);
   },
-  async delete(id: string): Promise<unknown> {
-    return await apiCall("delete", `/delete/${id}`);
+  async deleteProuct(id: string): Promise<unknown> {
+    return await apiCall("delete", `/deleteProduct/${id}`);
   },
 };
 

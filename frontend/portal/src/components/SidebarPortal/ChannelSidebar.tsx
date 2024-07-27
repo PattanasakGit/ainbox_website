@@ -38,6 +38,12 @@ const ChannelSidebar: React.FC = () => {
         พฤติกรรม AI
       </button>
       <button
+        className={selected === ChannelSidebarSelection.AIControl ? activeBtnStyle : btnStyle}
+        onClick={() => handleMenuClick(ChannelSidebarSelection.AIControl)}
+      >
+        ควบคลุม AI
+      </button>
+      <button
         className={selected === ChannelSidebarSelection.Products ? activeBtnStyle : btnStyle}
         onClick={() => handleMenuClick(ChannelSidebarSelection.Products)}
       >

@@ -14,6 +14,7 @@ export interface CardChannelProps {
 }
 
 export interface IProduct {
+  key?: string;
   _id: string;
   name: string;
   price: string;
