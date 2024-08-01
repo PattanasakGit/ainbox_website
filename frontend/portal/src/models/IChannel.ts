@@ -79,6 +79,8 @@ export interface IStoreDetails {
 }
 
 export interface IStore {
+  line_user_id: string;
+  channel_secret: string;
   page_access_token: string;
   page_id: string;
   details: IStoreDetails;

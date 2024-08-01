@@ -7,6 +7,7 @@ export interface IPageAccount extends Document {
     type: string;
     page_access_token: string;
     line_token?: string;
+    channel_secret: string;
 }
 
 const PageAccountSchema: Schema = new Schema({
@@ -15,7 +16,8 @@ const PageAccountSchema: Schema = new Schema({
     page_id: { type: String, required: true },
     type: { type: String, required: true },
     page_access_token: { type: String, required: true },
-    line_token: { type: String }
+    line_token: { type: String, required: false },
+    channel_secret: { type: String, required: true }
 }, {versionKey: false});
 
 mongoose.pluralize(null);

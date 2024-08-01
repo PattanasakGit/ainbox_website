@@ -3,7 +3,7 @@ import StatusCheck from '../models/statusCheckModel';
 
 export const createStatusCheck = async (req: Request, res: Response) => {
   try {
-    const { page_id } = req.body;
+    const page_id = req.body;
     const newStatusCheck = new StatusCheck({
       page_id,
       status: 1 // Default value set to 1

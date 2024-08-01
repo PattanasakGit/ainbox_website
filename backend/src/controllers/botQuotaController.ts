@@ -3,9 +3,11 @@ import BotQuota from '../models/botQuotaModel';
 
 export const createBotQuota = async (req: Request, res: Response) => {
   try {
-    const { user_id } = req.body;
+    const user_id = req.params.userId;
+    const { page_id } = req.body;
     const newBotQuota = new BotQuota({
       user_id,
+      page: [{ page_id }],
       quota: 1700
     });
     await newBotQuota.save();

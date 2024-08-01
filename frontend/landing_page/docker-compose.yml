@@ -11,6 +11,7 @@ services:
     volumes:
       - .:/app
       - ./data:/data
+    env_file: .env
     restart: always
     networks:
       - app-network

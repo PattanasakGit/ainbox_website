@@ -3,7 +3,7 @@ import TierStatus from '../models/tierStatusModel';
 
 export const createTierStatus = async (req: Request, res: Response) => {
   try {
-    const { page_id } = req.body;
+    const page_id = req.body;
     const newTierStatus = new TierStatus({
       page_id,
       tier: "EC1"

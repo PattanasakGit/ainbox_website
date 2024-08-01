@@ -1,7 +1,9 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IStore extends Document {
-  page_access_token: string;
+  line_user_id?: string;
+  channel_secret?: string;
+  page_access_token?: string;
   page_id: string;
   details: {
     ai_name: string;
@@ -38,7 +40,6 @@ export interface IStore extends Document {
 }
 
 const StoreSchema: Schema = new Schema({
-  page_access_token: { type: String, required: true },
   page_id: { type: String, required: true },
   details: {
     ai_name: String,

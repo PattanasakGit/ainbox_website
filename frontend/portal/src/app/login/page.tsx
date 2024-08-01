@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   const frontendUrl =
     process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
   const backendUrl =
-    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
+    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3002";
 
   const onSuccess = (response: any) => {
     console.log("Google login success:", response);
@@ -41,7 +41,7 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${backendUrl}/login`, {
+      const response = await fetch(`${backendUrl}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

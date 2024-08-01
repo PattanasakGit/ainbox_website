@@ -5,7 +5,7 @@ import { IProduct } from "@/models/IChannel";
 const frontendUrl =
   process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
 const backendUrl =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
+  process.env.NEXT_PUBLIC_BACKEND_URL ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api` : "http://localhost:3002/api";
 
 const getAuthToken = () => {
   return localStorage.getItem('token');
@@ -39,8 +39,8 @@ const apiCall = async <T>(
 };
 
 const ecommerceService = {
-  async createShop(user_id: string, shopDetail: IStore): Promise<IStore> {
-    return await apiCall("post", `/createStore/${user_id}`, shopDetail);
+  async createShop(userId: string, shopDetail: IStore): Promise<IStore> {
+    return await apiCall("post", `/createStore/${userId}`, shopDetail);
   },
   async listChannel(userId: string): Promise<IBusiness[]> {
     return await apiCall("get", `/getBusinesses/${userId}`);

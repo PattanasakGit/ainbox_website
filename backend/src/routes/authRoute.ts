@@ -5,6 +5,7 @@ import { authMiddleware } from '../middleware/authMiddleware';
 import { createStore } from '../controllers/storedbController';
 import { createBusiness, deleteBusinessById, getBusinessById, getBusinesses, updateBusinessById } from '../controllers/businessController';
 import { createProduct, deleteProductById, getProductById, getProducts, updateProductById } from '../controllers/productController';
+import { signatureVerificationMiddleware } from '../middleware/signatureMiddleware';
 
 const router = Router();
 
@@ -14,7 +15,11 @@ router.post('/logout', authMiddleware, logout);
 router.post('/refresh-token', refreshToken);
 
 //Store_db routes
-router.post('/createStore/:destination', authMiddleware, createStore);
+router.post('/createStore/:userId', 
+  authMiddleware,
+  signatureVerificationMiddleware, 
+  createStore
+);
 
 // Business routes
 router.post('/business', authMiddleware, businessValidation, createBusiness);
