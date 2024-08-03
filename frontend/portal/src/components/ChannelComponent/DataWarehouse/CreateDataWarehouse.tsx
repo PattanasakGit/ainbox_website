@@ -23,8 +23,10 @@ const CreateDataWarehouse: React.FC<CreateDataWarehouseProps> = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState<string>("fillForm");
   setchannel(ChannelType.DataWarehouse);
-  useEffect(() => {}, [filedata]);
-  ScollUpToTop();
+
+  useEffect(() => {
+    ScollUpToTop();
+  }, [filedata]);
 
   const handleNext = () => {
     if (filedata || textData) {

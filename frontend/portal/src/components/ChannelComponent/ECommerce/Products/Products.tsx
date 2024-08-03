@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalProduct from "@/components/ChannelComponent/ECommerce/Products/ModalProduct";
 import TableOfProduct from "@/components/ChannelComponent/ECommerce/Products/TableOfProduct";
 import ecommerceService from "@/service/ChannelService/EcommerceService";
@@ -9,7 +9,6 @@ import showAlert from "@/components/Alert/Alert";
 import { ScollUpToTop } from "@/utils/Scoll";
 
 const Products: React.FC = () => {
-  ScollUpToTop();
   const { products , setProducts } = useProductStore();
   const { dataChannel } = useDataChannel();
   const blankProduct = {
@@ -23,6 +22,11 @@ const Products: React.FC = () => {
   const [dataCreateProduct, setDataCreateProduct] = useState<IProductToHandle>(blankProduct);
   const [isEdit, setIsEdit] = useState(false);
   const [dataEditProduct, setDataEditProduct] =  useState<IProductToHandle>(blankProduct);
+
+  useEffect(() => {
+    ScollUpToTop();
+  }, []);
+  
   if (!products) {
     window.location.href = "/";
     return null;

@@ -26,6 +26,10 @@ const AIbehavior = ({
 }: IAiBehaviorProps) => {
   const [selectedGender, setSelectedGender] = useState<string>();
 
+  useEffect(() => {
+    ScollUpToTop();
+  }, []);
+
   const handleGenderSelect = (gender: string) => {
     setFormAI((prev) => ({ ...prev, ai_gender: gender }));
   };

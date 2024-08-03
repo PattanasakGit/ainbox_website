@@ -8,13 +8,16 @@ import AddChannelButton from "@/components/ChannelComponent/MainChannel/AddChann
 import { ScollUpToTop } from "@/utils/Scoll";
 
 const MainChannel: React.FC = () => {
-  ScollUpToTop();
   const [channels, setChannels] = useState<IBusiness[]>([]);
   const [loading, setLoading] = useState(true);
   const { setDataChannel } = useDataChannel();
+  
   const getUserID = () => {
     return localStorage.getItem("userId");
   }
+  useEffect(() => {
+    ScollUpToTop();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
