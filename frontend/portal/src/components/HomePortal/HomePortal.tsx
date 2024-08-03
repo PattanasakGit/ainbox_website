@@ -34,7 +34,7 @@ const HomePortal: React.FC = () => {
   return (
     <section className="w-full h-screen">
       <NavbarPortal />
-      <div className="pt-[70px] pl-[200px]">
+      <div className="pt-[70px] pl-[20%] xl:pl-[200px]">
         <MianSidebar />
         <CustomBreadcrumb />
         {ChooseDisplayComponent()}

@@ -33,7 +33,7 @@ const MainChannel: React.FC = () => {
     <section className="w-full h-screen">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 auto-rows-fr p-16 pt-0">
         {loading ? (
-          <div className="w-[80vw]"><AinboxLoading /></div>
+          <div><AinboxLoading /></div>
         ) : (
           channels.map((channel) => (
             <div key={`${channel._id}-${channel.user_id}`} onClick={() => setDataChannel(channel)}>

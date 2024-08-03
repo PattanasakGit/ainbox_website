@@ -16,7 +16,7 @@ const ChannelSidebar: React.FC = () => {
   };
 
   return (
-    <section className="mt-[70px] h-screen w-[200px] bg-[#faf7f3] fixed top-0 left-0 flex flex-col justify-start">
+    <section className="mt-[70px] h-screen w-[20%] max-w-[200px] bg-[#faf7f3] fixed top-0 left-0 flex flex-col justify-start">
       <Link href={'/'}>
         <button
           className={`h-12 hover:text-white flex justify-center items-center gap-2 bg-[#ebe5de] hover:bg-[#bab0a5] w-full`}

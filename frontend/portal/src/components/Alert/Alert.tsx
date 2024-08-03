@@ -28,7 +28,7 @@ const showAlert = ({
     toast: true,
     position,
     showConfirmButton: false,
-    timer: timer ? timer : 200,
+    timer: timer ? timer : 2000,
     timerProgressBar: true,
   });
 };
