@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const GoogleLoginButton = dynamic(() => import("./googleLogin"), {
   ssr: false,
@@ -13,6 +14,7 @@ const GoogleLoginButton = dynamic(() => import("./googleLogin"), {
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const clientId =
     "1037698577728-825l0c6g03vookbm4gkp03pp45o0c3oc.apps.googleusercontent.com";
@@ -79,7 +81,7 @@ const Login: React.FC = () => {
 
   return (
     <section className="flex justify-center items-center h-screen bg-[url('/images/bg.webp')] bg-cover bg-fixed bg-center">
-      <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center">
+      <div className="w-[450px] p-8 bg-white rounded-2xl shadow-2xl text-center ">
         <Image
           src="/images/logo.png"
           alt="Ainbox Logo"
@@ -102,12 +104,12 @@ const Login: React.FC = () => {
               required
             />
           </div>
-          <div className="mb-6 text-left">
+          <div className="mb-6 text-left relative">
             <label htmlFor="password" className="block text-gray-700 mb-2">
               รหัสผ่าน
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               value={password}
@@ -115,6 +117,16 @@ const Login: React.FC = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               required
             />
+            <div
+              className="absolute inset-y-[50px] right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible className="text-gray-500" />
+              ) : (
+                <AiOutlineEye className="text-gray-500" />
+              )}
+            </div>
           </div>
           <button
             type="submit"
@@ -122,17 +134,15 @@ const Login: React.FC = () => {
           >
             เข้าสู่ระบบ
           </button>
-          <Link href="#">
-            <button className="w-full bg-green-500 text-white py-2 my-4 rounded-md hover:bg-green-600 transition-colors duration-200">
-              ปุ่มนี้สมมติว่า Login ได้ DEV MODE
-            </button>
-          </Link>
         </form>
-        <GoogleLoginButton
-          clientId={clientId}
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-        />
+        <hr />
+        <div className="mt-4 mb-8 flex justify-center items-center">
+          <GoogleLoginButton
+            clientId={clientId}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+          />
+        </div>
         <div className="my-4">
           <Link
             href="/forget_password"
@@ -142,9 +152,9 @@ const Login: React.FC = () => {
           </Link>
         </div>
         <div>
-          คุณยังไม่มีบัญชีผู้ใช้งานใช่ไหม
+          คุณยังไม่มีบัญชีผู้ใช้งานใช่ไหม?
           <Link href="/signup" className="text-orange-500 hover:underline">
-            สมัครสมาชิกใหม่
+            {" "}สมัครสมาชิกใหม่
           </Link>
         </div>
       </div>

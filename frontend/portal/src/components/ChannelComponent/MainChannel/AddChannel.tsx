@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import ModalAddChannel from "./ModalAddChannel";
@@ -10,7 +10,7 @@ const AddChannelButton: React.FC = () => {
     <>
       <div
         onClick={() => setIsModalOpen(true)}
-        className="min-h-[21rem] h-full w-full flex items-center justify-center bg-white rounded-xl shadow-md border-2 border-orange-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-orange-400 cursor-pointer"
+        className="flex items-center justify-center max-w-[18rem] border-2 border-orange-100 hover:border-orange-400 h-full w-full relative rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 hover:shadow-lg bg-white"
       >
         <div className="text-center">
           <div className="mb-4 flex justify-center">
