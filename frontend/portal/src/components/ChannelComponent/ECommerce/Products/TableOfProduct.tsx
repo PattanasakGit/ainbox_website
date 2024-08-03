@@ -31,14 +31,17 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
       title: "ขื่อสินค้า",
       dataIndex: "name",
       key: "name",
-      width: "20%",
+      width: "25%",
+      fixed: true,
+      ellipsis: true,
       ...getColumnSearchProps("name"),
     },
     {
       title: "ราคา (บาท)",
       dataIndex: "price",
       key: "price",
-      width: "15%",
+      width: "18%",
+      ellipsis: true,
       ...getColumnSearchProps("price"),
       sorter: (a, b) => a.description.length - b.description.length,
       sortDirections: ["descend", "ascend"] as ("descend" | "ascend")[],
@@ -47,6 +50,8 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
       title: "ข้อมูลสินค้า",
       dataIndex: "description",
       key: "description",
+      width: "35%",
+      ellipsis: true,
       ...getColumnSearchProps("description"),
       sorter: (a, b) => a.description.length - b.description.length,
       sortDirections: ["descend", "ascend"] as ("descend" | "ascend")[],
@@ -55,16 +60,18 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
       title: "ลิงค์ข้อมูลสินค้า",
       dataIndex: "url_link",
       key: "url_link",
+      ellipsis: true,
       ...getColumnSearchProps("url_link"),
     },
     {
       title: "",
       dataIndex: "key",
       key: "key",
+      width: "12%",
       render: (_, record:any) => (
-        <div>
+        <div className="flex justify-end items-end gap-1">
           <button
-            className="py-4 px-3 bg-orange-400 text-white rounded-l-lg hover:bg-[#888] shadow-sm"
+            className="py-4 px-3 bg-orange-400 text-white rounded-lg hover:bg-orange-700 shadow-sm"
             onClick={() => {
               handleEdit(record);
             }}
@@ -72,7 +79,7 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
             <FaEdit />
           </button>
           <button
-            className="py-4 px-3 bg-red-400 text-white rounded-r-lg hover:bg-[#888] shadow-sm"
+            className="py-4 px-3 bg-red-400 text-white rounded-lg hover:bg-red-700 shadow-sm"
             onClick={() => {
               Swal.fire({
                 icon: "warning",
@@ -105,10 +112,11 @@ const TableOfProduct: React.FC<TableOfProductProps> = ({
       dataSource={dataInTable}
       size="middle"
       pagination={{
+        responsive: true,
         pageSize: 10,
         // showSizeChanger: true,
-        // position: ["bottomCenter"],
-        // className: "bg-orange-50 rounded-lg p-2 shadow-sm",
+        position: ["bottomLeft"],
+        // className: " rounded-lg p-2 shadow-sm",
       }}
     />
   );

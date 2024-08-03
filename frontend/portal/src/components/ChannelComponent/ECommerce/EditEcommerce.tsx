@@ -15,7 +15,6 @@ import Swal from "sweetalert2";
 import showAlert from "@/components/Alert/Alert";
 
 const EditEcommerce: React.FC = () => {
-  ScollUpToTop();
   const { dataChannel } = useDataChannel();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState(dataInitial);
@@ -24,6 +23,9 @@ const EditEcommerce: React.FC = () => {
   const frontendUrl =
     process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001";
 
+  useEffect(() => {
+    ScollUpToTop();
+  }, []);
 
   useEffect(() => {
     if (!dataChannel) {
@@ -128,16 +130,19 @@ const EditEcommerce: React.FC = () => {
           showLoaderOnConfirm: true,
           confirmButtonText: "ลบ",
           cancelButtonText: "ยกเลิก",
-          confirmButtonColor:"#FB923C",
+          confirmButtonColor: "#FB923C",
           preConfirm: (input) => {
             return input;
           },
         });
-  
+
         if (result.isConfirmed) {
           if (result.value === dataChannel.business_name) {
             await ecommerceService.deleteChennel(dataChannel._id);
-            await showAlert({ icon: 'success', title: `ลบ ${dataChannel.business_name} เสร็จสิ้น` });
+            await showAlert({
+              icon: "success",
+              title: `ลบ ${dataChannel.business_name} เสร็จสิ้น`,
+            });
             window.location.href = frontendUrl;
           } else {
             Swal.fire({

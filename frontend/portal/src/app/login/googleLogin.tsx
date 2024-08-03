@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { FcGoogle } from "react-icons/fc";
 import { gapi } from 'gapi-script';
 
 interface GoogleLoginButtonProps {
@@ -45,8 +46,9 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ clientId, onSucce
   return (
     <button
       onClick={loadGoogleScript}
-      className="w-full bg-blue-500 text-white py-2 my-4 rounded-md hover:bg-blue-600 transition-colors duration-200"
+      className="flex justify-center w-[100%] items-center bg-white text-[#555] py-2 px-4 rounded-md hover:bg-gray-200 transition-colors duration-200 border border-gray-300"
     >
+      <FcGoogle className='mr-4 text-[25px]'/>
       Login with Google
     </button>
   );

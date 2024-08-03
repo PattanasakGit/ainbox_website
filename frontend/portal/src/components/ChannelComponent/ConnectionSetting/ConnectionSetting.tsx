@@ -13,7 +13,6 @@ import { FaCheck, FaSave, FaEdit } from "react-icons/fa";
 import { access } from "fs";
 
 const ConnectionSetting: React.FC = () => {
-  ScollUpToTop();
   const [destination, setDestination] = useState<string>("");
   const [channelSecret, setChannelSecret] = useState("");
   const [lineUserId, setLineUserId] = useState("");
@@ -27,6 +26,10 @@ const ConnectionSetting: React.FC = () => {
   const [isConnecting, setIsConnecting] = useState(false);
 
   const platforms = ["Line", "Messenger", "API", "Discord", "Embed"];
+
+  useEffect(() => {
+    ScollUpToTop();
+  }, []);
 
   const handleCloseModal = () => {
     setIsOpenModal(false);

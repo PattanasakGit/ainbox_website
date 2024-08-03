@@ -34,7 +34,7 @@ const apiCall = async <T>(
     }
     console.log('error = ',error);
     
-    throw error;
+    throw new error;
   }
 };
 

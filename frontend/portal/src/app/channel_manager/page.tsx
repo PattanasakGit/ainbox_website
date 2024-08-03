@@ -45,7 +45,12 @@ const ChannelManager: React.FC = () => {
     } else if (selected === ChannelSidebarSelection.AIBehavior) {
       return <EditAI />;
     } else if (selected === ChannelSidebarSelection.AIControl) {
-      return <AIControlList/>;
+      //return <AIControlList/>;
+      return (
+        <div className="flex justify-center items-center h-[80vh]">
+          ขออภัย อยู่ระหว่างการพัฒนา
+        </div>
+      );
     } else if (selected === ChannelSidebarSelection.Products) {
       return <Products />;
     } else if (selected === ChannelSidebarSelection.Connects) {
@@ -53,7 +58,7 @@ const ChannelManager: React.FC = () => {
     } else {
       return (
         <div className="flex justify-center items-center h-[80vh]">
-          นี่คือพื้นที่ขอความช่วยเหลือซึ่งตอนนี้ยังไม่รู้ว่าจะทำออกมาอย่างไร
+          ขออภัย อยู่ระหว่างการพัฒนา
         </div>
       );
     }

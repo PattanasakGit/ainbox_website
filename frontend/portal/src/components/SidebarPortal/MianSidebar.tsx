@@ -13,19 +13,8 @@ const MianSidebar: React.FC = () => {
     setSelected(menu);
   };
 
-  const checkCreateSelect = () => {
-    if (selected === MainSidebarSelection.CreateEcommerce) {
-      return;
-    } else if (selected === MainSidebarSelection.CreateDataWarehouse) {
-      return;
-    } else if (selected === MainSidebarSelection.CreatePersonal) {
-      return;
-    } else {
-    }
-  };
-
   return (
-    <section className="mt-[70px] h-screen w-[200px] bg-[#faf7f3] fixed top-0 left-0 flex flex-col justify-start">
+    <section className="mt-[70px] h-screen w-[20%] max-w-[200px] bg-[#faf7f3] fixed top-0 left-0 flex flex-col justify-start">
       {(selected === MainSidebarSelection.CreateDataWarehouse ||
         selected === MainSidebarSelection.CreateEcommerce ||
         selected === MainSidebarSelection.CreatePersonal) && (

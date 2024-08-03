@@ -129,7 +129,6 @@ const CreateEcommerce: React.FC<CreateEcommerceProps> = ({
             value={formData.website}
             onChange={handleChange}
             className="EcommerceInput"
-            required
           />
         </div>
 
