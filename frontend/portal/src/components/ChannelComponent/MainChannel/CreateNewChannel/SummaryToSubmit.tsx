@@ -22,10 +22,6 @@ const SummaryToSubmit: React.FC<SummaryProps> = ({ formData, formAI, channel, fi
       return <p className="text-[#555] text-lg">ไม่มีข้อมูลเวลาทำการ</p>;
     }
 
-    useEffect(() => {
-      ScollUpToTop();
-    }, []);
-
     return (
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
