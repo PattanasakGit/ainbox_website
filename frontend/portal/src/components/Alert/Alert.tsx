@@ -1,17 +1,26 @@
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 interface AlertOptions {
-  icon: 'success' | 'error' | 'warning' | 'info' | 'question';
+  icon: "success" | "error" | "warning" | "info" | "question";
   title: string;
-  position?: 'top' | 'top-start' | 'top-end' | 'center' | 'center-start' | 'center-end' | 'bottom' | 'bottom-start' | 'bottom-end';
+  position?:
+    | "top"
+    | "top-start"
+    | "top-end"
+    | "center"
+    | "center-start"
+    | "center-end"
+    | "bottom"
+    | "bottom-start"
+    | "bottom-end";
   timer?: number;
 }
 
 const showAlert = ({
   icon,
   title,
-  position = 'top-end',
-  timer = 3000
+  position = "top-end",
+  timer,
 }: AlertOptions) => {
   return Swal.fire({
     icon,
@@ -19,7 +28,7 @@ const showAlert = ({
     toast: true,
     position,
     showConfirmButton: false,
-    timer,
+    timer: timer ? timer : 200,
     timerProgressBar: true,
   });
 };

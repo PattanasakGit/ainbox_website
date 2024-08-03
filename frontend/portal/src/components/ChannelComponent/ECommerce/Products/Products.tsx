@@ -26,7 +26,7 @@ const Products: React.FC = () => {
   useEffect(() => {
     ScollUpToTop();
   }, []);
-  
+
   if (!products) {
     window.location.href = "/";
     return null;
@@ -45,6 +45,7 @@ const Products: React.FC = () => {
   };
 
   const closeModal = () => {
+    fetchListProduct();
     setIsModal(false);
     setDataEditProduct(blankProduct);
     setIsEdit(false);
@@ -55,10 +56,10 @@ const Products: React.FC = () => {
     try {
       await ecommerceService.createProduct(dataCreateProduct);
       fetchListProduct();
-      await showAlert({ icon: 'success', title: `ข้อมูลถูกบันทึกเรียบร้อยแล้ว` });
+      await showAlert({ icon: 'success',timer:1000, title: `ข้อมูลถูกบันทึกเรียบร้อยแล้ว` });
       closeModal();
     } catch (error) {
-      await showAlert({ icon: 'error', title: `เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001` });
+      await showAlert({ icon: 'error', timer: 1000, title: `เกิดข้อผิดพลาดในการบันทึกข้อมูล\nรหัสความผิดพลาด:FZF0001` });
     }
   };
 
@@ -79,7 +80,7 @@ const Products: React.FC = () => {
       );
       useProductStore.setState({ products: updatedProducts });
       fetchListProduct();
-      await showAlert({ icon: 'success', title: `ข้อมูลถูกอัพเดตเรียบร้อยแล้ว` });
+      await showAlert({ icon: 'success',timer: 1000, title: `ข้อมูลถูกอัพเดตเรียบร้อยแล้ว` });
       closeModal();
     } catch (error) {
       console.error("Edit product error:", error);
@@ -89,11 +90,11 @@ const Products: React.FC = () => {
 
   const handleDeleteProduct = async (index: string) => {
     try {
-      ecommerceService.deleteProuct(index.toString())
+      await ecommerceService.deleteProuct(index.toString())
       fetchListProduct();
-      await showAlert({ icon: 'success', title: `ลบสินค้าสำเร็จ` });
+      await showAlert({ icon: 'success',timer: 1000, title: `ลบสินค้าสำเร็จ` });
     } catch (error) {
-      await showAlert({ icon: 'error', title: `ลบสินค้าล้มเหลว` });
+      await showAlert({ icon: 'error',timer: 1000, title: `ลบสินค้าล้มเหลว` });
     }
   };
 

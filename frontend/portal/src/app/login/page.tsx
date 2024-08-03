@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import showAlert from "@/components/Alert/Alert";
 
 const GoogleLoginButton = dynamic(() => import("./googleLogin"), {
   ssr: false,
@@ -73,9 +74,7 @@ const Login: React.FC = () => {
       router.push(frontendUrl);
     } catch (error) {
       console.error("Login error:", error);
-      alert(
-        "Login failed. Your Email or Password is incorrect. Please try again."
-      );
+      showAlert({ icon: 'error', title: `Email หรือ รหัสผ่านไม่ถูกต้อง` });
     }
   };
 
@@ -92,7 +91,7 @@ const Login: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4 text-left">
             <label htmlFor="email" className="block text-gray-700 mb-2">
-              ชื่อผู้ใช้(Email)
+              Email
             </label>
             <input
               type="email"
@@ -118,7 +117,7 @@ const Login: React.FC = () => {
               required
             />
             <div
-              className="absolute inset-y-[50px] right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
+              className="absolute inset-y-[53px] right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (

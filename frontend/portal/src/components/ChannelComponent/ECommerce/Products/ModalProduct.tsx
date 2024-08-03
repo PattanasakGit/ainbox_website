@@ -69,7 +69,7 @@ const ModalProduct: React.FC<IProductModalProps> = ({
                 htmlFor="name"
                 className="EcommerceLabel"
               >
-                ชื่อสินค้า
+                ชื่อสินค้า *
               </label>
               <input
                 type="text"
@@ -77,6 +77,7 @@ const ModalProduct: React.FC<IProductModalProps> = ({
                 value={currentData.name}
                 onChange={handleChange}
                 className="EcommerceInput"
+                autoComplete="false"
                 required
               />
             </div>
@@ -85,10 +86,10 @@ const ModalProduct: React.FC<IProductModalProps> = ({
                 htmlFor="price"
                 className="EcommerceLabel"
               >
-                ราคา (บาท)
+                ราคา *
               </label>
               <input
-                type="text"
+                type="number"
                 id="price"
                 value={currentData.price}
                 onChange={handleChange}
@@ -102,7 +103,7 @@ const ModalProduct: React.FC<IProductModalProps> = ({
               htmlFor="description"
               className="EcommerceLabel"
             >
-              คำอธิบาย
+              คำอธิบาย *
             </label>
             <textarea
               id="description"
